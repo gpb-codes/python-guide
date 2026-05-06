@@ -119,7 +119,6 @@
                 <a href="#temas" class="nav-item text-gray-300 hover:text-white text-sm font-medium">Temas</a>
                 <a href="#sintaxis" class="nav-item text-gray-300 hover:text-white text-sm font-medium">Sintaxis</a>
                 <a href="#ejercicios" class="nav-item text-gray-300 hover:text-white text-sm font-medium">Ejercicios</a>
-                <a href="#practicar" class="nav-item text-gray-300 hover:text-white text-sm font-medium bg-gradient-to-r from-cyan-500 to-purple-500 bg-clip-text text-transparent font-bold">Práctica</a>
             </div>
             <button id="menuBtn" class="md:hidden w-10 h-10 flex items-center justify-center">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
@@ -133,7 +132,6 @@
         <a href="#temas" class="text-2xl text-gray-300 hover:text-white" onclick="toggleMenu()">Temas</a>
         <a href="#sintaxis" class="text-2xl text-gray-300 hover:text-white" onclick="toggleMenu()">Sintaxis</a>
         <a href="#ejercicios" class="text-2xl text-gray-300 hover:text-white" onclick="toggleMenu()">Ejercicios</a>
-        <a href="#practicar" class="text-2xl gradient-text font-bold" onclick="toggleMenu()">Práctica</a>
     </div>
 
     <main class="pt-20">
@@ -157,9 +155,9 @@
                 </p>
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in delay-300">
                     <a href="#temas" class="btn-gradient px-8 py-4 rounded-xl text-white font-semibold">Comenzar a Aprender</a>
-                    <a href="#practicar" class="glass-card px-8 py-4 rounded-xl text-white font-semibold hover:bg-white/10 flex items-center gap-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /></svg>
-                        Ejecutar Código
+                    <a href="#sintaxis" class="glass-card px-8 py-4 rounded-xl text-white font-semibold hover:bg-white/10 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                        Ver Sintaxis
                     </a>
                 </div>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 animate-fade-in delay-400">
@@ -258,16 +256,21 @@
                     <p class="text-lg text-gray-400">Aprende la sintaxis básica con ejemplos</p>
                 </div>
                 <div class="flex flex-wrap gap-2 mb-8 justify-center">
-                    <button onclick="showTab('variables')" class="tab-btn px-4 py-2 rounded-lg bg-dark-700 text-dark-300 hover:bg-dark-600 active">Variables</button>
-                    <button onclick="showTab('operadores')" class="tab-btn px-4 py-2 rounded-lg bg-dark-700 text-dark-300 hover:bg-dark-600">Operadores</button>
-                    <button onclick="showTab('condicionales')" class="tab-btn px-4 py-2 rounded-lg bg-dark-700 text-dark-300 hover:bg-dark-600">Condicionales</button>
-                    <button onclick="showTab('for')" class="tab-btn px-4 py-2 rounded-lg bg-dark-700 text-dark-300 hover:bg-dark-600">FOR</button>
-                    <button onclick="showTab('while')" class="tab-btn px-4 py-2 rounded-lg bg-dark-700 text-dark-300 hover:bg-dark-600">WHILE</button>
-                    <button onclick="showTab('funciones')" class="tab-btn px-4 py-2 rounded-lg bg-dark-700 text-dark-300 hover:bg-dark-600">Funciones</button>
-                    <button onclick="showTab('listas')" class="tab-btn px-4 py-2 rounded-lg bg-purple-700 text-purple-200 hover:bg-purple-600">Listas</button>
-                    <button onclick="showTab('diccionarios')" class="tab-btn px-4 py-2 rounded-lg bg-purple-700 text-purple-200 hover:bg-purple-600">Diccionarios</button>
-                    <button onclick="showTab('strings')" class="tab-btn px-4 py-2 rounded-lg bg-purple-700 text-purple-200 hover:bg-purple-600">Strings</button>
-                    <button onclick="showTab('excepciones')" class="tab-btn px-4 py-2 rounded-lg bg-purple-700 text-purple-200 hover:bg-purple-600">Excepciones</button>
+                    <button onclick="showTab('variables')" class="tab-btn px-3 py-2 rounded-lg bg-dark-700 text-dark-300 hover:bg-dark-600 text-xs active">Variables</button>
+                    <button onclick="showTab('operadores')" class="tab-btn px-3 py-2 rounded-lg bg-dark-700 text-dark-300 hover:bg-dark-600 text-xs">Operadores</button>
+                    <button onclick="showTab('condicionales')" class="tab-btn px-3 py-2 rounded-lg bg-dark-700 text-dark-300 hover:bg-dark-600 text-xs">Condicionales</button>
+                    <button onclick="showTab('for')" class="tab-btn px-3 py-2 rounded-lg bg-dark-700 text-dark-300 hover:bg-dark-600 text-xs">FOR</button>
+                    <button onclick="showTab('while')" class="tab-btn px-3 py-2 rounded-lg bg-dark-700 text-dark-300 hover:bg-dark-600 text-xs">WHILE</button>
+                    <button onclick="showTab('funciones')" class="tab-btn px-3 py-2 rounded-lg bg-dark-700 text-dark-300 hover:bg-dark-600 text-xs">Funciones</button>
+                    <button onclick="showTab('listas')" class="tab-btn px-3 py-2 rounded-lg bg-purple-700 text-purple-200 hover:bg-purple-600 text-xs">Listas</button>
+                    <button onclick="showTab('diccionarios')" class="tab-btn px-3 py-2 rounded-lg bg-purple-700 text-purple-200 hover:bg-purple-600 text-xs">Diccionarios</button>
+                    <button onclick="showTab('tuplas')" class="tab-btn px-3 py-2 rounded-lg bg-purple-700 text-purple-200 hover:bg-purple-600 text-xs">Tuplas</button>
+                    <button onclick="showTab('sets')" class="tab-btn px-3 py-2 rounded-lg bg-purple-700 text-purple-200 hover:bg-purple-600 text-xs">Sets</button>
+                    <button onclick="showTab('strings')" class="tab-btn px-3 py-2 rounded-lg bg-purple-700 text-purple-200 hover:bg-purple-600 text-xs">Strings</button>
+                    <button onclick="showTab('comprehensions')" class="tab-btn px-3 py-2 rounded-lg bg-pink-700 text-pink-200 hover:bg-pink-600 text-xs">Comprehensions</button>
+                    <button onclick="showTab('excepciones')" class="tab-btn px-3 py-2 rounded-lg bg-pink-700 text-pink-200 hover:bg-pink-600 text-xs">Excepciones</button>
+                    <button onclick="showTab('archivos')" class="tab-btn px-3 py-2 rounded-lg bg-pink-700 text-pink-200 hover:bg-pink-600 text-xs">Archivos</button>
+                    <button onclick="showTab('poo')" class="tab-btn px-3 py-2 rounded-lg bg-red-700 text-red-200 hover:bg-red-600 text-xs">POO</button>
                 </div>
                 <div id="tabContent">
                     <div data-tab="variables" class="tab-panel grid lg:grid-cols-2 gap-8">
@@ -599,6 +602,226 @@ except ValueError as e:
                             </div>
                         </div>
                     </div>
+
+                    <!-- Tuplas -->
+                    <div data-tab="tuplas" class="tab-panel hidden grid lg:grid-cols-2 gap-8">
+                        <div class="glass-card p-6 rounded-2xl">
+                            <h3 class="text-xl font-bold mb-4 text-yellow-400">Tuplas Básicas</h3>
+                            <div class="code-window">
+                                <div class="code-header"><div class="flex gap-2"><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div><span class="text-gray-400 text-sm">tuplas.py</span></div>
+                                <div class="code-body"><pre><code class="language-python"># Tupla (inmutable)
+tupla = (1, 2, 3)
+print(tupla[0])    # 1
+print(tupla[-1])   # 3
+
+# Desempaqueo
+x, y, z = (10, 20, 30)
+print(f"x={x}, y={y}, z={z}")
+
+# Return múltiples valores
+def operacion(a, b):
+    return a+b, a-b, a*b
+
+suma, resta, mult = operacion(5, 3)</code></pre></div>
+                            </div>
+                        </div>
+                        <div class="glass-card p-6 rounded-2xl">
+                            <h3 class="text-xl font-bold mb-4 text-yellow-400">Tuplas vs Listas</h3>
+                            <div class="code-window">
+                                <div class="code-header"><div class="flex gap-2"><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div><span class="text-gray-400 text-sm">diferencia.py</span></div>
+                                <div class="code-body"><pre><code class="language-python"># Lista - mutable
+lista = [1, 2, 3]
+lista[0] = 0  # ✓ permitido
+
+# Tupla - inmutable
+tupla = (1, 2, 3)
+# tupla[0] = 0  # ✗ Error!
+
+# Usar tuplas para datosconstants
+coordenadas = (10, 20)
+dias_semana = ("Lun", "Mar", "Mié")</code></pre></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sets -->
+                    <div data-tab="sets" class="tab-panel hidden grid lg:grid-cols-2 gap-8">
+                        <div class="glass-card p-6 rounded-2xl">
+                            <h3 class="text-xl font-bold mb-4 text-purple-400">Sets Básicos</h3>
+                            <div class="code-window">
+                                <div class="code-header"><div class="flex gap-2"><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div><span class="text-gray-400 text-sm">sets.py</span></div>
+                                <div class="code-body"><pre><code class="language-python"># Set - elementos únicos
+numeros = {1, 2, 3, 3, 3}
+print(numeros)  # {1, 2, 3}
+
+# Agregar y eliminar
+numeros.add(4)
+numeros.discard(1)
+numeros.remove(2)
+
+# Operaciones
+a = {1, 2, 3}
+b = {3, 4, 5}
+print(a | b)   # Unión {1,2,3,4,5}
+print(a & b)   # Intersección {3}
+print(a - b)   # Diferencia {1,2}</code></pre></div>
+                            </div>
+                        </div>
+                        <div class="glass-card p-6 rounded-2xl">
+                            <h3 class="text-xl font-bold mb-4 text-purple-400">Eliminar Duplicados</h3>
+                            <div class="code-window">
+                                <div class="code-header"><div class="flex gap-2"><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div><span class="text-gray-400 text-sm">duplicados.py</span></div>
+                                <div class="code-body"><pre><code class="language-python"># Eliminar duplicados
+nombres = ["Ana", "Bob", "Ana", "Carla"]
+unicos = list(set(nombres))
+print(unicos)  # ['Ana', 'Bob', 'Carla']
+
+# Verificar pertenencia (rápido)
+emails = {"ana@email.com", "bob@email.com"}
+print("ana@email.com" in emails)  # True
+
+# frozenset (inmutable)
+pares = frozenset([1, 2, 3])
+# pares.add(4)  # Error!</code></pre></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Comprehensions -->
+                    <div data-tab="comprehensions" class="tab-panel hidden grid lg:grid-cols-2 gap-8">
+                        <div class="glass-card p-6 rounded-2xl">
+                            <h3 class="text-xl font-bold mb-4 text-pink-400">List Comprehension</h3>
+                            <div class="code-window">
+                                <div class="code-header"><div class="flex gap-2"><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div><span class="text-gray-400 text-sm">list_comp.py</span></div>
+                                <div class="code-body"><pre><code class="language-python"># Lista de cuadrados
+cuadrados = [x**2 for x in range(5)]
+print(cuadrados)  # [0, 1, 4, 9, 16]
+
+# Con condición
+pares = [x for x in range(10) if x % 2 == 0]
+print(pares)  # [0, 2, 4, 6, 8]
+
+# Matriz 3x3
+matriz = [[j for j in range(3)] for i in range(3)]
+print(matriz)</code></pre></div>
+                            </div>
+                        </div>
+                        <div class="glass-card p-6 rounded-2xl">
+                            <h3 class="text-xl font-bold mb-4 text-pink-400">Dict y Set Comprehension</h3>
+                            <div class="code-window">
+                                <div class="code-header"><div class="flex gap-2"><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div><span class="text-gray-400 text-sm">dict_set.py</span></div>
+                                <div class="code-body"><pre><code class="language-python"># Dictionary comprehension
+nombres = ["Ana", "Bob", "Carla"]
+dicc = {n: len(n) for n in nombres}
+print(dicc)  # {'Ana': 3, 'Bob': 3, 'Carla': 6}
+
+# Set comprehension
+numeros = [1, 2, 2, 3, 3, 3]
+unicos = {x for x in numeros}
+print(unicos)  # {1, 2, 3}
+
+# Transformar diccionario
+precios = {"manzana": 100, "pera": 150}
+precios_doble = {k: v*2 for k, v in precios.items()}</code></pre></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Archivos -->
+                    <div data-tab="archivos" class="tab-panel hidden grid lg:grid-cols-2 gap-8">
+                        <div class="glass-card p-6 rounded-2xl">
+                            <h3 class="text-xl font-bold mb-4 text-cyan-400">Leer y Escribir</h3>
+                            <div class="code-window">
+                                <div class="code-header"><div class="flex gap-2"><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div><span class="text-gray-400 text-sm">archivos.py</span></div>
+                                <div class="code-body"><pre><code class="language-python"># Escribir archivo
+with open("datos.txt", "w") as f:
+    f.write("Hola mundo\n")
+    f.write("Segunda línea")
+
+# Leer archivo
+with open("datos.txt", "r") as f:
+    contenido = f.read()
+    print(contenido)
+
+# Leer línea por línea
+with open("datos.txt", "r") as f:
+    for linea in f:
+        print(linea.strip())</code></pre></div>
+                            </div>
+                        </div>
+                        <div class="glass-card p-6 rounded-2xl">
+                            <h3 class="text-xl font-bold mb-4 text-cyan-400">JSON</h3>
+                            <div class="code-window">
+                                <div class="code-header"><div class="flex gap-2"><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div><span class="text-gray-400 text-sm">json.py</span></div>
+                                <div class="code-body"><pre><code class="language-python">import json
+
+datos = {"nombre": "Ana", "edad": 25, "notas": [85, 90, 78]}
+
+# Guardar JSON
+with open("datos.json", "w") as f:
+    json.dump(datos, f)
+
+# Leer JSON
+with open("datos.json", "r") as f:
+    datos_leidos = json.load(f)
+    print(datos_leidos["nombre"])
+
+# Convertir a string
+texto = json.dumps(datos)</code></pre></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- POO -->
+                    <div data-tab="poo" class="tab-panel hidden grid lg:grid-cols-2 gap-8">
+                        <div class="glass-card p-6 rounded-2xl">
+                            <h3 class="text-xl font-bold mb-4 text-red-400">Clases y Objetos</h3>
+                            <div class="code-window">
+                                <div class="code-header"><div class="flex gap-2"><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div><span class="text-gray-400 text-sm">clase.py</span></div>
+                                <div class="code-body"><pre><code class="language-python">class Persona:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+    
+    def saludar(self):
+        return f"Hola, soy {self.nombre}"
+    
+    def cumplir_anios(self):
+        self.edad += 1
+
+# Crear objeto
+persona = Persona("Gabriel", 25)
+print(persona.saludar())
+persona.cumplir_anios()
+print(f"Ahora tengo {persona.edad} años")</code></pre></div>
+                            </div>
+                        </div>
+                        <div class="glass-card p-6 rounded-2xl">
+                            <h3 class="text-xl font-bold mb-4 text-red-400">Herencia</h3>
+                            <div class="code-window">
+                                <div class="code-header"><div class="flex gap-2"><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div><span class="text-gray-400 text-sm">herencia.py</span></div>
+                                <div class="code-body"><pre><code class="language-python">class Animal:
+    def __init__(self, nombre):
+        self.nombre = nombre
+    
+    def sonido(self):
+        return "..."
+
+class Perro(Animal):
+    def sonido(self):
+        return "Guau!"
+
+class Gato(Animal):
+    def sonido(self):
+        return "Miau!"
+
+perro = Perro("Firulais")
+gato = Gato("Michi")
+print(perro.sonido())  # Guau!
+print(gato.sonido())   # Miau!</code></pre></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -645,79 +868,7 @@ except ValueError as e:
             </div>
         </section>
 
-        <!-- Practica Interactiva Section -->
-        <section id="practicar" class="py-20 px-6 bg-dark-800/30">
-            <div class="max-w-7xl mx-auto">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Practica Interactiva</h2>
-                    <p class="text-lg text-gray-400">Escribe y ejecuta código Python directamente</p>
-                </div>
-                <div class="grid gap-6">
-                    <div class="glass-card p-6 rounded-2xl">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-lg font-bold flex items-center gap-2">
-                                <svg class="w-5 h-5 text-cyan-400" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                                Editor de Código Python
-                            </h3>
-                            <div class="flex gap-2 flex-wrap">
-                                <button onclick="loadExample(0)" class="px-3 py-1 text-xs bg-dark-700 hover:bg-dark-600 rounded-full text-cyan-400">Variables</button>
-                                <button onclick="loadExample(1)" class="px-3 py-1 text-xs bg-dark-700 hover:bg-dark-600 rounded-full text-purple-400">Promedio</button>
-                                <button onclick="loadExample(2)" class="px-3 py-1 text-xs bg-dark-700 hover:bg-dark-600 rounded-full text-yellow-400">Listas</button>
-                                <button onclick="loadExample(3)" class="px-3 py-1 text-xs bg-dark-700 hover:bg-dark-600 rounded-full text-green-400">Conversión</button>
-                                <button onclick="loadExample(4)" class="px-3 py-1 text-xs bg-dark-700 hover:bg-dark-600 rounded-full text-orange-400">Funciones</button>
-                                <button onclick="loadExample(5)" class="px-3 py-1 text-xs bg-dark-700 hover:bg-dark-600 rounded-full text-pink-400">Diccionario</button>
-                            </div>
-                        </div>
-                        <div class="code-window">
-                            <div class="code-header">
-                                <div class="flex gap-2"><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div>
-                                <span class="text-gray-400 text-sm">main.py</span>
-                            </div>
-                            <div class="code-body">
-                                <textarea id="codeEditor" class="w-full h-56 bg-transparent text-white font-mono text-sm p-4 focus:outline-none resize-none" placeholder="# Escribe tu código Python aquí..."></textarea>
-                            </div>
-                        </div>
-                        <div class="flex gap-4 mt-4">
-                            <button id="runBtn" onclick="runCode()" class="btn-gradient px-8 py-3 rounded-xl text-white font-semibold flex items-center gap-2">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                                Ejecutar Código
-                            </button>
-                            <button onclick="clearCode()" class="glass-card px-6 py-3 rounded-xl text-white font-semibold hover:bg-white/10">Limpiar</button>
-                        </div>
-                        <div class="mt-6">
-                            <h4 class="text-sm font-semibold text-gray-400 mb-2 flex items-center gap-2">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                                Salida:
-                            </h4>
-                            <div id="outputConsole" class="output-console">
-                                <span class="info">🎯 Haz clic en "Ejecutar Código" o selecciona un ejemplo para comenzar...</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                        <button onclick="loadExample(0)" class="p-4 rounded-xl glass-card hover:border-cyan-500 text-left transition-all">
-                            <div class="font-semibold text-cyan-400">Ejemplo 1</div><div class="text-gray-400 text-xs">Variables</div>
-                        </button>
-                        <button onclick="loadExample(1)" class="p-4 rounded-xl glass-card hover:border-purple-500 text-left transition-all">
-                            <div class="font-semibold text-purple-400">Ejemplo 2</div><div class="text-gray-400 text-xs">Promedio</div>
-                        </button>
-                        <button onclick="loadExample(2)" class="p-4 rounded-xl glass-card hover:border-yellow-500 text-left transition-all">
-                            <div class="font-semibold text-yellow-400">Ejemplo 3</div><div class="text-gray-400 text-xs">Listas</div>
-                        </button>
-                        <button onclick="loadExample(3)" class="p-4 rounded-xl glass-card hover:border-green-500 text-left transition-all">
-                            <div class="font-semibold text-green-400">Ejemplo 4</div><div class="text-gray-400 text-xs">Conversión</div>
-                        </button>
-                        <button onclick="loadExample(4)" class="p-4 rounded-xl glass-card hover:border-orange-500 text-left transition-all">
-                            <div class="font-semibold text-orange-400">Ejemplo 5</div><div class="text-gray-400 text-xs">Funciones</div>
-                        </button>
-                        <button onclick="loadExample(5)" class="p-4 rounded-xl glass-card hover:border-pink-500 text-left transition-all">
-                            <div class="font-semibold text-pink-400">Ejemplo 6</div><div class="text-gray-400 text-xs">Diccionario</div>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+        </main>
 
     <!-- Footer -->
     <footer class="py-12 px-6 glass-card border-t border-white/10">
