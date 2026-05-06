@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -1205,15 +1206,17 @@ else:
         // Initialize first tab
         showTab('variables');
         
-        // Code examples
+        // Code examples (without input() for browser compatibility)
         const codeExamples = [
             `# Ejemplo 1: Hola Mundo
-nombre = input("¿Cómo te llamas? ")
+nombre = "Gabriel"
 print(f"¡Hola {nombre}!")
 
-# Verificar si es mayor de edad
-edad = int(input("¿Cuántos años tienes? "))
+# Variables
+edad = 25
+print(f"Tengo {edad} años")
 
+# Condicional
 if edad >= 18:
     print("Eres mayor de edad")
 else:
@@ -1222,83 +1225,124 @@ else:
             `# Ejemplo 2: Calculadora de Promedio
 print("=== Calculadora de Promedio ===")
 
-# Pedir 3 notas
-nota1 = float(input("Ingresa nota 1: "))
-nota2 = float(input("Ingresa nota 2: "))
-nota3 = float(input("Ingresa nota 3: "))
+# Notas predefinidas (para browser)
+nota1 = 70
+nota2 = 80
+nota3 = 90
 
 # Calcular promedio
 promedio = (nota1 + nota2 + nota3) / 3
 
 # Mostrar resultado
-print(f"Tu promedio es: {promedio:.2f}")
+print(f"Nota 1: {nota1}")
+print(f"Nota 2: {nota2}")
+print(f"Nota 3: {nota3}")
+print(f"Promedio: {promedio:.2f}")
 
 # Determinar si aprueba
-if promedio >= 4.0:
+if promedio >= 70:
     print("¡Felicitaciones, aprobaste!")
 else:
     print("Reprobaste. ¡Intenta de nuevo!")`,
 
-            `# Ejemplo 3: Validación de Edad con WHILE
-print("=== Sistema de Validación ===")
+            `# Ejemplo 3: Listas y Ciclos
+print("=== Ejemplo con Listas ===")
 
-# Validar que la edad sea válida
-edad = 0
-while edad < 1 or edad > 120:
-    try:
-        edad = int(input("Ingresa tu edad: "))
-        if edad < 1 or edad > 120:
-            print("Edad inválida. Intenta de nuevo.")
-    except ValueError:
-        print("Debes ingresar un número.")
-        edad = 0
+# Lista de nombres
+nombres = ["Ana", "Bob", "Carla", "Diana"]
 
-print(f"Tienes {edad} años")
+# Iterar con for
+for nombre in nombres:
+    print(f"Hola {nombre}!")
 
-# Clasificación
-if edad < 12:
-    print("Eres un niño")
-elif edad < 18:
-    print("Eres un adolescente")
-elif edad < 60:
-    print("Eres un adulto")
-else:
-    print("Eres un adulto mayor")`
+# Calcular promedio de notas
+notas = [85, 90, 78, 92, 88]
+total = 0
+for nota in notas:
+    total += nota
+    
+promedio = total / len(notas)
+print(f"\nPromedio de notas: {promedio:.2f}")`
         ];
         
         function loadExample(index) {
-            document.getElementById('codeEditor').value = codeExamples[index];
+            const codeEditor = document.getElementById('codeEditor');
+            codeEditor.value = codeExamples[index];
             Prism.highlightAll();
         }
         
         function clearCode() {
-            document.getElementById('codeEditor').value = '';
-            document.getElementById('outputConsole').innerHTML = '<span class="info">Código limpiado...</span>';
+            const codeEditor = document.getElementById('codeEditor');
+            const outputConsole = document.getElementById('outputConsole');
+            codeEditor.value = '';
+            outputConsole.innerHTML = '<span class="info">Código limpiado...</span>';
         }
+        
+        // Pyodide instance
+        let pyodide = null;
+        let pyodideReady = false;
+        
+        // Initialize Pyodide
+        async function initPyodide() {
+            const outputConsole = document.getElementById('outputConsole');
+            try {
+                outputConsole.innerHTML = '<span class="info">Cargando intérprete Python (esto puede tomar unos segundos)...</span>';
+                pyodide = await loadPyodide();
+                await pyodide.runPythonAsync(`
+import sys
+from io import StringIO
+`);
+                pyodideReady = true;
+                outputConsole.innerHTML = '<span class="success">¡Python listo! Ya puedes ejecutar código.</span>';
+            } catch (error) {
+                outputConsole.innerHTML = '<span class="error">Error al cargar Python: ' + error.message + '</span>';
+            }
+        }
+        
+        // Load Pyodide on page load
+        initPyodide();
         
         async function runCode() {
             const btn = document.getElementById('runBtn');
-            const output = document.getElementById('outputConsole');
+            const outputConsole = document.getElementById('outputConsole');
             const code = document.getElementById('codeEditor').value;
             
             btn.classList.add('loading');
             btn.innerHTML = '<span>Ejecutando...</span>';
             
-            output.innerHTML = '<span class="info">Ejecutando código...</span>';
+            if (!pyodideReady) {
+                outputConsole.innerHTML = '<span class="error">El intérprete aún está cargando. Intenta de nuevo en unos segundos.</span>';
+                btn.classList.remove('loading');
+                btn.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Ejecutar';
+                return;
+            }
             
             try {
-                // Simulate Python execution (note: actual execution would need Pyodide)
-                output.innerHTML = '<span class="success">Nota: Para ejecutar Python en el navegador, integra Pyodide o usa un backend.\n\nEste es un ejemplo de cómo se vería la salida:\n\n--- Código ---\n' + code + '\n--- Fin Código ---</span>';
+                // Redirect stdout to capture print output
+                await pyodide.runPythonAsync(`
+import sys
+from io import StringIO
+sys.stdout = StringIO()
+`);
                 
-                // In a real implementation, you would use Pyodide:
-                /*
-                const pyodide = await loadPyodide();
+                // Run user code
                 await pyodide.runPythonAsync(code);
-                const result = pyodide.globals.get('result');
-                output.innerHTML = '<span class="success">' + result + '</span>';
-                */
+                
+                // Get captured output
+                const stdout = pyodide.runPython("sys.stdout.getvalue()");
+                
+                // Reset stdout
+                await pyodide.runPythonAsync(`
+sys.stdout = sys.__stdout__
+`);
+                
+                if (stdout) {
+                    outputConsole.innerHTML = '<span class="success">' + stdout + '</span>';
+                } else {
+                    outputConsole.innerHTML = '<span class="info">El código se ejecutó sin salida. (Revisa que uses print() para mostrar resultados)</span>';
+                }
             } catch (error) {
-                output.innerHTML = '<span class="error">Error: ' + error.message + '</span>';
+                outputConsole.innerHTML = '<span class="error">Error: ' + error.message + '</span>';
             }
             
             btn.classList.remove('loading');
