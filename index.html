@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Python Guide - Guía de Aprendizaje</title>
+    <title>Python Guide - 🦠 Multiverso</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=JetBrains+Mono:wght@400;500;600&family=Bangers&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
@@ -14,37 +14,96 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: { sans: ['Space Grotesk', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] },
-                    colors: {
-                        cyan: { 400: '#22d3ee', 500: '#06b6d4', 600: '#0891b2' },
-                        purple: { 400: '#a78bfa', 500: '#8b5cf6', 600: '#7c3aed' },
-                        pink: { 400: '#f472b6', 500: '#ec4899' }
+                    fontFamily: { 
+                        mono: ['JetBrains Mono', 'monospace'],
+                        display: ['Bangers', 'cursive'],
+                        creepy: ['Creepster', 'cursive']
                     },
-                    animation: { 'blob': 'blob 7s infinite', 'float-slow': 'float 8s ease-in-out infinite' },
+                    colors: {
+                        rick: {
+                            yellow: '#facc15',
+                            yellow2: '#fbbf24',
+                            purple: '#a855f7',
+                            purple2: '#8b5cf6',
+                            pink: '#ec4899',
+                            pink2: '#f472b6',
+                            dark: '#0f0f1a',
+                            darker: '#050508'
+                        }
+                    },
+                    animation: {
+                        'glitch': 'glitch 1s infinite',
+                        'portal': 'portal 3s infinite',
+                        'shake': 'shake 0.5s infinite',
+                        'flicker': 'flicker 0.1s infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
+                        'rotate-slow': 'rotateSlow 20s linear infinite'
+                    },
                     keyframes: {
-                        blob: { '0%': { transform: 'translate(0px, 0px) scale(1)' }, '33%': { transform: 'translate(30px, -50px) scale(1.1)' }, '66%': { transform: 'translate(-20px, 20px) scale(0.9)' }, '100%': { transform: 'translate(0px, 0px) scale(1)' } },
-                        float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-20px)' } }
+                        glitch: {
+                            '0%, 100%': { transform: 'translate(0)' },
+                            '20%': { transform: 'translate(-2px, 2px)' },
+                            '40%': { transform: 'translate(-2px, -2px)' },
+                            '60%': { transform: 'translate(2px, 2px)' },
+                            '80%': { transform: 'translate(2px, -2px)' }
+                        },
+                        portal: {
+                            '0%, 100%': { transform: 'scale(1) rotate(0deg)', opacity: 0.8 },
+                            '50%': { transform: 'scale(1.1) rotate(180deg)', opacity: 1 }
+                        },
+                        shake: {
+                            '0%, 100%': { transform: 'translateX(0)' },
+                            '25%': { transform: 'translateX(-5px)' },
+                            '75%': { transform: 'translateX(5px)' }
+                        },
+                        flicker: {
+                            '0%, 100%': { opacity: 1 },
+                            '50%': { opacity: 0.8 }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' }
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 20px rgba(168, 85, 247, 0.5)' },
+                            '50%': { boxShadow: '0 0 40px rgba(236, 72, 153, 0.8)' }
+                        },
+                        rotateSlow: {
+                            '0%': { transform: 'rotate(0deg)' },
+                            '100%': { transform: 'rotate(360deg)' }
+                        }
                     }
                 }
             }
         }
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Creepster&display=swap');
         
         * { scroll-behavior: smooth; margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
-            background: #030014; 
-            font-family: 'Space Grotesk', sans-serif;
-            overflow-x: hidden;
+            background: #050508; 
+            font-family: 'JetBrains Mono', monospace;
             color: #e2e8f0;
+            overflow-x: hidden;
         }
         
-        #canvas-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        /* Particle Canvas - Watermark Background */
+        #canvas-container { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            z-index: -1; 
+            pointer-events: none;
+            opacity: 0.6;
+        }
         
-        /* Glowing Background */
-        .glow-bg {
+        /* Enhanced Portal Background */
+        .portal-bg {
             position: fixed;
             top: 0;
             left: 0;
@@ -52,243 +111,540 @@
             height: 100%;
             pointer-events: none;
             z-index: -2;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(168, 85, 247, 0.2) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(250, 204, 21, 0.1) 0%, transparent 40%),
+                radial-gradient(ellipse at 10% 90%, rgba(168, 85, 247, 0.1) 0%, transparent 30%),
+                radial-gradient(ellipse at 90% 10%, rgba(236, 72, 153, 0.1) 0%, transparent 30%),
+                linear-gradient(180deg, #050508 0%, #0f0f1a 50%, #050508 100%);
         }
         
-        .glow-blob {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(100px);
-            opacity: 0.4;
-            animation: blob 10s infinite ease-in-out;
-        }
-        
-        .glow-1 { width: 600px; height: 600px; background: linear-gradient(180deg, #06b6d4 0%, #8b5cf6 100%); top: -200px; left: -100px; }
-        .glow-2 { width: 500px; height: 500px; background: linear-gradient(180deg, #ec4899 0%, #8b5cf6 100%); bottom: -150px; right: -100px; animation-delay: -5s; }
-        .glow-3 { width: 400px; height: 400px; background: linear-gradient(180deg, #22d3ee 0%, #06b6d4 100%); top: 50%; left: 50%; transform: translate(-50%, -50%); animation-delay: -2s; opacity: 0.3; }
-        
-        /* Glass Cards */
-        .glass {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .glass:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(6, 182, 212, 0.3);
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(6, 182, 212, 0.1);
-        }
-        
-        .glass-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-        }
-        
-        /* Gradient Text */
-        .gradient-text {
-            background: linear-gradient(135deg, #22d3ee 0%, #a78bfa 50%, #f472b6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            background-size: 200% 200%;
-            animation: gradient-shift 3s ease infinite;
-        }
-        
-        @keyframes gradient-shift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        /* Code Window */
-        .code-window { 
-            background: #0d1117; 
-            border-radius: 16px; 
-            overflow: hidden; 
-            border: 1px solid rgba(255,255,255,0.1);
-            font-family: 'JetBrains Mono', monospace;
-        }
-        
-        .code-header { 
-            background: linear-gradient(180deg, #161b22 0%, #0d1117 100%); 
-            padding: 12px 16px; 
-            display: flex; 
-            align-items: center; 
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        
-        .code-dot { width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; }
-        
-        .code-body { padding: 20px; }
-        
-        .code-body pre { margin: 0; padding: 0; background: transparent; font-size: 14px; line-height: 1.7; }
-        
-        /* Topic Cards */
-        .topic-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 20px;
-            padding: 28px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .topic-card::before {
-            content: '';
-            position: absolute;
+        /* Animated Grid Background */
+        .grid-bg {
+            position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #22d3ee, #a78bfa, #f472b6);
-            opacity: 0;
-            transition: opacity 0.3s;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(168, 85, 247, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(168, 85, 247, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            z-index: -3;
         }
         
-        .topic-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            border-color: rgba(6, 182, 212, 0.3);
-            box-shadow: 0 30px 60px rgba(6, 182, 212, 0.15);
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
         }
         
-        .topic-card:hover::before { opacity: 1; }
-        
-        /* Icon Box */
-        .icon-box {
-            width: 56px;
-            height: 56px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            font-size: 24px;
-        }
-        
-        /* Buttons */
-        .btn-primary {
-            background: linear-gradient(135deg, #06b6d4 0%, #8b5cf6 100%);
-            border: none;
-            padding: 16px 32px;
-            border-radius: 14px;
-            font-weight: 600;
-            font-size: 16px;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s;
+        /* Rick and Morty Style Cards - Enhanced */
+        .rick-card {
+            background: linear-gradient(135deg, rgba(15, 15, 26, 0.95) 0%, rgba(10, 10, 20, 0.98) 100%);
+            border: 2px solid rgba(168, 85, 247, 0.4);
+            border-radius: 24px;
+            padding: 32px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
         }
         
-        .btn-primary::before {
+        .rick-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.15), transparent);
+            transition: left 0.6s;
+        }
+        
+        .rick-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(250, 204, 21, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        
+        .rick-card:hover {
+            transform: translateY(-12px) scale(1.03);
+            border-color: rgba(250, 204, 21, 0.8);
+            box-shadow: 
+                0 0 40px rgba(168, 85, 247, 0.4),
+                0 0 80px rgba(236, 72, 153, 0.3),
+                0 20px 40px rgba(0, 0, 0, 0.5),
+                inset 0 0 30px rgba(250, 204, 21, 0.1);
+        }
+        
+        .rick-card:hover::before { left: 100%; }
+        .rick-card:hover::after { opacity: 1; }
+        
+        /* Neon Glow Text Effects */
+        .rick-yellow {
+            color: #facc15;
+            text-shadow: 
+                0 0 10px rgba(250, 204, 21, 0.8),
+                0 0 20px rgba(250, 204, 21, 0.5),
+                0 0 30px rgba(250, 204, 21, 0.3),
+                0 0 40px rgba(250, 204, 21, 0.2);
+        }
+        
+        .rick-purple {
+            color: #a855f7;
+            text-shadow: 
+                0 0 10px rgba(168, 85, 247, 0.8),
+                0 0 20px rgba(168, 85, 247, 0.5),
+                0 0 30px rgba(168, 85, 247, 0.3);
+        }
+        
+        .rick-pink {
+            color: #ec4899;
+            text-shadow: 
+                0 0 10px rgba(236, 72, 153, 0.8),
+                0 0 20px rgba(236, 72, 153, 0.5),
+                0 0 30px rgba(236, 72, 153, 0.3);
+        }
+        
+        /* Gradient Text - Enhanced */
+        .rick-gradient {
+            background: linear-gradient(90deg, #facc15, #a855f7, #ec4899, #f472b6, #facc15);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-flow 2s linear infinite;
+            filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.5));
+        }
+        
+        @keyframes gradient-flow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 300% 50%; }
+        }
+        
+        /* Glitch Effect - Enhanced */
+        .glitch-text {
+            position: relative;
+            animation: glitch 2s infinite;
+        }
+        
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .glitch-text::before {
+            animation: glitch-1 2s infinite;
+            color: #facc15;
+            z-index: -1;
+        }
+        
+        .glitch-text::after {
+            animation: glitch-2 2s infinite;
+            color: #ec4899;
+            z-index: -2;
+        }
+        
+        @keyframes glitch {
+            0%, 90%, 100% { transform: translate(0); }
+            92% { transform: translate(-3px, 2px); }
+            94% { transform: translate(3px, -2px); }
+            96% { transform: translate(-2px, -1px); }
+            98% { transform: translate(2px, 1px); }
+        }
+        
+        @keyframes glitch-1 {
+            0%, 90%, 100% { transform: translate(0); opacity: 0; }
+            92% { transform: translate(-4px, 2px); opacity: 0.8; }
+            94% { transform: translate(4px, -2px); opacity: 0; }
+        }
+        
+        @keyframes glitch-2 {
+            0%, 90%, 100% { transform: translate(0); opacity: 0; }
+            93% { transform: translate(3px, -2px); opacity: 0.8; }
+            95% { transform: translate(-3px, 2px); opacity: 0; }
+        }
+        
+        /* Code Window - Enhanced */
+        .portal-code { 
+            background: #0a0a12; 
+            border-radius: 20px; 
+            overflow: hidden; 
+            border: 2px solid rgba(168, 85, 247, 0.4);
+            font-family: 'JetBrains Mono', monospace;
+            box-shadow: 
+                0 0 30px rgba(168, 85, 247, 0.3),
+                inset 0 0 60px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+        
+        .portal-code::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(250, 204, 21, 0.5), transparent);
+        }
+        
+        .portal-code-header { 
+            background: linear-gradient(180deg, #1a1a2e 0%, #0a0a12 100%); 
+            padding: 16px 20px; 
+            display: flex; 
+            align-items: center; 
+            border-bottom: 2px solid rgba(168, 85, 247, 0.3);
+        }
+        
+        .code-dot { 
+            width: 14px; 
+            height: 14px; 
+            border-radius: 50%; 
+            margin-right: 10px;
+            box-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
+        }
+        
+        .code-body { 
+            padding: 28px; 
+            background: transparent;
+        }
+        
+        .code-body pre { 
+            margin: 0; 
+            padding: 0; 
+            background: transparent; 
+            font-size: 14px; 
+            line-height: 1.9;
+        }
+        
+        /* Tabs - Enhanced */
+        .portal-tab {
+            padding: 14px 28px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 14px;
+            transition: all 0.3s;
+            background: rgba(168, 85, 247, 0.15);
+            color: rgba(255,255,255,0.7);
+            border: 2px solid rgba(168, 85, 247, 0.2);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .portal-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
             transition: left 0.5s;
         }
         
-        .btn-primary:hover::before { left: 100%; }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 20px 40px rgba(6, 182, 212, 0.3); }
-        
-        .btn-secondary {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 16px 32px;
-            border-radius: 14px;
-            font-weight: 500;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s;
+        .portal-tab:hover { 
+            background: rgba(168, 85, 247, 0.3);
+            color: #facc15;
+            border-color: rgba(250, 204, 21, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(250, 204, 21, 0.2);
         }
         
-        .btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: rgba(6, 182, 212, 0.3); }
+        .portal-tab:hover::before { left: 100%; }
         
-        /* Tabs */
-        .tab-btn {
-            padding: 10px 20px;
-            border-radius: 10px;
-            font-weight: 500;
-            font-size: 14px;
-            transition: all 0.3s;
-            background: rgba(255,255,255,0.05);
-            color: rgba(255,255,255,0.6);
-            border: 1px solid rgba(255,255,255,0.05);
-            cursor: pointer;
-        }
-        
-        .tab-btn:hover { background: rgba(255,255,255,0.1); color: white; }
-        
-        .tab-btn.active {
-            background: linear-gradient(135deg, #06b6d4 0%, #8b5cf6 100%);
+        .portal-tab.active {
+            background: linear-gradient(135deg, #facc15, #a855f7, #ec4899);
             color: white;
             border: none;
-            box-shadow: 0 10px 20px rgba(6, 182, 212, 0.2);
+            box-shadow: 
+                0 0 30px rgba(250, 204, 21, 0.5),
+                0 0 60px rgba(168, 85, 247, 0.4),
+                0 0 90px rgba(236, 72, 153, 0.3);
+            animation: flicker 0.15s infinite, tabGlow 2s infinite;
         }
         
-        /* Stats */
-        .stat-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.08);
+        @keyframes tabGlow {
+            0%, 100% { box-shadow: 0 0 30px rgba(250, 204, 21, 0.5), 0 0 60px rgba(168, 85, 247, 0.4); }
+            50% { box-shadow: 0 0 40px rgba(236, 72, 153, 0.6), 0 0 80px rgba(250, 204, 21, 0.3); }
+        }
+        
+        /* Buttons - Enhanced */
+        .portal-btn {
+            background: linear-gradient(135deg, #facc15 0%, #a855f7 50%, #ec4899 100%);
+            background-size: 200% 200%;
+            border: none;
+            padding: 20px 42px;
             border-radius: 16px;
-            padding: 24px;
-            text-align: center;
-            transition: all 0.3s;
+            font-weight: 800;
+            font-size: 17px;
+            color: #050508;
+            cursor: pointer;
+            transition: all 0.4s;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+            overflow: hidden;
+            animation: gradientMove 3s ease infinite;
         }
         
-        .stat-card:hover {
-            background: rgba(255,255,255,0.06);
-            transform: scale(1.05);
+        @keyframes gradientMove {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
+        
+        .portal-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            transition: left 0.6s;
+        }
+        
+        .portal-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        
+        .portal-btn:hover {
+            transform: translateY(-5px) scale(1.08);
+            box-shadow: 
+                0 15px 40px rgba(250, 204, 21, 0.5),
+                0 30px 80px rgba(168, 85, 247, 0.4),
+                0 0 100px rgba(236, 72, 153, 0.3);
+        }
+        
+        .portal-btn:hover::before { left: 100%; }
+        .portal-btn:hover::after { opacity: 1; }
+        
+        .portal-btn-outline {
+            background: transparent;
+            border: 3px solid #a855f7;
+            padding: 20px 42px;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 17px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .portal-btn-outline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(236, 72, 153, 0.2));
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        
+        .portal-btn-outline:hover {
+            background: rgba(168, 85, 247, 0.2);
+            border-color: #facc15;
+            box-shadow: 
+                0 0 30px rgba(250, 204, 21, 0.4),
+                0 0 60px rgba(168, 85, 247, 0.3),
+                inset 0 0 30px rgba(250, 204, 21, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .portal-btn-outline:hover::before { opacity: 1; }
+        
+        /* Stats Cards - Enhanced */
+        .stat-portal {
+            background: linear-gradient(135deg, rgba(15, 15, 26, 0.9) 0%, rgba(10, 10, 20, 0.95) 100%);
+            border: 2px solid rgba(168, 85, 247, 0.3);
+            border-radius: 20px;
+            padding: 32px;
+            text-align: center;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-portal::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        
+        .stat-portal:hover {
+            border-color: #ec4899;
+            transform: scale(1.12) translateY(-5px);
+            box-shadow: 
+                0 0 40px rgba(236, 72, 153, 0.4),
+                0 0 80px rgba(168, 85, 247, 0.2),
+                0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .stat-portal:hover::before { opacity: 1; }
         
         .stat-number {
-            font-size: 42px;
+            font-size: 56px;
             font-weight: 700;
-            background: linear-gradient(135deg, #22d3ee 0%, #a78bfa 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-family: 'Bangers', cursive;
+            letter-spacing: 3px;
+            position: relative;
+            display: inline-block;
         }
         
-        /* Exercise Cards */
-        .exercise-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.01) 100%);
-            border: 1px solid rgba(255,255,255,0.08);
+        .stat-number::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, currentColor, transparent);
+        }
+        
+        /* Topic Cards Icons */
+        .icon-portal {
+            width: 70px;
+            height: 70px;
             border-radius: 20px;
-            padding: 28px;
-            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin-bottom: 24px;
+            border: 3px solid;
+            position: relative;
+            overflow: hidden;
         }
         
-        .exercise-card:hover {
-            border-color: rgba(6, 182, 212, 0.3);
-            transform: translateY(-4px);
+        .icon-portal::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
         }
+        
+        .icon-portal:hover::before { opacity: 1; }
+        
+        /* Nav */
+        .nav-portal {
+            color: rgba(255,255,255, 0.7);
+            font-weight: 700;
+            padding: 12px 24px;
+            transition: all 0.3s;
+            position: relative;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .nav-portal:hover { 
+            color: #facc15;
+            text-shadow: 
+                0 0 10px rgba(250, 204, 21, 0.8),
+                0 0 20px rgba(250, 204, 21, 0.4);
+        }
+        
+        .nav-portal::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #facc15, #a855f7, #ec4899);
+            transition: all 0.4s;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .nav-portal:hover::after { width: 100%; }
+        
+        /* Section styles */
+        section { padding: 120px 0; position: relative; }
+        
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
         
         /* Badge */
-        .badge {
+        .portal-badge {
             display: inline-block;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            background: linear-gradient(135deg, rgba(6, 182, 212, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
-            color: #22d3ee;
-            border: 1px solid rgba(6, 182, 212, 0.2);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 700;
+            background: linear-gradient(135deg, rgba(250, 204, 21, 0.2), rgba(168, 85, 247, 0.2), rgba(236, 72, 153, 0.2));
+            color: #facc15;
+            border: 1px solid rgba(250, 204, 21, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .portal-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(250, 204, 21, 0.2), transparent);
+            animation: badgeShine 3s infinite;
+        }
+        
+        @keyframes badgeShine {
+            0%, 100% { left: -100%; }
+            50% { left: 100%; }
         }
         
         /* Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #030014; }
-        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #06b6d4, #8b5cf6); border-radius: 4px; }
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: #050508; }
+        ::-webkit-scrollbar-thumb { 
+            background: linear-gradient(180deg, #facc15, #a855f7, #ec4899); 
+            border-radius: 6px;
+            border: 3px solid #050508;
+        }
         
-        /* Animation Classes */
-        .animate-in { opacity: 0; transform: translateY(30px); animation: fadeInUp 0.8s ease forwards; }
+        /* Animation classes */
+        .animate-in { opacity: 0; transform: translateY(50px); animation: fadeInUp 0.8s ease forwards; }
         
         @keyframes fadeInUp {
             to { opacity: 1; transform: translateY(0); }
@@ -298,126 +654,184 @@
         .delay-200 { animation-delay: 0.2s; }
         .delay-300 { animation-delay: 0.3s; }
         .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
         
-        /* Nav */
-        .nav-link {
-            position: relative;
-            color: rgba(255,255,255,0.7);
-            font-weight: 500;
-            padding: 8px 16px;
-            transition: color 0.3s;
+        /* Floating Portal Animation */
+        .floating-portal {
+            animation: float 4s ease-in-out infinite, rotateSlow 10s linear infinite;
         }
         
-        .nav-link:hover { color: white; }
-        .nav-link::after {
+        /* Hero Title Glow */
+        .hero-title {
+            text-shadow: 
+                0 0 20px rgba(250, 204, 21, 0.8),
+                0 0 40px rgba(250, 204, 21, 0.5),
+                0 0 60px rgba(168, 85, 247, 0.4),
+                0 0 80px rgba(236, 72, 153, 0.3);
+        }
+        
+        /* Card shine effect */
+        .card-shine {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: skewX(-25deg);
+            animation: cardShine 4s infinite;
+        }
+        
+        @keyframes cardShine {
+            0% { left: -100%; }
+            50%, 100% { left: 200%; }
+        }
+        
+        /* Section divider */
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.5), transparent);
+            margin: 60px 0;
+        }
+        
+        /* Interactive cursor */
+        .cursor-glow {
+            cursor: pointer;
+        }
+        
+        /* Loading animation */
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(168, 85, 247, 0.3);
+            border-top-color: #facc15;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Neon border effect */
+        .neon-border {
+            position: relative;
+        }
+        
+        .neon-border::before {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #06b6d4, #8b5cf6);
-            transition: all 0.3s;
-            transform: translateX(-50%);
+            inset: -2px;
+            background: linear-gradient(45deg, #facc15, #a855f7, #ec4899, #facc15);
+            border-radius: inherit;
+            z-index: -1;
+            animation: borderRotate 3s linear infinite;
+            background-size: 300% 300%;
         }
         
-        .nav-link:hover::after { width: 100%; }
-        
-        /* Section padding */
-        section { padding: 100px 0; }
-        
-        /* Container */
-        .container { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
+        @keyframes borderRotate {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 300% 50%; }
+        }
     </style>
 </head>
 
 <body class="min-h-screen">
-    <!-- Glow Background -->
-    <div class="glow-bg">
-        <div class="glow-blob glow-1"></div>
-        <div class="glow-blob glow-2"></div>
-        <div class="glow-blob glow-3"></div>
-    </div>
+    <!-- Grid Background -->
+    <div class="grid-bg"></div>
     
-    <!-- Three.js Canvas -->
+    <!-- Portal Background -->
+    <div class="portal-bg"></div>
+    
+    <!-- Three.js Particle Canvas -->
     <div id="canvas-container"></div>
 
     <!-- Header -->
-    <header class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/10">
+    <header class="fixed top-0 left-0 right-0 z-50" style="background: rgba(5, 5, 8, 0.92); backdrop-filter: blur(25px); border-bottom: 2px solid rgba(168, 85, 247, 0.4);">
         <div class="container">
-            <nav class="flex items-center justify-between h-20">
-                <div class="flex items-center gap-4">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" alt="Python" class="w-12 h-12 animate-float-slow">
+            <nav class="flex items-center justify-between h-24">
+                <div class="flex items-center gap-6">
+                    <div class="relative">
+                        <span class="text-6xl floating-portal">🌀</span>
+                        <div class="absolute -inset-2 bg-gradient-to-r from-yellow-500 via-purple-500 to-pink-500 blur-xl opacity-50 rounded-full"></div>
+                    </div>
                     <div>
-                        <h1 class="text-2xl font-bold gradient-text">Python</h1>
-                        <p class="text-xs text-gray-500">Guía de Aprendizaje</p>
+                        <h1 class="text-4xl font-bold rick-gradient" style="font-family: 'Bangers', cursive; letter-spacing: 4px;">PYTHON</h1>
+                        <p class="text-sm rick-purple" style="font-family: 'Creepster', cursive; font-size: 18px;">🧬 Guía del Multiverso</p>
                     </div>
                 </div>
-                <div class="hidden md:flex items-center gap-8">
-                    <a href="#inicio" class="nav-link">Inicio</a>
-                    <a href="#temas" class="nav-link">Temas</a>
-                    <a href="#sintaxis" class="nav-link">Sintaxis</a>
-                    <a href="#ejercicios" class="nav-link">Ejercicios</a>
+                <div class="hidden md:flex items-center gap-4">
+                    <a href="#inicio" class="nav-portal cursor-glow">🏠 Inicio</a>
+                    <a href="#temas" class="nav-portal cursor-glow">🧠 Temas</a>
+                    <a href="#sintaxis" class="nav-portal cursor-glow">💻 Sintaxis</a>
+                    <a href="#ejercicios" class="nav-portal cursor-glow">🎮 Ejercicios</a>
                 </div>
-                <button id="menuBtn" class="md:hidden p-3 glass rounded-xl">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                <button id="menuBtn" class="md:hidden p-4 rick-card rounded-xl cursor-glow">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                 </button>
             </nav>
         </div>
     </header>
 
     <!-- Mobile Menu -->
-    <div id="mobileMenu" class="fixed inset-0 z-40 bg-[#030014]/95 backdrop-blur-xl hidden flex flex-col items-center justify-center gap-8">
-        <a href="#inicio" class="text-3xl gradient-text font-bold" onclick="toggleMenu()">Inicio</a>
-        <a href="#temas" class="text-2xl text-gray-300" onclick="toggleMenu()">Temas</a>
-        <a href="#sintaxis" class="text-2xl text-gray-300" onclick="toggleMenu()">Sintaxis</a>
-        <a href="#ejercicios" class="text-2xl text-gray-300" onclick="toggleMenu()">Ejercicios</a>
+    <div id="mobileMenu" class="fixed inset-0 z-40" style="background: rgba(5, 5, 8, 0.98); backdrop-filter: blur(30px);" hidden flex flex-col items-center justify-center gap-10>
+        <a href="#inicio" class="text-5xl rick-gradient glitch-text" onclick="toggleMenu()">🏠 Inicio</a>
+        <a href="#temas" class="text-4xl text-white hover:rick-purple" onclick="toggleMenu()">🧠 Temas</a>
+        <a href="#sintaxis" class="text-4xl text-white hover:rick-yellow" onclick="toggleMenu()">💻 Sintaxis</a>
+        <a href="#ejercicios" class="text-4xl text-white hover:rick-pink" onclick="toggleMenu()">🎮 Ejercicios</a>
     </div>
 
-    <main class="pt-20">
+    <main class="pt-24">
         <!-- Hero Section -->
-        <section id="inicio" class="min-h-screen flex items-center relative">
-            <div class="container">
-                <div class="max-w-4xl mx-auto text-center">
-                    <div class="inline-flex items-center gap-3 px-6 py-3 glass rounded-full mb-10 animate-in">
-                        <span class="w-3 h-3 rounded-full bg-cyan-400 animate-pulse"></span>
-                        <span class="text-cyan-400 font-medium">✨ Aprende Python desde cero</span>
+        <section id="inicio" class="min-h-screen flex items-center relative overflow-hidden">
+            <!-- Decorative elements -->
+            <div class="absolute top-20 left-10 w-32 h-32 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
+            <div class="absolute bottom-20 right-10 w-40 h-40 bg-pink-500/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+            <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-yellow-500/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
+            
+            <div class="container relative z-10">
+                <div class="max-w-5xl mx-auto text-center">
+                    <div class="inline-flex items-center gap-6 px-10 py-6 rick-card mb-16 animate-in relative overflow-hidden">
+                        <div class="card-shine"></div>
+                        <span class="text-4xl">🌌</span>
+                        <span class="text-2xl rick-yellow font-bold" style="font-family: 'Creepster', cursive;">¡Explora el Multiverso de Python!</span>
+                        <span class="text-4xl">🌌</span>
                     </div>
                     
-                    <h1 class="text-6xl md:text-8xl font-bold mb-8 animate-in delay-100">
-                        <span class="gradient-text">Guía de Python</span>
+                    <h1 class="text-7xl md:text-10xl font-bold mb-12 animate-in delay-100 hero-title" style="font-family: 'Bangers', cursive; letter-spacing: 10px;">
+                        <span class="rick-gradient">PYTHON</span>
                     </h1>
                     
-                    <p class="text-xl md:text-2xl text-gray-400 mb-12 max-w-2xl mx-auto animate-in delay-200">
-                        Domina la programación con <span class="text-cyan-400 font-semibold">ejercicios prácticos</span> y ejemplos interactivos
+                    <p class="text-3xl md:text-4xl text-gray-300 mb-16 max-w-3xl mx-auto animate-in delay-200 leading-relaxed">
+                        Domina el código a través del <span class="rick-purple font-bold">espacio</span>, el <span class="rick-pink font-bold">tiempo</span> y las <span class="rick-yellow font-bold">dimensiones</span>
                     </p>
                     
-                    <div class="flex flex-col sm:flex-row items-center justify-center gap-6 animate-in delay-300">
-                        <a href="#temas" class="btn-primary">
-                            Comenzar a Aprender
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-8 animate-in delay-300">
+                        <a href="#temas" class="portal-btn cursor-glow">
+                            🚀 Iniciar Viaje
                         </a>
-                        <a href="#sintaxis" class="btn-secondary">
-                            Ver Sintaxis
+                        <a href="#sintaxis" class="portal-btn-outline cursor-glow">
+                            💫 Ver Código
                         </a>
                     </div>
                     
-                    <!-- Stats -->
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20 animate-in delay-400">
-                        <div class="stat-card">
-                            <div class="stat-number">20+</div>
-                            <div class="text-gray-400 mt-2">Ejercicios</div>
+                    <!-- Stats - Enhanced -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-24 animate-in delay-400">
+                        <div class="stat-portal cursor-glow">
+                            <div class="stat-number rick-yellow">20+</div>
+                            <div class="text-gray-400 mt-4 text-lg">🧬 Ejercicios</div>
                         </div>
-                        <div class="stat-card">
-                            <div class="stat-number">15</div>
-                            <div class="text-gray-400 mt-2">Temas</div>
+                        <div class="stat-portal cursor-glow">
+                            <div class="stat-number rick-purple">15</div>
+                            <div class="text-gray-400 mt-4 text-lg">🌌 Temas</div>
                         </div>
-                        <div class="stat-card">
-                            <div class="stat-number">3</div>
-                            <div class="text-gray-400 mt-2">Niveles</div>
+                        <div class="stat-portal cursor-glow">
+                            <div class="stat-number rick-pink">∞</div>
+                            <div class="text-gray-400 mt-4 text-lg">🌀 Dimensiones</div>
                         </div>
-                        <div class="stat-card">
-                            <div class="stat-number">∞</div>
-                            <div class="text-gray-400 mt-2">Posibilidades</div>
+                        <div class="stat-portal cursor-glow">
+                            <div class="stat-number text-white">3</div>
+                            <div class="text-gray-400 mt-4 text-lg">👾 Niveles</div>
                         </div>
                     </div>
                 </div>
@@ -427,84 +841,72 @@
         <!-- Temas Section -->
         <section id="temas">
             <div class="container">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl md:text-5xl font-bold mb-4">
-                        <span class="gradient-text">Temas de Aprendizaje</span>
+                <div class="text-center mb-20">
+                    <h2 class="text-6xl md:text-7xl font-bold mb-8" style="font-family: 'Bangers', cursive; letter-spacing: 5px;">
+                        <span class="rick-gradient glitch-text" data-text="🧠 Dimensiones">🧠 Dimensiones</span>
                     </h2>
-                    <p class="text-xl text-gray-400">Estructura progresiva para dominar Python</p>
+                    <p class="text-2xl text-gray-400">Explora los mundos del conocimiento Python</p>
+                    <div class="section-divider"></div>
                 </div>
                 
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="topic-card animate-in">
-                        <div class="icon-box glass" style="background: linear-gradient(135deg, rgba(34, 211, 238, 0.2), rgba(34, 211, 238, 0.05));">
-                            💾
-                        </div>
-                        <h3 class="text-2xl font-bold text-cyan-400 mb-3">1. Variables</h3>
-                        <p class="text-gray-400 mb-4">Aprende a almacenar y manipular datos</p>
-                        <div class="flex gap-2">
-                            <span class="badge">Tipos de datos</span>
-                            <span class="badge">Declaración</span>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <div class="rick-card animate-in cursor-glow">
+                        <div class="icon-portal" style="background: rgba(250, 204, 21, 0.15); border-color: #facc15;">💾</div>
+                        <h3 class="text-3xl font-bold rick-yellow mb-4" style="font-family: 'Bangers', cursive;">1. Variables</h3>
+                        <p class="text-gray-400 mb-5 text-lg">Almacena información entre dimensiones</p>
+                        <div class="flex gap-3 flex-wrap">
+                            <span class="portal-badge">Tipos</span>
+                            <span class="portal-badge">Datos</span>
                         </div>
                     </div>
                     
-                    <div class="topic-card animate-in delay-100">
-                        <div class="icon-box glass" style="background: linear-gradient(135deg, rgba(167, 139, 250, 0.2), rgba(167, 139, 250, 0.05));">
-                            🔢
-                        </div>
-                        <h3 class="text-2xl font-bold text-purple-400 mb-3">2. Operadores</h3>
-                        <p class="text-gray-400 mb-4">Cálculos y comparaciones</p>
-                        <div class="flex gap-2">
-                            <span class="badge">Aritméticos</span>
-                            <span class="badge">Lógicos</span>
+                    <div class="rick-card animate-in delay-100 cursor-glow">
+                        <div class="icon-portal" style="background: rgba(168, 85, 247, 0.15); border-color: #a855f7;">🔢</div>
+                        <h3 class="text-3xl font-bold rick-purple mb-4" style="font-family: 'Bangers', cursive;">2. Operadores</h3>
+                        <p class="text-gray-400 mb-5 text-lg">Manipula la energía del código</p>
+                        <div class="flex gap-3 flex-wrap">
+                            <span class="portal-badge">Matemáticas</span>
+                            <span class="portal-badge">Lógicos</span>
                         </div>
                     </div>
                     
-                    <div class="topic-card animate-in delay-200">
-                        <div class="icon-box glass" style="background: linear-gradient(135deg, rgba(244, 114, 182, 0.2), rgba(244, 114, 182, 0.05));">
-                            🔀
-                        </div>
-                        <h3 class="text-2xl font-bold text-pink-400 mb-3">3. Condicionales</h3>
-                        <p class="text-gray-400 mb-4">Toma de decisiones en código</p>
-                        <div class="flex gap-2">
-                            <span class="badge">if</span>
-                            <span class="badge">elif</span>
-                            <span class="badge">else</span>
+                    <div class="rick-card animate-in delay-200 cursor-glow">
+                        <div class="icon-portal" style="background: rgba(236, 72, 153, 0.15); border-color: #ec4899;">🔀</div>
+                        <h3 class="text-3xl font-bold rick-pink mb-4" style="font-family: 'Bangers', cursive;">3. Condicionales</h3>
+                        <p class="text-gray-400 mb-5 text-lg">Toma decisiones entre realidades</p>
+                        <div class="flex gap-3 flex-wrap">
+                            <span class="portal-badge">if</span>
+                            <span class="portal-badge">else</span>
                         </div>
                     </div>
                     
-                    <div class="topic-card animate-in delay-300">
-                        <div class="icon-box glass" style="background: linear-gradient(135deg, rgba(251, 191, 36, 0.2), rgba(251, 191, 36, 0.05));">
-                            🔄
-                        </div>
-                        <h3 class="text-2xl font-bold text-yellow-400 mb-3">4. Bucle FOR</h3>
-                        <p class="text-gray-400 mb-4">Iteración definida</p>
-                        <div class="flex gap-2">
-                            <span class="badge">range()</span>
-                            <span class="badge">enumerate</span>
+                    <div class="rick-card animate-in delay-300 cursor-glow">
+                        <div class="icon-portal" style="background: rgba(250, 204, 21, 0.15); border-color: #facc15;">🔄</div>
+                        <h3 class="text-3xl font-bold rick-yellow mb-4" style="font-family: 'Bangers', cursive;">4. Bucle FOR</h3>
+                        <p class="text-gray-400 mb-5 text-lg">Repetición infinita del tiempo</p>
+                        <div class="flex gap-3 flex-wrap">
+                            <span class="portal-badge">range</span>
+                            <span class="portal-badge">iterar</span>
                         </div>
                     </div>
                     
-                    <div class="topic-card animate-in delay-400">
-                        <div class="icon-box glass" style="background: linear-gradient(135deg, rgba(249, 115, 22, 0.2), rgba(249, 115, 22, 0.05));">
-                            ⚡
-                        </div>
-                        <h3 class="text-2xl font-bold text-orange-400 mb-3">5. Bucle WHILE</h3>
-                        <p class="text-gray-400 mb-4">Iteración condicional</p>
-                        <div class="flex gap-2">
-                            <span class="badge">break</span>
-                            <span class="badge">continue</span>
+                    <div class="rick-card animate-in delay-400 cursor-glow">
+                        <div class="icon-portal" style="background: rgba(168, 85, 247, 0.15); border-color: #a855f7;">⚡</div>
+                        <h3 class="text-3xl font-bold rick-purple mb-4" style="font-family: 'Bangers', cursive;">5. Bucle WHILE</h3>
+                        <p class="text-gray-400 mb-5 text-lg">El.loop infinito del portal</p>
+                        <div class="flex gap-3 flex-wrap">
+                            <span class="portal-badge">break</span>
+                            <span class="portal-badge">continue</span>
                         </div>
                     </div>
                     
-                    <div class="topic-card">
-                        <div class="icon-box glass" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.05));">
-                            ⚙️
-                        </div>
-                        <h3 class="text-2xl font-bold text-red-400 mb-3">6. Funciones</h3>
-                        <p class="text-gray-400 mb-4">Código reutilizable</p>
-                        <div class="flex gap-2">
-                            <span class="badge">def</span>
-                            <span class="badge">return</span>
+                    <div class="rick-card cursor-glow">
+                        <div class="icon-portal" style="background: rgba(236, 72, 153, 0.15); border-color: #ec4899;">⚙️</div>
+                        <h3 class="text-3xl font-bold rick-pink mb-4" style="font-family: 'Bangers', cursive;">6. Funciones</h3>
+                        <p class="text-gray-400 mb-5 text-lg">Crea portales de código reutilizable</p>
+                        <div class="flex gap-3 flex-wrap">
+                            <span class="portal-badge">def</span>
+                            <span class="portal-badge">return</span>
                         </div>
                     </div>
                 </div>
@@ -512,82 +914,78 @@
         </section>
 
         <!-- Sintaxis Section -->
-        <section id="sintaxis" class="bg-black/20">
+        <section id="sintaxis" style="background: rgba(0, 0, 0, 0.4);">
             <div class="container">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl md:text-5xl font-bold mb-4">
-                        <span class="gradient-text">Sintaxis de Python</span>
+                <div class="text-center mb-20">
+                    <h2 class="text-6xl md:text-7xl font-bold mb-8" style="font-family: 'Bangers', cursive; letter-spacing: 5px;">
+                        <span class="rick-gradient" data-text="💻 Código Portal">💻 Código Portal</span>
                     </h2>
-                    <p class="text-xl text-gray-400">Aprende la sintaxis con ejemplos prácticos</p>
+                    <p class="text-2xl text-gray-400">Escribe el código que abre portales</p>
+                    <div class="section-divider"></div>
                 </div>
                 
                 <!-- Tabs -->
-                <div class="flex flex-wrap gap-3 mb-12 justify-center">
-                    <button onclick="showTab('variables')" class="tab-btn active">Variables</button>
-                    <button onclick="showTab('operadores')" class="tab-btn">Operadores</button>
-                    <button onclick="showTab('condicionales')" class="tab-btn">Condicionales</button>
-                    <button onclick="showTab('for')" class="tab-btn">FOR</button>
-                    <button onclick="showTab('while')" class="tab-btn">WHILE</button>
-                    <button onclick="showTab('funciones')" class="tab-btn">Funciones</button>
-                    <button onclick="showTab('listas')" class="tab-btn">Listas</button>
-                    <button onclick="showTab('diccionarios')" class="tab-btn">Diccionarios</button>
-                    <button onclick="showTab('tuplas')" class="tab-btn">Tuplas</button>
-                    <button onclick="showTab('sets')" class="tab-btn">Sets</button>
-                    <button onclick="showTab('strings')" class="tab-btn">Strings</button>
-                    <button onclick="showTab('excepciones')" class="tab-btn">Excepciones</button>
-                    <button onclick="showTab('poo')" class="tab-btn">POO</button>
+                <div class="flex flex-wrap gap-4 mb-16 justify-center">
+                    <button onclick="showTab('variables')" class="portal-tab active cursor-glow">Variables</button>
+                    <button onclick="showTab('operadores')" class="portal-tab cursor-glow">Operadores</button>
+                    <button onclick="showTab('condicionales')" class="portal-tab cursor-glow">Condicionales</button>
+                    <button onclick="showTab('for')" class="portal-tab cursor-glow">FOR</button>
+                    <button onclick="showTab('while')" class="portal-tab cursor-glow">WHILE</button>
+                    <button onclick="showTab('funciones')" class="portal-tab cursor-glow">Funciones</button>
+                    <button onclick="showTab('listas')" class="portal-tab cursor-glow">Listas</button>
+                    <button onclick="showTab('diccionarios')" class="portal-tab cursor-glow">Diccionarios</button>
+                    <button onclick="showTab('poo')" class="portal-tab cursor-glow">POO</button>
                 </div>
                 
                 <div id="tabContent">
-                    <!-- Variables -->
-                    <div data-tab="variables" class="tab-panel grid lg:grid-cols-2 gap-8">
-                        <div class="glass-card p-8">
-                            <h3 class="text-2xl font-bold text-cyan-400 mb-6">Variables y Tipos</h3>
-                            <div class="code-window">
-                                <div class="code-header">
-                                    <div><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div>
-                                    <span class="text-gray-400 text-sm">variables.py</span>
+                    <div data-tab="variables" class="tab-panel grid lg:grid-cols-2 gap-10">
+                        <div class="rick-card cursor-glow">
+                            <h3 class="text-2xl font-bold rick-yellow mb-6" style="font-family: 'Bangers', cursive;">🧬 Variables</h3>
+                            <div class="portal-code">
+                                <div class="portal-code-header">
+                                    <div><div class="code-dot" style="background: #ef4444;"></div><div class="code-dot" style="background: #eab308;"></div><div class="code-dot" style="background: #22c55e;"></div></div>
+                                    <span class="text-gray-400 text-sm ml-4">variables.py</span>
                                 </div>
                                 <div class="code-body">
-                                    <pre><code class="language-python"># Variables en Python
-nombre = "Gabriel"      # str
-edad = 25                # int
-promedio = 85.5          # float
-es_estudiante = True     # bool
+                                    <pre><code class="language-python"># 🧬 Variables en Python
+nombre = "Rick"       # str
+edad = 65              # int
+portal = 42.5          # float
+es_loco = True         # bool
 
-print(f"Hola, soy {nombre}")
+print(f"¡Soy {nombre}!")
 print(f"Tengo {edad} años")
 print(type(nombre))</code></pre>
                                 </div>
                             </div>
                         </div>
-                        <div class="glass-card p-8">
-                            <h3 class="text-2xl font-bold text-cyan-400 mb-6">Conversión de Tipos</h3>
-                            <div class="code-window">
-                                <div class="code-header">
-                                    <div><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div>
-                                    <span class="text-gray-400 text-sm">conversion.py</span>
+                        <div class="rick-card cursor-glow">
+                            <h3 class="text-2xl font-bold rick-yellow mb-6" style="font-family: 'Bangers', cursive;">🔄 Conversión</h3>
+                            <div class="portal-code">
+                                <div class="portal-code-header">
+                                    <div><div class="code-dot" style="background: #ef4444;"></div><div class="code-dot" style="background: #eab308;"></div><div class="code-dot" style="background: #22c55e;"></div></div>
+                                    <span class="text-gray-400 text-sm ml-4">conversion.py</span>
                                 </div>
                                 <div class="code-body">
-                                    <pre><code class="language-python"># Conversión de tipos
-numero = int("42")       # String -> int
-precio = float("19.99")  # String -> float
-edad = 25
+                                    <pre><code class="language-python"># 🔄 Conversión de tipos
+numero = int("42")
+precio = float("19.99")
+edad = 65
 print("Tengo " + str(edad) + " años")
-print(int(True))         # 1
-print(int(False))        # 0</code></pre>
+print(int(True))   # 1
+print(int(False))  # 0</code></pre>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div data-tab="operadores" class="tab-panel hidden grid lg:grid-cols-2 gap-8">
-                        <div class="glass-card p-8">
-                            <h3 class="text-2xl font-bold text-purple-400 mb-6">Operadores Aritméticos</h3>
-                            <div class="code-window">
-                                <div class="code-header">
-                                    <div><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div>
-                                    <span class="text-gray-400 text-sm">aritmetica.py</span>
+                    <div data-tab="operadores" class="tab-panel hidden grid lg:grid-cols-2 gap-10">
+                        <div class="rick-card cursor-glow">
+                            <h3 class="text-2xl font-bold rick-purple mb-6" style="font-family: 'Bangers', cursive;">🔢 Operadores</h3>
+                            <div class="portal-code">
+                                <div class="portal-code-header">
+                                    <div><div class="code-dot" style="background: #ef4444;"></div><div class="code-dot" style="background: #eab308;"></div><div class="code-dot" style="background: #22c55e;"></div></div>
+                                    <span class="text-gray-400 text-sm ml-4">operadores.py</span>
                                 </div>
                                 <div class="code-body">
                                     <pre><code class="language-python">a, b = 10, 3
@@ -596,49 +994,47 @@ print(a - b)    # 7  Resta
 print(a * b)    # 30 Multiplicación
 print(a / b)    # 3.33...
 print(a // b)   # 3  División entera
-print(a % b)    # 1  Módulo
 print(a ** b)   # 1000 Potencia</code></pre>
                                 </div>
                             </div>
                         </div>
-                        <div class="glass-card p-8">
-                            <h3 class="text-2xl font-bold text-purple-400 mb-6">Operadores de Comparación</h3>
-                            <div class="code-window">
-                                <div class="code-header">
-                                    <div><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div>
-                                    <span class="text-gray-400 text-sm">comparacion.py</span>
+                        <div class="rick-card cursor-glow">
+                            <h3 class="text-2xl font-bold rick-purple mb-6" style="font-family: 'Bangers', cursive;">🎯 Comparación</h3>
+                            <div class="portal-code">
+                                <div class="portal-code-header">
+                                    <div><div class="code-dot" style="background: #ef4444;"></div><div class="code-dot" style="background: #eab308;"></div><div class="code-dot" style="background: #22c55e;"></div></div>
+                                    <span class="text-gray-400 text-sm ml-4">comparacion.py</span>
                                 </div>
                                 <div class="code-body">
                                     <pre><code class="language-python">a, b = 5, 10
 print(a == b)   # False
 print(a != b)   # True
 print(a < b)    # True
-print(a > b)    # False
 
 if a < b:
-    print("a es menor que b")</code></pre>
+    print("¡Wubba Lubba Dub Dub!")</code></pre>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div data-tab="condicionales" class="tab-panel hidden grid lg:grid-cols-2 gap-8">
-                        <div class="glass-card p-8">
-                            <h3 class="text-2xl font-bold text-pink-400 mb-6">Condicional if/else</h3>
-                            <div class="code-window">
-                                <div class="code-header">
-                                    <div><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div>
-                                    <span class="text-gray-400 text-sm">if_simple.py</span>
+                    <div data-tab="condicionales" class="tab-panel hidden grid lg:grid-cols-2 gap-10">
+                        <div class="rick-card cursor-glow">
+                            <h3 class="text-2xl font-bold rick-pink mb-6" style="font-family: 'Bangers', cursive;">🔀 Condicional</h3>
+                            <div class="portal-code">
+                                <div class="portal-code-header">
+                                    <div><div class="code-dot" style="background: #ef4444;"></div><div class="code-dot" style="background: #eab308;"></div><div class="code-dot" style="background: #22c55e;"></div></div>
+                                    <span class="text-gray-400 text-sm ml-4">if_else.py</span>
                                 </div>
                                 <div class="code-body">
-                                    <pre><code class="language-python">edad = 18
+                                    <pre><code class="language-python">edad = 65
 
 if edad >= 18:
-    print("Mayor de edad")
+    print("¡Pode ir al limbo!")
 else:
-    print("Menor de edad")
+    print("¡Quedate en el garage!")
 
-# Múltiple
+# Multiple
 nota = 75
 if nota >= 70:
     print("Acreditado")
@@ -649,38 +1045,37 @@ else:
                                 </div>
                             </div>
                         </div>
-                        <div class="glass-card p-8">
-                            <h3 class="text-2xl font-bold text-pink-400 mb-6">Operadores Lógicos</h3>
-                            <div class="code-window">
-                                <div class="code-header">
-                                    <div><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div>
-                                    <span class="text-gray-400 text-sm">logicos.py</span>
+                        <div class="rick-card cursor-glow">
+                            <h3 class="text-2xl font-bold rick-pink mb-6" style="font-family: 'Bangers', cursive;">🔗 Lógicos</h3>
+                            <div class="portal-code">
+                                <div class="portal-code-header">
+                                    <div><div class="code-dot" style="background: #ef4444;"></div><div class="code-dot" style="background: #eab308;"></div><div class="code-dot" style="background: #22c55e;"></div></div>
+                                    <span class="text-gray-400 text-sm ml-4">logicos.py</span>
                                 </div>
                                 <div class="code-body">
-                                    <pre><code class="language-python">edad = 25
-tiene_licencia = True
+                                    <pre><code class="language-python">edad = 65
+tiene_ticket = True
 
-# and, or, not
-if edad >= 18 and tiene_licencia:
-    print("Puede conducir")
+if edad >= 18 and tiene_ticket:
+    print("¡Entra al portal!")
 
-if edad < 18 or not tiene_licencia:
-    print("No puede conducir")</code></pre>
+if edad < 18 or not tiene_ticket:
+    print("¡No puedes pasar!")</code></pre>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div data-tab="for" class="tab-panel hidden grid lg:grid-cols-2 gap-8">
-                        <div class="glass-card p-8">
-                            <h3 class="text-2xl font-bold text-yellow-400 mb-6">Bucle FOR</h3>
-                            <div class="code-window">
-                                <div class="code-header">
-                                    <div><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div>
-                                    <span class="text-gray-400 text-sm">for_basico.py</span>
+                    <div data-tab="for" class="tab-panel hidden grid lg:grid-cols-2 gap-10">
+                        <div class="rick-card cursor-glow">
+                            <h3 class="text-2xl font-bold rick-yellow mb-6" style="font-family: 'Bangers', cursive;">🔄 Bucle FOR</h3>
+                            <div class="portal-code">
+                                <div class="portal-code-header">
+                                    <div><div class="code-dot" style="background: #ef4444;"></div><div class="code-dot" style="background: #eab308;"></div><div class="code-dot" style="background: #22c55e;"></div></div>
+                                    <span class="text-gray-400 text-sm ml-4">for.py</span>
                                 </div>
                                 <div class="code-body">
-                                    <pre><code class="language-python"># range
+                                    <pre><code class="language-python"># Range
 for i in range(5):
     print(i)  # 0,1,2,3,4
 
@@ -689,25 +1084,24 @@ for i in range(0, 10, 2):
     print(i)  # 0,2,4,6,8
 
 # Iterar lista
-nombres = ["Ana", "Bob", "Carla"]
+nombres = ["Rick", "Morty", "Summer"]
 for nombre in nombres:
-    print(f"Hola {nombre}")</code></pre>
+    print(f"¡Hola {nombre}!")</code></pre>
                                 </div>
                             </div>
                         </div>
-                        <div class="glass-card p-8">
-                            <h3 class="text-2xl font-bold text-yellow-400 mb-6">enumerate</h3>
-                            <div class="code-window">
-                                <div class="code-header">
-                                    <div><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div>
-                                    <span class="text-gray-400 text-sm">enumerate.py</span>
+                        <div class="rick-card cursor-glow">
+                            <h3 class="text-2xl font-bold rick-yellow mb-6" style="font-family: 'Bangers', cursive;">🪐 enumerate</h3>
+                            <div class="portal-code">
+                                <div class="portal-code-header">
+                                    <div><div class="code-dot" style="background: #ef4444;"></div><div class="code-dot" style="background: #eab308;"></div><div class="code-dot" style="background: #22c55e;"></div></div>
+                                    <span class="text-gray-400 text-sm ml-4">enumerate.py</span>
                                 </div>
                                 <div class="code-body">
-                                    <pre><code class="language-python">frutas = ["manzana", "pera", "uva"]
+                                    <pre><code class="language-python">dimensiones = ["C-137", "Fox", "Cronenberg"]
 
-# Con índice
-for i, fruta in enumerate(frutas):
-    print(f"{i}: {fruta}")
+for i, dim in enumerate(dimensiones):
+    print(f"{i}: {dim}")
 
 # Sumar
 numeros = [10, 20, 30]
@@ -718,13 +1112,13 @@ print(f"Total: {total}")</code></pre>
                         </div>
                     </div>
                     
-                    <div data-tab="while" class="tab-panel hidden grid lg:grid-cols-2 gap-8">
-                        <div class="glass-card p-8">
-                            <h3 class="text-2xl font-bold text-orange-400 mb-6">Bucle WHILE</h3>
-                            <div class="code-window">
-                                <div class="code-header">
-                                    <div><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div>
-                                    <span class="text-gray-400 text-sm">while_basico.py</span>
+                    <div data-tab="while" class="tab-panel hidden grid lg:grid-cols-2 gap-10">
+                        <div class="rick-card cursor-glow">
+                            <h3 class="text-2xl font-bold rick-purple mb-6" style="font-family: 'Bangers', cursive;">⚡ WHILE</h3>
+                            <div class="portal-code">
+                                <div class="portal-code-header">
+                                    <div><div class="code-dot" style="background: #ef4444;"></div><div class="code-dot" style="background: #eab308;"></div><div class="code-dot" style="background: #22c55e;"></div></div>
+                                    <span class="text-gray-400 text-sm ml-4">while.py</span>
                                 </div>
                                 <div class="code-body">
                                     <pre><code class="language-python">contador = 0
@@ -734,25 +1128,25 @@ while contador < 5:
 
 # Con break
 while True:
-    print("Ejecutando...")
+    print("¡Abriendo portal!")
     break</code></pre>
                                 </div>
                             </div>
                         </div>
-                        <div class="glass-card p-8">
-                            <h3 class="text-2xl font-bold text-orange-400 mb-6">Break y Continue</h3>
-                            <div class="code-window">
-                                <div class="code-header">
-                                    <div><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div>
-                                    <span class="text-gray-400 text-sm">control.py</span>
+                        <div class="rick-card cursor-glow">
+                            <h3 class="text-2xl font-bold rick-purple mb-6" style="font-family: 'Bangers', cursive;">🛑 Control</h3>
+                            <div class="portal-code">
+                                <div class="portal-code-header">
+                                    <div><div class="code-dot" style="background: #ef4444;"></div><div class="code-dot" style="background: #eab308;"></div><div class="code-dot" style="background: #22c55e;"></div></div>
+                                    <span class="text-gray-400 text-sm ml-4">break_continue.py</span>
                                 </div>
                                 <div class="code-body">
-                                    <pre><code class="language-python"># Continue - salta iteración
+                                    <pre><code class="language-python"># Continue - salta
 for i in range(5):
     if i == 2: continue
     print(i)  # 0,1,3,4
 
-# Break - sale del ciclo
+# Break - sale
 for i in range(10):
     if i == 3: break
     print(i)  # 0,1,2</code></pre>
@@ -761,34 +1155,34 @@ for i in range(10):
                         </div>
                     </div>
                     
-                    <div data-tab="funciones" class="tab-panel hidden grid lg:grid-cols-2 gap-8">
-                        <div class="glass-card p-8">
-                            <h3 class="text-2xl font-bold text-red-400 mb-6">Crear Funciones</h3>
-                            <div class="code-window">
-                                <div class="code-header">
-                                    <div><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div>
-                                    <span class="text-gray-400 text-sm">funciones.py</span>
+                    <div data-tab="funciones" class="tab-panel hidden grid lg:grid-cols-2 gap-10">
+                        <div class="rick-card cursor-glow">
+                            <h3 class="text-2xl font-bold rick-pink mb-6" style="font-family: 'Bangers', cursive;">⚙️ Funciones</h3>
+                            <div class="portal-code">
+                                <div class="portal-code-header">
+                                    <div><div class="code-dot" style="background: #ef4444;"></div><div class="code-dot" style="background: #eab308;"></div><div class="code-dot" style="background: #22c55e;"></div></div>
+                                    <span class="text-gray-400 text-sm ml-4">funciones.py</span>
                                 </div>
                                 <div class="code-body">
                                     <pre><code class="language-python">def saludar(nombre):
-    return f"Hola {nombre}!"
+    return f"¡Hola {nombre}!"
 
-print(saludar("Gabriel"))
+print(saludar("Rick"))
 
-# Con valor por defecto
-def saludar(nombre="Usuario"):
-    return f"Hola {nombre}"
+# Valor por defecto
+def saludar(nombre="Morty"):
+    return f"¡Hola {nombre}!"
 
 print(saludar())</code></pre>
                                 </div>
                             </div>
                         </div>
-                        <div class="glass-card p-8">
-                            <h3 class="text-2xl font-bold text-red-400 mb-6">Retorno</h3>
-                            <div class="code-window">
-                                <div class="code-header">
-                                    <div><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div>
-                                    <span class="text-gray-400 text-sm">retorno.py</span>
+                        <div class="rick-card cursor-glow">
+                            <h3 class="text-2xl font-bold rick-pink mb-6" style="font-family: 'Bangers', cursive;">📤 Return</h3>
+                            <div class="portal-code">
+                                <div class="portal-code-header">
+                                    <div><div class="code-dot" style="background: #ef4444;"></div><div class="code-dot" style="background: #eab308;"></div><div class="code-dot" style="background: #22c55e;"></div></div>
+                                    <span class="text-gray-400 text-sm ml-4">return.py</span>
                                 </div>
                                 <div class="code-body">
                                     <pre><code class="language-python">def promedio(a, b, c):
@@ -807,32 +1201,31 @@ suma, resta = operaciones(10, 5)</code></pre>
                         </div>
                     </div>
                     
-                    <div data-tab="listas" class="tab-panel hidden grid lg:grid-cols-2 gap-8">
-                        <div class="glass-card p-8">
-                            <h3 class="text-2xl font-bold text-cyan-400 mb-6">Operaciones con Listas</h3>
-                            <div class="code-window">
-                                <div class="code-header">
-                                    <div><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div>
-                                    <span class="text-gray-400 text-sm">listas.py</span>
+                    <div data-tab="listas" class="tab-panel hidden grid lg:grid-cols-2 gap-10">
+                        <div class="rick-card cursor-glow">
+                            <h3 class="text-2xl font-bold rick-yellow mb-6" style="font-family: 'Bangers', cursive;">📋 Listas</h3>
+                            <div class="portal-code">
+                                <div class="portal-code-header">
+                                    <div><div class="code-dot" style="background: #ef4444;"></div><div class="code-dot" style="background: #eab308;"></div><div class="code-dot" style="background: #22c55e;"></div></div>
+                                    <span class="text-gray-400 text-sm ml-4">listas.py</span>
                                 </div>
                                 <div class="code-body">
-                                    <pre><code class="language-python">frutas = ["manzana", "pera", "uva"]
-print(frutas[0])
-print(frutas[-1])
+                                    <pre><code class="language-python">portal = ["Rick", "Morty", "Jerry"]
+print(portal[0])   # Rick
+print(portal[-1])  # Jerry
 
-frutas.append("coco")
-frutas.insert(1, "melón")
-frutas.remove("pera")
-print(len(frutas))</code></pre>
+portal.append("Beth")
+portal.insert(1, "Summer")
+print(len(portal))</code></pre>
                                 </div>
                             </div>
                         </div>
-                        <div class="glass-card p-8">
-                            <h3 class="text-2xl font-bold text-cyan-400 mb-6">Métodos de Listas</h3>
-                            <div class="code-window">
-                                <div class="code-header">
-                                    <div><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div>
-                                    <span class="text-gray-400 text-sm">metodos.py</span>
+                        <div class="rick-card cursor-glow">
+                            <h3 class="text-2xl font-bold rick-yellow mb-6" style="font-family: 'Bangers', cursive;">🔧 Métodos</h3>
+                            <div class="portal-code">
+                                <div class="portal-code-header">
+                                    <div><div class="code-dot" style="background: #ef4444;"></div><div class="code-dot" style="background: #eab308;"></div><div class="code-dot" style="background: #22c55e;"></div></div>
+                                    <span class="text-gray-400 text-sm ml-4">metodos.py</span>
                                 </div>
                                 <div class="code-body">
                                     <pre><code class="language-python">numeros = [3, 1, 4, 1, 5]
@@ -840,8 +1233,6 @@ numeros.sort()
 print(numeros)  # [1,1,3,4,5]
 
 numeros.reverse()
-print(numeros)  # [5,4,3,1,1]
-
 print(numeros.count(1))  # 2
 print(numeros.index(3))  # 2</code></pre>
                                 </div>
@@ -849,36 +1240,35 @@ print(numeros.index(3))  # 2</code></pre>
                         </div>
                     </div>
                     
-                    <div data-tab="diccionarios" class="tab-panel hidden grid lg:grid-cols-2 gap-8">
-                        <div class="glass-card p-8">
-                            <h3 class="text-2xl font-bold text-pink-400 mb-6">Diccionarios</h3>
-                            <div class="code-window">
-                                <div class="code-header">
-                                    <div><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div>
-                                    <span class="text-gray-400 text-sm">diccionarios.py</span>
+                    <div data-tab="diccionarios" class="tab-panel hidden grid lg:grid-cols-2 gap-10">
+                        <div class="rick-card cursor-glow">
+                            <h3 class="text-2xl font-bold rick-purple mb-6" style="font-family: 'Bangers', cursive;">🗺️ Diccionarios</h3>
+                            <div class="portal-code">
+                                <div class="portal-code-header">
+                                    <div><div class="code-dot" style="background: #ef4444;"></div><div class="code-dot" style="background: #eab308;"></div><div class="code-dot" style="background: #22c55e;"></div></div>
+                                    <span class="text-gray-400 text-sm ml-4">diccionarios.py</span>
                                 </div>
                                 <div class="code-body">
-                                    <pre><code class="language-python">persona = {"nombre": "Gabriel", "edad": 25}
+                                    <pre><code class="language-python">persona = {"nombre": "Rick", "edad": 65}
 print(persona["nombre"])
 print(persona.get("edad"))
 
-persona["ciudad"] = "Santiago"
-persona["edad"] = 26
+persona["Dimension"] = "C-137"
 
 for clave, valor in persona.items():
     print(f"{clave}: {valor}")</code></pre>
                                 </div>
                             </div>
                         </div>
-                        <div class="glass-card p-8">
-                            <h3 class="text-2xl font-bold text-pink-400 mb-6">Métodos de Diccionarios</h3>
-                            <div class="code-window">
-                                <div class="code-header">
-                                    <div><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div>
-                                    <span class="text-gray-400 text-sm">metodos.py</span>
+                        <div class="rick-card cursor-glow">
+                            <h3 class="text-2xl font-bold rick-purple mb-6" style="font-family: 'Bangers', cursive;">🔍 Métodos</h3>
+                            <div class="portal-code">
+                                <div class="portal-code-header">
+                                    <div><div class="code-dot" style="background: #ef4444;"></div><div class="code-dot" style="background: #eab308;"></div><div class="code-dot" style="background: #22c55e;"></div></div>
+                                    <span class="text-gray-400 text-sm ml-4">metodos.py</span>
                                 </div>
                                 <div class="code-body">
-                                    <pre><code class="language-python">persona = {"nombre": "Ana", "edad": 25}
+                                    <pre><code class="language-python">persona = {"nombre": "Morty", "edad": 14}
 print(persona.keys())
 print(persona.values())
 print(persona.items())
@@ -891,194 +1281,13 @@ print(copia)</code></pre>
                         </div>
                     </div>
                     
-                    <div data-tab="tuplas" class="tab-panel hidden grid lg:grid-cols-2 gap-8">
-                        <div class="glass-card p-8">
-                            <h3 class="text-2xl font-bold text-yellow-400 mb-6">Tuplas</h3>
-                            <div class="code-window">
-                                <div class="code-header">
-                                    <div><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div>
-                                    <span class="text-gray-400 text-sm">tuplas.py</span>
-                                </div>
-                                <div class="code-body">
-                                    <pre><code class="language-python">tupla = (1, 2, 3)
-print(tupla[0])   # 1
-print(tupla[-1])  # 3
-
-# Desempaqueo
-x, y, z = (10, 20, 30)
-print(f"x={x}, y={y}, z={z}")
-
-# Return múltiples valores
-def operacion(a, b):
-    return a+b, a-b
-
-suma, resta = operacion(5, 3)</code></pre>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="glass-card p-8">
-                            <h3 class="text-2xl font-bold text-yellow-400 mb-6">Tuplas vs Listas</h3>
-                            <div class="code-window">
-                                <div class="code-header">
-                                    <div><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div>
-                                    <span class="text-gray-400 text-sm">diferencia.py</span>
-                                </div>
-                                <div class="code-body">
-                                    <pre><code class="language-python"># Lista - mutable
-lista = [1, 2, 3]
-lista[0] = 0  # ✓ permitido
-
-# Tupla - inmutable
-tupla = (1, 2, 3)
-# tupla[0] = 0  # ✗ Error!
-
-# Usar tuplas para datos constantes
-coordenadas = (10, 20)
-dias = ("Lun", "Mar", "Mié")</code></pre>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div data-tab="sets" class="tab-panel hidden grid lg:grid-cols-2 gap-8">
-                        <div class="glass-card p-8">
-                            <h3 class="text-2xl font-bold text-purple-400 mb-6">Sets</h3>
-                            <div class="code-window">
-                                <div class="code-header">
-                                    <div><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div>
-                                    <span class="text-gray-400 text-sm">sets.py</span>
-                                </div>
-                                <div class="code-body">
-                                    <pre><code class="language-python"># Set - elementos únicos
-numeros = {1, 2, 3, 3, 3}
-print(numeros)  # {1, 2, 3}
-
-numeros.add(4)
-numeros.discard(1)
-
-a = {1, 2, 3}
-b = {3, 4, 5}
-print(a | b)  # Unión
-print(a & b)  # Intersección
-print(a - b)  # Diferencia</code></pre>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="glass-card p-8">
-                            <h3 class="text-2xl font-bold text-purple-400 mb-6">Eliminar Duplicados</h3>
-                            <div class="code-window">
-                                <div class="code-header">
-                                    <div><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div>
-                                    <span class="text-gray-400 text-sm">duplicados.py</span>
-                                </div>
-                                <div class="code-body">
-                                    <pre><code class="language-python"># Eliminar duplicados
-nombres = ["Ana", "Bob", "Ana", "Carla"]
-unicos = list(set(nombres))
-print(unicos)
-
-# Verificar pertenencia (rápido)
-emails = {"ana@email.com", "bob@email.com"}
-print("ana@email.com" in emails)
-
-# frozenset (inmutable)
-pares = frozenset([1, 2, 3])</code></pre>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div data-tab="strings" class="tab-panel hidden grid lg:grid-cols-2 gap-8">
-                        <div class="glass-card p-8">
-                            <h3 class="text-2xl font-bold text-green-400 mb-6">Métodos de Strings</h3>
-                            <div class="code-window">
-                                <div class="code-header">
-                                    <div><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div>
-                                    <span class="text-gray-400 text-sm">strings.py</span>
-                                </div>
-                                <div class="code-body">
-                                    <pre><code class="language-python">texto = "Hola Mundo"
-print(texto.upper())      # HOLA MUNDO
-print(texto.lower())      # hola mundo
-print(texto.find("Mundo")) # 5
-print(texto.replace("Mundo", "Python"))
-
-palabras = "uno,dos,tres"
-print(palabras.split(","))</code></pre>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="glass-card p-8">
-                            <h3 class="text-2xl font-bold text-green-400 mb-6">Slicing de Strings</h3>
-                            <div class="code-window">
-                                <div class="code-header">
-                                    <div><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div>
-                                    <span class="text-gray-400 text-sm">slicing.py</span>
-                                </div>
-                                <div class="code-body">
-                                    <pre><code class="language-python">texto = "Python"
-print(texto[0])   # P
-print(texto[-1])  # n
-print(texto[0:3]) # Pyt
-print(texto[::2]) # Pto
-print(texto[::-1])# nohtyP
-
-nombre = "Ana"
-print(f"Hola {nombre}")</code></pre>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div data-tab="excepciones" class="tab-panel hidden grid lg:grid-cols-2 gap-8">
-                        <div class="glass-card p-8">
-                            <h3 class="text-2xl font-bold text-red-400 mb-6">Try/Except</h3>
-                            <div class="code-window">
-                                <div class="code-header">
-                                    <div><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div>
-                                    <span class="text-gray-400 text-sm">excepciones.py</span>
-                                </div>
-                                <div class="code-body">
-                                    <pre><code class="language-python">try:
-    resultado = 10 / 0
-except ZeroDivisionError:
-    print("No se puede dividir por cero")
-except Exception as e:
-    print(f"Error: {e}")
-finally:
-    print("Siempre se ejecuta")</code></pre>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="glass-card p-8">
-                            <h3 class="text-2xl font-bold text-red-400 mb-6">Raise</h3>
-                            <div class="code-window">
-                                <div class="code-header">
-                                    <div><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div>
-                                    <span class="text-gray-400 text-sm">raise.py</span>
-                                </div>
-                                <div class="code-body">
-                                    <pre><code class="language-python">def dividir(a, b):
-    if b == 0:
-        raise ValueError("Divisor no puede ser 0")
-    return a / b
-
-try:
-    print(dividir(10, 0))
-except ValueError as e:
-    print(f"Error: {e}")</code></pre>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div data-tab="poo" class="tab-panel hidden grid lg:grid-cols-2 gap-8">
-                        <div class="glass-card p-8">
-                            <h3 class="text-2xl font-bold text-cyan-400 mb-6">Clases y Objetos</h3>
-                            <div class="code-window">
-                                <div class="code-header">
-                                    <div><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div>
-                                    <span class="text-gray-400 text-sm">clase.py</span>
+                    <div data-tab="poo" class="tab-panel hidden grid lg:grid-cols-2 gap-10">
+                        <div class="rick-card cursor-glow">
+                            <h3 class="text-2xl font-bold rick-pink mb-6" style="font-family: 'Bangers', cursive;">👾 Clases</h3>
+                            <div class="portal-code">
+                                <div class="portal-code-header">
+                                    <div><div class="code-dot" style="background: #ef4444;"></div><div class="code-dot" style="background: #eab308;"></div><div class="code-dot" style="background: #22c55e;"></div></div>
+                                    <span class="text-gray-400 text-sm ml-4">clase.py</span>
                                 </div>
                                 <div class="code-body">
                                     <pre><code class="language-python">class Persona:
@@ -1087,37 +1296,31 @@ except ValueError as e:
         self.edad = edad
     
     def saludar(self):
-        return f"Hola, soy {self.nombre}"
-    
-    def cumplir_anios(self):
-        self.edad += 1
+        return f"¡Hola, soy {self.nombre}!"
 
-persona = Persona("Gabriel", 25)
+persona = Persona("Rick", 65)
 print(persona.saludar())</code></pre>
                                 </div>
                             </div>
                         </div>
-                        <div class="glass-card p-8">
-                            <h3 class="text-2xl font-bold text-cyan-400 mb-6">Herencia</h3>
-                            <div class="code-window">
-                                <div class="code-header">
-                                    <div><div class="code-dot bg-red-500"></div><div class="code-dot bg-yellow-500"></div><div class="code-dot bg-green-500"></div></div>
-                                    <span class="text-gray-400 text-sm">herencia.py</span>
+                        <div class="rick-card cursor-glow">
+                            <h3 class="text-2xl font-bold rick-pink mb-6" style="font-family: 'Bangers', cursive;">🧬 Herencia</h3>
+                            <div class="portal-code">
+                                <div class="portal-code-header">
+                                    <div><div class="code-dot" style="background: #ef4444;"></div><div class="code-dot" style="background: #eab308;"></div><div class="code-dot" style="background: #22c55e;"></div></div>
+                                    <span class="text-gray-400 text-sm ml-4">herencia.py</span>
                                 </div>
                                 <div class="code-body">
-                                    <pre><code class="language-python">class Animal:
+                                    <pre><code class="language-python">class Ser:
     def __init__(self, nombre):
         self.nombre = nombre
-    
-    def sonido(self):
-        return "..."
 
-class Perro(Animal):
-    def sonido(self):
-        return "Guau!"
+class Humano(Ser):
+    def decir_hola(self):
+        return "¡Hola!"
 
-perro = Perro("Firulais")
-print(perro.sonido())  # Guau!</code></pre>
+rick = Humano("Rick")
+print(rick.decir_hola())</code></pre>
                                 </div>
                             </div>
                         </div>
@@ -1129,42 +1332,43 @@ print(perro.sonido())  # Guau!</code></pre>
         <!-- Ejercicios Section -->
         <section id="ejercicios">
             <div class="container">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl md:text-5xl font-bold mb-4">
-                        <span class="gradient-text">Ejercicios Prácticos</span>
+                <div class="text-center mb-20">
+                    <h2 class="text-6xl md:text-7xl font-bold mb-8" style="font-family: 'Bangers', cursive; letter-spacing: 5px;">
+                        <span class="rick-gradient">🎮 Misiones</span>
                     </h2>
-                    <p class="text-xl text-gray-400">Aplica lo aprendido con ejercicios reales</p>
+                    <p class="text-2xl text-gray-400">¡Completa las misiones para salvar el multiverso!</p>
+                    <div class="section-divider"></div>
                 </div>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="exercise-card">
-                        <span class="badge mb-4">Funciones</span>
-                        <h3 class="text-2xl font-bold text-cyan-400 mb-3">1. Calculadora</h3>
-                        <p class="text-gray-400">Crea una calculadora con operaciones básicas.</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <div class="rick-card cursor-glow">
+                        <span class="portal-badge mb-5">🧪 Nivel 1</span>
+                        <h3 class="text-2xl font-bold rick-yellow mb-4" style="font-family: 'Bangers', cursive;">1. Calculadora Portal</h3>
+                        <p class="text-gray-400 text-lg">Crea una calculadora con operaciones básicas.</p>
                     </div>
-                    <div class="exercise-card">
-                        <span class="badge mb-4">Condicionales</span>
-                        <h3 class="text-2xl font-bold text-purple-400 mb-3">2. Sistema de Notas</h3>
-                        <p class="text-gray-400">Calcula promedio y determina aprobado.</p>
+                    <div class="rick-card cursor-glow">
+                        <span class="portal-badge mb-5">🧪 Nivel 2</span>
+                        <h3 class="text-2xl font-bold rick-purple mb-4" style="font-family: 'Bangers', cursive;">2. Sistema de Notas</h3>
+                        <p class="text-gray-400 text-lg">Calcula promedio y determina aprobado.</p>
                     </div>
-                    <div class="exercise-card">
-                        <span class="badge mb-4">Bucles</span>
-                        <h3 class="text-2xl font-bold text-yellow-400 mb-3">3. Contador FOR</h3>
-                        <p class="text-gray-400">Itera y calcula totales.</p>
+                    <div class="rick-card cursor-glow">
+                        <span class="portal-badge mb-5">🧪 Nivel 3</span>
+                        <h3 class="text-2xl font-bold rick-pink mb-4" style="font-family: 'Bangers', cursive;">3. Contador Dimensional</h3>
+                        <p class="text-gray-400 text-lg">Itera y calcula totales con FOR.</p>
                     </div>
-                    <div class="exercise-card">
-                        <span class="badge mb-4">WHILE</span>
-                        <h3 class="text-2xl font-bold text-orange-400 mb-3">4. Validar Usuario</h3>
-                        <p class="text-gray-400">Valida username con while.</p>
+                    <div class="rick-card cursor-glow">
+                        <span class="portal-badge mb-5">🧪 Nivel 4</span>
+                        <h3 class="text-2xl font-bold rick-yellow mb-4" style="font-family: 'Bangers', cursive;">4. Validar Usuario</h3>
+                        <p class="text-gray-400 text-lg">Valida username con while.</p>
                     </div>
-                    <div class="exercise-card">
-                        <span class="badge mb-4">Listas</span>
-                        <h3 class="text-2xl font-bold text-pink-400 mb-3">5. Manipular Listas</h3>
-                        <p class="text-gray-400">Agrega, elimina y ordena.</p>
+                    <div class="rick-card cursor-glow">
+                        <span class="portal-badge mb-5">🧪 Nivel 5</span>
+                        <h3 class="text-2xl font-bold rick-purple mb-4" style="font-family: 'Bangers', cursive;">5. Lista de Planetas</h3>
+                        <p class="text-gray-400 text-lg">Manipula listas de dimensiones.</p>
                     </div>
-                    <div class="exercise-card">
-                        <span class="badge mb-4">Diccionarios</span>
-                        <h3 class="text-2xl font-bold text-red-400 mb-3">6. Diccionario</h3>
-                        <p class="text-gray-400">Almacena y busca información.</p>
+                    <div class="rick-card cursor-glow">
+                        <span class="portal-badge mb-5">🧪 Nivel 6</span>
+                        <h3 class="text-2xl font-bold rick-pink mb-4" style="font-family: 'Bangers', cursive;">6. Diccionario Alien</h3>
+                        <p class="text-gray-400 text-lg">Almacena información de especies.</p>
                     </div>
                 </div>
             </div>
@@ -1172,116 +1376,243 @@ print(perro.sonido())  # Guau!</code></pre>
     </main>
 
     <!-- Footer -->
-    <footer class="py-16 glass border-t border-white/10">
+    <footer class="py-20" style="background: rgba(15, 15, 26, 0.9); border-top: 2px solid rgba(168, 85, 247, 0.4);">
         <div class="container text-center">
-            <div class="flex items-center justify-center gap-4 mb-8">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" alt="Python" class="w-12 h-12">
-                <span class="text-2xl font-bold gradient-text">Python Guide</span>
+            <div class="flex items-center justify-center gap-6 mb-10">
+                <span class="text-6xl floating-portal">🌀</span>
+                <span class="text-4xl font-bold rick-gradient" style="font-family: 'Bangers', cursive;">PYTHON GUIDE</span>
+                <span class="text-6xl floating-portal">🌀</span>
             </div>
-            <p class="text-gray-400 mb-4">Gabriel Pedreros - Aprende Python desde cero</p>
-            <p class="text-gray-500 text-sm">© 2026 Python Guide - Hecho con ❤️</p>
+            <p class="text-gray-400 mb-5 text-xl">🧬 Gabriel Pedreros - ¡Yolo! 🦠</p>
+            <p class="text-gray-500 text-sm">© 2026 Rick and Morty Style Python Guide</p>
         </div>
     </footer>
 
     <script>
-        // Mobile Menu
         function toggleMenu() {
             document.getElementById('mobileMenu').classList.toggle('hidden');
         }
         document.getElementById('menuBtn').addEventListener('click', toggleMenu);
 
-        // Tabs
         function showTab(tabName) {
             document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
             document.querySelector(`[data-tab="${tabName}"]`).classList.remove('hidden');
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.portal-tab').forEach(b => b.classList.remove('active'));
             event.target.classList.add('active');
         }
         showTab('variables');
 
-        // Three.js Background
+        // Enhanced Three.js Particle System - Watermark Background
         function initThreeJS() {
             const container = document.getElementById('canvas-container');
             if (!container) return;
 
             const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.z = 30;
+            const camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, 0.1, 2000);
+            camera.position.z = 50;
 
             const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
             container.appendChild(renderer.domElement);
 
-            // Particles
+            // Massive particle system for watermark effect
             const particlesGeometry = new THREE.BufferGeometry();
-            const particlesCount = 1500;
+            const particlesCount = 5000;
             const posArray = new Float32Array(particlesCount * 3);
-            for (let i = 0; i < particlesCount * 3; i++) {
-                posArray[i] = (Math.random() - 0.5) * 80;
-            }
-            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-            const particlesMaterial = new THREE.PointsMaterial({
-                size: 0.02,
-                color: 0x22d3ee,
-                transparent: true,
-                opacity: 0.6
-            });
-            const particles = new THREE.Points(particlesGeometry, particlesMaterial);
-            scene.add(particles);
-
-            // Floating spheres
-            const sphereGeo = new THREE.SphereGeometry(1, 32, 32);
+            const colorArray = new Float32Array(particlesCount * 3);
+            const sizeArray = new Float32Array(particlesCount);
+            const velocityArray = new Float32Array(particlesCount * 3);
             
-            const cyanSphere = new THREE.Mesh(sphereGeo, new THREE.MeshBasicMaterial({ color: 0x22d3ee, transparent: true, opacity: 0.08 }));
-            cyanSphere.position.set(-20, 10, -25);
-            cyanSphere.scale.set(15, 15, 15);
-            scene.add(cyanSphere);
-
-            const purpleSphere = new THREE.Mesh(sphereGeo, new THREE.MeshBasicMaterial({ color: 0x8b5cf6, transparent: true, opacity: 0.06 }));
-            purpleSphere.position.set(20, -10, -20);
-            purpleSphere.scale.set(12, 12, 12);
-            scene.add(purpleSphere);
-
-            const pinkSphere = new THREE.Mesh(sphereGeo, new THREE.MeshBasicMaterial({ color: 0xf472b6, transparent: true, opacity: 0.05 }));
-            pinkSphere.position.set(0, 15, -30);
-            pinkSphere.scale.set(10, 10, 10);
-            scene.add(pinkSphere);
-
-            let mouseX = 0, mouseY = 0;
-            document.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX / window.innerWidth - 0.5;
-                mouseY = e.clientY / window.innerHeight - 0.5;
+            const colors = [
+                new THREE.Color(0xfacc15),
+                new THREE.Color(0xa855f7),
+                new THREE.Color(0xec4899),
+                new THREE.Color(0xf472b6),
+                new THREE.Color(0x8b5cf6)
+            ];
+            
+            for (let i = 0; i < particlesCount * 3; i += 3) {
+                posArray[i] = (Math.random() - 0.5) * 150;
+                posArray[i + 1] = (Math.random() - 0.5) * 150;
+                posArray[i + 2] = (Math.random() - 0.5) * 100;
+                
+                velocityArray[i] = (Math.random() - 0.5) * 0.02;
+                velocityArray[i + 1] = (Math.random() - 0.5) * 0.02;
+                velocityArray[i + 2] = (Math.random() - 0.5) * 0.01;
+                
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                colorArray[i] = color.r;
+                colorArray[i + 1] = color.g;
+                colorArray[i + 2] = color.b;
+                
+                sizeArray[i / 3] = Math.random() * 0.1 + 0.02;
+            }
+            
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colorArray, 3));
+            particlesGeometry.setAttribute('size', new THREE.BufferAttribute(sizeArray, 1));
+            
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 0.08,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.7,
+                blending: THREE.AdditiveBlending,
+                depthWrite: false
             });
-
+            
+            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particlesMesh);
+            
+            // Second layer - larger slower particles
+            const particlesGeometry2 = new THREE.BufferGeometry();
+            const particlesCount2 = 2000;
+            const posArray2 = new Float32Array(particlesCount2 * 3);
+            const colorArray2 = new Float32Array(particlesCount2 * 3);
+            
+            for (let i = 0; i < particlesCount2 * 3; i += 3) {
+                posArray2[i] = (Math.random() - 0.5) * 200;
+                posArray2[i + 1] = (Math.random() - 0.5) * 200;
+                posArray2[i + 2] = (Math.random() - 0.5) * 150;
+                
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                colorArray2[i] = color.r * 0.6;
+                colorArray2[i + 1] = color.g * 0.6;
+                colorArray2[i + 2] = color.b * 0.6;
+            }
+            
+            particlesGeometry2.setAttribute('position', new THREE.BufferAttribute(posArray2, 3));
+            particlesGeometry2.setAttribute('color', new THREE.BufferAttribute(colorArray2, 3));
+            
+            const particlesMaterial2 = new THREE.PointsMaterial({
+                size: 0.15,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.4,
+                blending: THREE.AdditiveBlending,
+                depthWrite: false
+            });
+            
+            const particlesMesh2 = new THREE.Points(particlesGeometry2, particlesMaterial2);
+            scene.add(particlesMesh2);
+            
+            // Third layer - tiny dust particles
+            const particlesGeometry3 = new THREE.BufferGeometry();
+            const particlesCount3 = 8000;
+            const posArray3 = new Float32Array(particlesCount3 * 3);
+            
+            for (let i = 0; i < particlesCount3 * 3; i += 3) {
+                posArray3[i] = (Math.random() - 0.5) * 250;
+                posArray3[i + 1] = (Math.random() - 0.5) * 250;
+                posArray3[i + 2] = (Math.random() - 0.5) * 200;
+            }
+            
+            particlesGeometry3.setAttribute('position', new THREE.BufferAttribute(posArray3, 3));
+            
+            const particlesMaterial3 = new THREE.PointsMaterial({
+                size: 0.02,
+                color: 0xa855f7,
+                transparent: true,
+                opacity: 0.3,
+                blending: THREE.AdditiveBlending,
+                depthWrite: false
+            });
+            
+            const particlesMesh3 = new THREE.Points(particlesGeometry3, particlesMaterial3);
+            scene.add(particlesMesh3);
+            
+            // Portal rings effect
+            const torusGeometries = [];
+            const torusMaterials = [];
+            const torusMeshes = [];
+            
+            const ringColors = [0xfacc15, 0xa855f7, 0xec4899];
+            
+            for (let i = 0; i < 5; i++) {
+                const torusGeometry = new THREE.TorusGeometry(8 + i * 2, 0.1 + i * 0.05, 16, 100);
+                const torusMaterial = new THREE.MeshBasicMaterial({
+                    color: ringColors[i % 3],
+                    transparent: true,
+                    opacity: 0.3 - i * 0.05
+                });
+                const torusMesh = new THREE.Mesh(torusGeometry, torusMaterial);
+                torusMesh.rotation.x = Math.PI / 2 + i * 0.1;
+                torusMesh.rotation.y = i * 0.3;
+                torusMeshes.push(torusMesh);
+                scene.add(torusMesh);
+            }
+            
+            // Mouse interaction
+            let mouseX = 0;
+            let mouseY = 0;
+            let targetX = 0;
+            let targetY = 0;
+            
+            document.addEventListener('mousemove', (event) => {
+                mouseX = (event.clientX - window.innerWidth / 2) * 0.001;
+                mouseY = (event.clientY - window.innerHeight / 2) * 0.001;
+            });
+            
+            // Animation
+            let time = 0;
             function animate() {
                 requestAnimationFrame(animate);
-                particles.rotation.y += 0.0005;
-                particles.rotation.x += 0.0003;
-                camera.position.x += (mouseX * 5 - camera.position.x) * 0.02;
-                camera.position.y += (-mouseY * 5 - camera.position.y) * 0.02;
+                time += 0.001;
+                
+                // Smooth mouse follow
+                targetX += (mouseX - targetX) * 0.05;
+                targetY += (mouseY - targetY) * 0.05;
+                
+                camera.position.x = targetX * 30;
+                camera.position.y = targetY * 30;
                 camera.lookAt(scene.position);
-
-                const time = Date.now() * 0.001;
-                cyanSphere.scale.setScalar(15 + Math.sin(time) * 1.5);
-                purpleSphere.scale.setScalar(12 + Math.cos(time * 0.8) * 1);
-                pinkSphere.scale.setScalar(10 + Math.sin(time * 1.2) * 0.5);
-
+                
+                // Rotate particles
+                particlesMesh.rotation.y = time * 0.1;
+                particlesMesh.rotation.x = time * 0.05;
+                
+                particlesMesh2.rotation.y = -time * 0.05;
+                particlesMesh2.rotation.x = -time * 0.03;
+                
+                particlesMesh3.rotation.y = time * 0.02;
+                
+                // Animate portal rings
+                torusMeshes.forEach((mesh, i) => {
+                    mesh.rotation.z = time * (0.5 + i * 0.1);
+                    mesh.rotation.x = Math.PI / 2 + Math.sin(time + i) * 0.1;
+                });
+                
+                // Update particle positions
+                const positions = particlesGeometry.attributes.position.array;
+                for (let i = 0; i < particlesCount * 3; i += 3) {
+                    positions[i] += velocityArray[i];
+                    positions[i + 1] += velocityArray[i + 1];
+                    positions[i + 2] += velocityArray[i + 2];
+                    
+                    // Wrap around
+                    if (positions[i] > 75) positions[i] = -75;
+                    if (positions[i] < -75) positions[i] = 75;
+                    if (positions[i + 1] > 75) positions[i + 1] = -75;
+                    if (positions[i + 1] < -75) positions[i + 1] = 75;
+                }
+                particlesGeometry.attributes.position.needsUpdate = true;
+                
                 renderer.render(scene, camera);
             }
+            
             animate();
-
+            
+            // Handle resize
             window.addEventListener('resize', () => {
                 camera.aspect = window.innerWidth / window.innerHeight;
                 camera.updateProjectionMatrix();
                 renderer.setSize(window.innerWidth, window.innerHeight);
             });
         }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            Prism.highlightAll();
-            initThreeJS();
-        });
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', initThreeJS);
     </script>
 </body>
 </html>
