@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Guide - Guia de Programacion</title>
+    <meta name="description" content="Aprende Python desde cero con ejercicios interactivos">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Bangers&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                        display: ['Bangers', 'cursive']
+                    },
+                    colors: {
+                        rick: { yellow: '#facc15', purple: '#a855f7', pink: '#ec4899', dark: '#0a0a0f', darker: '#050508' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+        
+        * { scroll-behavior: smooth; margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            background: #0a0a0f; 
+            font-family: 'Inter', sans-serif;
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+        
+        #canvas-container { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            z-index: -1; opacity: 0.5;
+        }
+        
+        .portal-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: -2;
+            background: 
+                radial-gradient(ellipse at 30% 20%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(250, 204, 21, 0.08) 0%, transparent 40%),
+                linear-gradient(180deg, #0a0a0f 0%, #0f0f1a 100%);
+        }
+        
+        .rick-card {
+            background: rgba(15, 15, 26, 0.8);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+        
+        .rick-card:hover {
+            border-color: rgba(250, 204, 21, 0.5);
+            box-shadow: 0 8px 30px rgba(168, 85, 247, 0.2);
+            transform: translateY(-4px);
+        }
+        
+        .rick-gradient {
+            background: linear-gradient(135deg, #facc15, #a855f7, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .rick-yellow { color: #facc15; }
+        .rick-purple { color: #a855f7; }
+        .rick-pink { color: #ec4899; }
+        
+        .portal-code { 
+            background: #0d0d14; border-radius: 12px; overflow: hidden; 
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .portal-code-header { 
+            background: #151520; padding: 12px 16px; 
+            display: flex; align-items: center; 
+            border-bottom: 1px solid rgba(168, 85, 247, 0.2);
+        }
+        
+        .code-dot { width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; }
+        
+        .portal-code-body { padding: 20px; background: transparent; }
+        .portal-code-body pre { margin: 0; background: transparent; font-size: 13px; line-height: 1.7; }
+        
+        .portal-tab {
+            padding: 10px 20px; border-radius: 8px; font-weight: 500; font-size: 14px;
+            transition: all 0.2s; background: rgba(168, 85, 247, 0.1); color: rgba(255,255,255,0.7);
+            border: 1px solid transparent; cursor: pointer;
+        }
+        
+        .portal-tab:hover { background: rgba(168, 85, 247, 0.2); color: #facc15; }
+        
+        .portal-tab.active {
+            background: linear-gradient(135deg, #a855f7, #ec4899); color: white;
+            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+        }
+        
+        .portal-btn {
+            background: linear-gradient(135deg, #facc15, #a855f7); border: none;
+            padding: 14px 32px; border-radius: 10px; font-weight: 600; font-size: 15px;
+            color: #0a0a0f; cursor: pointer; transition: all 0.3s;
+        }
+        
+        .portal-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(250, 204, 21, 0.3); }
+        
+        .portal-btn-outline {
+            background: transparent; border: 2px solid #a855f7;
+            padding: 14px 32px; border-radius: 10px; font-weight: 600; font-size: 15px;
+            color: white; cursor: pointer; transition: all 0.3s;
+        }
+        
+        .portal-btn-outline:hover { background: rgba(168, 85, 247, 0.2); border-color: #facc15; }
+        
+        .stat-card {
+            background: rgba(15, 15, 26, 0.8); border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 12px; padding: 24px; text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .stat-card:hover { border-color: #ec4899; transform: scale(1.05); }
+        
+        .stat-number { font-size: 36px; font-weight: 700; font-family: 'Bangers', cursive; letter-spacing: 2px; }
+        
+        .icon-box { width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 16px; border: 2px solid; }
+        
+        .nav-portal { color: rgba(255,255,255, 0.7); font-weight: 500; padding: 8px 16px; transition: all 0.2s; }
+        .nav-portal:hover { color: #facc15; }
+        
+        section { padding: 80px 0; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        
+        .portal-badge { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; background: rgba(250, 204, 21, 0.1); color: #facc15; border: 1px solid rgba(250, 204, 21, 0.3); }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0f; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #facc15, #a855f7); border-radius: 4px; }
+        
+        .animate-in { opacity: 0; transform: translateY(30px); animation: fadeInUp 0.6s ease forwards; }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+        
+        .quiz-option { display: flex; align-items: center; padding: 12px 16px; margin-bottom: 10px; border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 10px; cursor: pointer; transition: all 0.2s; background: rgba(10, 10, 18, 0.5); }
+        .quiz-option:hover { border-color: #a855f7; background: rgba(168, 85, 247, 0.1); }
+        .quiz-option.selected { border-color: #facc15; background: rgba(250, 204, 21, 0.15); }
+        .quiz-option.correct { border-color: #22c55e; background: rgba(34, 197, 94, 0.15); }
+        .quiz-option.incorrect { border-color: #ef4444; background: rgba(239, 68, 68, 0.15); }
+        .quiz-option .option-marker { width: 20px; height: 20px; border: 2px solid rgba(168, 85, 247, 0.5); border-radius: 6px; margin-right: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; }
+        .quiz-option.selected .option-marker { border-color: #facc15; background: #facc15; }
+        .quiz-option.correct .option-marker { border-color: #22c55e; background: #22c55e; }
+        .quiz-option.incorrect .option-marker { border-color: #ef4444; background: #ef4444; }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div class="portal-bg"></div>
+    <div id="canvas-container"></div>
+
+    <header class="fixed top-0 left-0 right-0 z-50" style="background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(168, 85, 247, 0.2);">
+        <div class="container">
+            <nav class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-code text-2xl text-purple-500"></i>
+                    <div>
+                        <h1 class="text-2xl font-bold rick-gradient">PYTHON</h1>
+                        <p class="text-xs text-gray-400">Guia de Programacion</p>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center gap-2">
+                    <a href="#inicio" class="nav-portal">Inicio</a>
+                    <a href="#temas" class="nav-portal">Temas</a>
+                    <a href="#sintaxis" class="nav-portal">Sintaxis</a>
+                    <a href="#ejercicios" class="nav-portal">Ejercicios</a>
+                    <a href="#test" class="nav-portal">Test</a>
+                </div>
+                <button id="menuBtn" class="md:hidden p-2 text-white">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <div id="mobileMenu" class="fixed inset-0 z-40 hidden" style="background: rgba(10, 10, 15, 0.98);">
+        <div class="flex flex-col items-center justify-center gap-8 pt-20">
+            <a href="#inicio" class="text-2xl text-white" onclick="toggleMenu()">Inicio</a>
+            <a href="#temas" class="text-2xl text-white" onclick="toggleMenu()">Temas</a>
+            <a href="#sintaxis" class="text-2xl text-white" onclick="toggleMenu()">Sintaxis</a>
+            <a href="#ejercicios" class="text-2xl text-white" onclick="toggleMenu()">Ejercicios</a>
+            <a href="#test" class="text-2xl text-white" onclick="toggleMenu()">Test</a>
+        </div>
+    </div>
+
+    <main class="pt-16">
+        <section id="inicio" class="min-h-screen flex items-center">
+            <div class="container">
+                <div class="max-w-4xl mx-auto text-center">
+                    <div class="inline-flex items-center gap-3 px-6 py-3 rick-card mb-10 animate-in">
+                        <i class="fas fa-rocket text-yellow-400"></i>
+                        <span class="text-lg font-medium text-white">Aprende Python desde cero</span>
+                    </div>
+                    
+                    <h1 class="text-5xl md:text-7xl font-bold mb-6 animate-in delay-100" style="font-family: 'Bangers', cursive; letter-spacing: 3px;">
+                        <span class="rick-gradient">PROGRAMACION</span>
+                    </h1>
+                    
+                    <p class="text-xl text-gray-400 mb-10 max-w-2xl mx-auto animate-in delay-200">
+                        Domina los conceptos fundamentales de Python con ejemplos practicos y ejercicios interactivos
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-in delay-300">
+                        <a href="#temas" class="portal-btn"><i class="fas fa-play mr-2"></i>Comenzar</a>
+                        <a href="#sintaxis" class="portal-btn-outline"><i class="fas fa-code mr-2"></i>Ver Codigo</a>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 animate-in delay-300">
+                        <div class="stat-card"><div class="stat-number rick-yellow">20+</div><div class="text-gray-400 text-sm mt-2">Ejercicios</div></div>
+                        <div class="stat-card"><div class="stat-number rick-purple">15</div><div class="text-gray-400 text-sm mt-2">Temas</div></div>
+                        <div class="stat-card"><div class="stat-number rick-pink">9</div><div class="text-gray-400 text-sm mt-2">Secciones</div></div>
+                        <div class="stat-card"><div class="stat-number text-white">100%</div><div class="text-gray-400 text-sm mt-2">Gratis</div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="temas">
+            <div class="container">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4" style="font-family: 'Bangers', cursive; letter-spacing: 3px;">
+                        <span class="rick-gradient">TEMAS PRINCIPALES</span>
+                    </h2>
+                    <p class="text-gray-400">Los conceptos que necesitas dominar</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="topics-container"></div>
+            </div>
+        </section>
+
+        <section id="sintaxis" style="background: rgba(0,0,0,0.3);">
+            <div class="container">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4" style="font-family: 'Bangers', cursive; letter-spacing: 3px;">
+                        <span class="rick-gradient">SINTAXIS Y CODIGO</span>
+                    </h2>
+                    <p class="text-gray-400">Ejemplos practicos de cada tema</p>
+                </div>
+                
+                <div class="flex flex-wrap gap-3 mb-10 justify-center" id="tabs-container"></div>
+                
+                <div id="tab-content" class="grid lg:grid-cols-2 gap-6"></div>
+            </div>
+        </section>
+
+        <section id="ejercicios">
+            <div class="container">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4" style="font-family: 'Bangers', cursive; letter-spacing: 3px;">
+                        <span class="rick-gradient">EJERCICIOS PRACTICOS</span>
+                    </h2>
+                    <p class="text-gray-400">Pon a prueba tus conocimientos</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="exercises-container"></div>
+            </div>
+        </section>
+
+        <section id="test" style="background: rgba(0,0,0,0.3);">
+            <div class="container">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4" style="font-family: 'Bangers', cursive; letter-spacing: 3px;">
+                        <span class="rick-gradient">TEST DE CONOCIMIENTO</span>
+                    </h2>
+                    <p class="text-gray-400">Responde las preguntas y verifica tu aprendizaje</p>
+                </div>
+                
+                <div class="max-w-3xl mx-auto" id="quiz-container"></div>
+                
+                <div class="text-center mt-10">
+                    <button onclick="checkAnswers()" class="portal-btn"><i class="fas fa-check mr-2"></i>Verificar Respuestas</button>
+                    <button onclick="resetQuiz()" class="portal-btn-outline ml-4"><i class="fas fa-redo mr-2"></i>Reiniciar</button>
+                </div>
+                
+                <div id="result" class="hidden mt-8 text-center">
+                    <div class="rick-card inline-block px-8 py-6">
+                        <h3 class="text-2xl font-bold mb-2">Resultado</h3>
+                        <p class="text-4xl font-bold rick-gradient" id="score-text"></p>
+                        <p class="text-gray-400 mt-2" id="score-message"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-12" style="background: rgba(15, 15, 26, 0.8); border-top: 1px solid rgba(168, 85, 247, 0.2);">
+        <div class="container text-center">
+            <div class="flex items-center justify-center gap-3 mb-4">
+                <i class="fas fa-code text-2xl text-purple-500"></i>
+                <span class="text-2xl font-bold rick-gradient" style="font-family: 'Bangers', cursive;">PYTHON GUIDE</span>
+            </div>
+            <p class="text-gray-400 mb-2">Gabriel Pedreros</p>
+            <p class="text-gray-500 text-sm">Aprende a programar con Python</p>
+        </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script>
+        // Menu toggle
+        document.getElementById('menuBtn').addEventListener('click', () => {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        });
+
+        function toggleMenu() {
+            document.getElementById('mobileMenu').classList.add('hidden');
+        }
+
+        // Render Topics
+        function renderTopics() {
+            const container = document.getElementById('topics-container');
+            const colors = {
+                yellow: { text: 'text-yellow-400', border: 'border-yellow-400', bg: 'bg-yellow-400/10' },
+                purple: { text: 'text-purple-400', border: 'border-purple-400', bg: 'bg-purple-400/10' },
+                pink: { text: 'text-pink-400', border: 'border-pink-400', bg: 'bg-pink-400/10' }
+            };
+            
+            container.innerHTML = data.topics.map((topic, i) => {
+                const c = colors[topic.color];
+                return `
+                    <div class="rick-card animate-in ${i > 0 ? `delay-${Math.min(i, 3) * 100}` : ''}">
+                        <div class="icon-box ${c.bg} ${c.border} ${c.text}">
+                            <i class="fas ${topic.icon}"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 ${c.text}" style="font-family: 'Bangers', cursive;">${topic.id}. ${topic.title}</h3>
+                        <p class="text-gray-400 text-sm mb-4">${topic.description}</p>
+                        <div class="flex gap-2">
+                            ${topic.tags.map(tag => `<span class="portal-badge">${tag}</span>`).join('')}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Render Tabs
+        let activeTab = 'variables';
+        function renderTabs() {
+            const container = document.getElementById('tabs-container');
+            container.innerHTML = data.tabs.map(tab => `
+                <button onclick="showTab('${tab}')" class="portal-tab capitalize ${activeTab === tab ? 'active' : ''}">${tab}</button>
+            `).join('');
+        }
+
+        function showTab(tabName) {
+            activeTab = tabName;
+            renderTabs();
+            renderCodeExamples();
+        }
+
+        // Render Code Examples
+        function renderCodeExamples() {
+            const container = document.getElementById('tab-content');
+            const examples = data.codeExamples[activeTab] || [];
+            const icons = {
+                variables: 'fa-database', operadores: 'fa-calculator', condicionales: 'fa-code-branch',
+                for: 'fa-redo', while: 'fa-bolt', funciones: 'fa-cogs', listas: 'fa-list',
+                diccionarios: 'fa-map', poo: 'fa-shapes'
+            };
+            
+            container.innerHTML = examples.map(ex => `
+                <div class="rick-card">
+                    <h3 class="text-lg font-bold mb-4 ${activeTab === 'variables' || activeTab === 'for' || activeTab === 'listas' ? 'rick-yellow' : activeTab === 'condicionales' || activeTab === 'while' || activeTab === 'funciones' || activeTab === 'poo' ? 'rick-pink' : 'rick-purple'}" style="font-family: 'Bangers', cursive;">
+                        <i class="fas ${icons[activeTab]} mr-2"></i>${ex.title}
+                    </h3>
+                    <div class="portal-code">
+                        <div class="portal-code-header">
+                            <div><div class="code-dot" style="background: #ef4444;"></div><div class="code-dot" style="background: #eab308;"></div><div class="code-dot" style="background: #22c55e;"></div></div>
+                            <span class="text-gray-400 text-xs ml-4">${ex.filename}</span>
+                        </div>
+                        <div class="portal-code-body">
+                            <pre><code>${ex.code}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Render Exercises
+        function renderExercises() {
+            const container = document.getElementById('exercises-container');
+            const colors = ['rick-yellow', 'rick-purple', 'rick-pink', 'rick-yellow', 'rick-purple', 'rick-pink'];
+            
+            container.innerHTML = data.exercises.map((ex, i) => `
+                <div class="rick-card">
+                    <span class="portal-badge mb-3">Nivel ${ex.level}</span>
+                    <h3 class="text-lg font-bold mb-2 ${colors[i]}" style="font-family: 'Bangers', cursive;">${ex.level}. ${ex.title}</h3>
+                    <p class="text-gray-400 text-sm">${ex.description}</p>
+                </div>
+            `).join('');
+        }
+
+        // Quiz
+        let answers = {};
+        
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = data.quiz.map((q, i) => `
+                <div class="rick-card">
+                    <h4 class="text-base font-semibold text-white mb-4 flex items-start gap-3">
+                        <span class="bg-gradient-to-r from-purple-500 to-pink-500 text-white w-7 h-7 rounded-lg flex items-center justify-center text-sm font-bold flex-shrink-0">${i + 1}</span>
+                        ${q.question}
+                    </h4>
+                    <div class="space-y-3">
+                        ${q.options.map((opt, j) => `
+                            <div class="quiz-option cursor-pointer ${answers[i] === j ? 'selected' : ''}" onclick="selectOption(${i}, ${j})">
+                                <span class="option-marker"></span>
+                                <span class="text-sm">${opt}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function selectOption(qIndex, optIndex) {
+            answers[qIndex] = optIndex;
+            renderQuiz();
+        }
+
+        function checkAnswers() {
+            let score = 0;
+            const questionElements = document.querySelectorAll('#quiz-container .rick-card');
+            
+            data.quiz.forEach((q, i) => {
+                const options = questionElements[i].querySelectorAll('.quiz-option');
+                options.forEach((opt, j) => {
+                    opt.classList.remove('correct', 'incorrect');
+                    if (j === q.correct) opt.classList.add('correct');
+                });
+                
+                if (answers[i] !== undefined) {
+                    if (answers[i] === q.correct) {
+                        score++;
+                    } else {
+                        options[answers[i]].classList.add('incorrect');
+                    }
+                }
+            });
+
+            const percentage = (score / data.quiz.length) * 100;
+            document.getElementById('score-text').textContent = `${score}/${data.quiz.length}`;
+            
+            let message = '';
+            if (percentage >= 80) message = 'Excelente! Dominas Python perfectamente!';
+            else if (percentage >= 60) message = 'Muy bien! Tienes un buen conocimiento de Python.';
+            else if (percentage >= 40) message = 'Bien! Pero puedes mejorar practicando mas.';
+            else message = 'Sigue estudiando! Repasa los temas basicos.';
+            
+            document.getElementById('score-message').textContent = message;
+            document.getElementById('result').classList.remove('hidden');
+        }
+
+        function resetQuiz() {
+            answers = {};
+            document.getElementById('result').classList.add('hidden');
+            renderQuiz();
+        }
+
+        // Three.js
+        function initThreeJS() {
+            const container = document.getElementById('canvas-container');
+            if (!container) return;
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, 0.1, 2000);
+            camera.position.z = 50;
+
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            container.appendChild(renderer.domElement);
+
+            // Stars
+            const starsGeometry = new THREE.BufferGeometry();
+            const starsCount = 5000;
+            const starsPos = new Float32Array(starsCount * 3);
+            
+            for (let i = 0; i < starsCount * 3; i += 3) {
+                starsPos[i] = (Math.random() - 0.5) * 400;
+                starsPos[i + 1] = (Math.random() - 0.5) * 400;
+                starsPos[i + 2] = (Math.random() - 0.5) * 200;
+            }
+            
+            starsGeometry.setAttribute('position', new THREE.BufferAttribute(starsPos, 3));
+            const starsMaterial = new THREE.PointsMaterial({ size: 0.5, color: 0xffffff, transparent: true, opacity: 0.8 });
+            const stars = new THREE.Points(starsGeometry, starsMaterial);
+            scene.add(stars);
+
+            // Main particles
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = 4000;
+            const posArray = new Float32Array(particlesCount * 3);
+            const colorArray = new Float32Array(particlesCount * 3);
+            
+            const colors = [new THREE.Color(0xfacc15), new THREE.Color(0xa855f7), new THREE.Color(0xec4899)];
+            
+            for (let i = 0; i < particlesCount * 3; i += 3) {
+                posArray[i] = (Math.random() - 0.5) * 150;
+                posArray[i + 1] = (Math.random() - 0.5) * 150;
+                posArray[i + 2] = (Math.random() - 0.5) * 80;
+                
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                colorArray[i] = color.r;
+                colorArray[i + 1] = color.g;
+                colorArray[i + 2] = color.b;
+            }
+            
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colorArray, 3));
+            
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 0.08, vertexColors: true, transparent: true, opacity: 0.8, blending: THREE.AdditiveBlending
+            });
+            
+            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particlesMesh);
+
+            // Mouse interaction
+            let mouseX = 0, mouseY = 0, targetX = 0, targetY = 0;
+            
+            document.addEventListener('mousemove', (event) => {
+                mouseX = (event.clientX - window.innerWidth / 2) * 0.0005;
+                mouseY = (event.clientY - window.innerHeight / 2) * 0.0005;
+            });
+            
+            let time = 0;
+            function animate() {
+                requestAnimationFrame(animate);
+                time += 0.0005;
+                
+                targetX += (mouseX - targetX) * 0.05;
+                targetY += (mouseY - targetY) * 0.05;
+                
+                particlesMesh.rotation.y = time * 0.3 + targetX * 20;
+                particlesMesh.rotation.x = time * 0.1 + targetY * 20;
+                stars.rotation.y = time * 0.01;
+                
+                renderer.render(scene, camera);
+            }
+            
+            animate();
+            
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderTopics();
+            renderTabs();
+            renderCodeExamples();
+            renderExercises();
+            renderQuiz();
+            initThreeJS();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+const data = {
+    topics: [
+        { id: 1, title: "Variables", icon: "fa-database", color: "yellow", description: "Almacena y manipula datos en tu programa", tags: ["Tipos", "Datos"] },
+        { id: 2, title: "Operadores", icon: "fa-calculator", color: "purple", description: "Operaciones matematicas y logicas", tags: ["Aritmeticos", "Logicos"] },
+        { id: 3, title: "Condicionales", icon: "fa-code-branch", color: "pink", description: "Toma decisiones en tu codigo", tags: ["if", "else"] },
+        { id: 4, title: "Bucle FOR", icon: "fa-redo", color: "yellow", description: "Repite acciones de forma eficiente", tags: ["range", "iterar"] },
+        { id: 5, title: "Bucle WHILE", icon: "fa-bolt", color: "purple", description: "Repeticion controlada con condiciones", tags: ["break", "continue"] },
+        { id: 6, title: "Funciones", icon: "fa-cogs", color: "pink", description: "Organiza tu codigo en bloques reutilizables", tags: ["def", "return"] }
+    ],
+    
+    tabs: ["variables", "operadores", "condicionales", "for", "while", "funciones", "listas", "diccionarios", "poo"],
+    
+    codeExamples: {
+        variables: [
+            { title: "Variables", filename: "variables.py", code: "# Variables en Python\nnombre = \"Carlos\"\nedad = 25\naltura = 1.75\nes_estudiante = True\n\nprint(f\"Hola, me llamo {nombre}\")\nprint(f\"Tengo {edad} anos\")\nprint(type(nombre))" },
+            { title: "Conversion", filename: "conversion.py", code: "# Conversion de tipos\nnumero = int(\"42\")\nprecio = float(\"19.99\")\n\nedad = 25\nprint(\"Tengo \" + str(edad) + \" anos\")\n\nprint(int(True))\nprint(int(False))" }
+        ],
+        operadores: [
+            { title: "Operadores", filename: "operadores.py", code: "a, b = 10, 3\nprint(a + b)\nprint(a - b)\nprint(a * b)\nprint(a / b)\nprint(a // b)\nprint(a ** b)\nprint(a % b)" },
+            { title: "Comparacion", filename: "comparacion.py", code: "a, b = 5, 10\nprint(a == b)\nprint(a != b)\nprint(a < b)\nprint(a <= b)\n\nif a < b:\n    print(\"a es menor que b\")" }
+        ],
+        condicionales: [
+            { title: "Condicional", filename: "if_else.py", code: "edad = 20\n\nif edad >= 18:\n    print(\"Eres mayor de edad\")\nelse:\n    print(\"Eres menor de edad\")\n\nnota = 75\nif nota >= 70:\n    print(\"Aprobado\")\nelif nota >= 50:\n    print(\"Aceptable\")\nelse:\n    print(\"Reprobado\")" },
+            { title: "Logicos", filename: "logicos.py", code: "edad = 20\ntiene_entrada = True\n\nif edad >= 18 and tiene_entrada:\n    print(\"Puedes entrar\")\n\nif edad < 18 or not tiene_entrada:\n    print(\"No puedes entrar\")" }
+        ],
+        for: [
+            { title: "Bucle FOR", filename: "for.py", code: "# Range basico\nfor i in range(5):\n    print(i)\n\n# Con paso\nfor i in range(0, 10, 2):\n    print(i)\n\n# Iterar lista\nnombres = [\"Ana\", \"Luis\", \"Maria\"]\nfor nombre in nombres:\n    print(f\"Hola {nombre}\")" },
+            { title: "enumerate", filename: "enumerate.py", code: "frutas = [\"manzana\", \"banano\", \"uva\"]\n\nfor i, fruta in enumerate(frutas):\n    print(f\"{i}: {fruta}\")\n\nnumeros = [10, 20, 30]\ntotal = sum(numeros)\nprint(f\"Total: {total}\")" }
+        ],
+        while: [
+            { title: "WHILE", filename: "while.py", code: "contador = 0\nwhile contador < 5:\n    print(contador)\n    contador += 1\n\nwhile True:\n    print(\"Ejecutando...\")\n    break" },
+            { title: "Control", filename: "break_continue.py", code: "# continue - salta iteracion\nfor i in range(5):\n    if i == 2: continue\n    print(i)\n\n# break - sale del bucle\nfor i in range(10):\n    if i == 3: break\n    print(i)" }
+        ],
+        funciones: [
+            { title: "Funciones", filename: "funciones.py", code: "def saludar(nombre):\n    return f\"Hola {nombre}!\"\n\nprint(saludar(\"Carlos\"))\n\ndef saludar(nombre=\"Amigo\"):\n    return f\"Hola {nombre}!\"\n\nprint(saludar())" },
+            { title: "Return", filename: "return.py", code: "def promedio(a, b, c):\n    return (a + b + c) / 3\n\nresultado = promedio(70, 80, 90)\nprint(f\"Promedio: {resultado}\")\n\ndef operaciones(a, b):\n    return a + b, a - b\n\nsuma, resta = operaciones(10, 5)" }
+        ],
+        listas: [
+            { title: "Listas", filename: "listas.py", code: "frutas = [\"manzana\", \"pera\", \"uva\"]\nprint(frutas[0])\nprint(frutas[-1])\n\nfrutas.append(\"naranja\")\nfrutas.insert(1, \"banano\")\nprint(len(frutas))" },
+            { title: "Metodos", filename: "metodos.py", code: "numeros = [3, 1, 4, 1, 5]\nnumeros.sort()\nprint(numeros)\n\nnumeros.reverse()\nprint(numeros.count(1))\nprint(numeros.index(3))" }
+        ],
+        diccionarios: [
+            { title: "Diccionarios", filename: "diccionarios.py", code: "persona = {\"nombre\": \"Carlos\", \"edad\": 25}\nprint(persona[\"nombre\"])\nprint(persona.get(\"edad\"))\n\npersona[\"ciudad\"] = \"Madrid\"\n\nfor clave, valor in persona.items():\n    print(f\"{clave}: {valor}\")" },
+            { title: "Metodos", filename: "metodos.py", code: "persona = {\"nombre\": \"Ana\", \"edad\": 22}\nprint(persona.keys())\nprint(persona.values())\nprint(persona.items())\n\npersona.pop(\"edad\")\ncopia = persona.copy()\nprint(copia)" }
+        ],
+        poo: [
+            { title: "Clases", filename: "clase.py", code: "class Persona:\n    def __init__(self, nombre, edad):\n        self.nombre = nombre\n        self.edad = edad\n    \n    def saludar(self):\n        return f\"Hola, soy {self.nombre}\"\n\npersona = Persona(\"Carlos\", 25)\nprint(persona.saludar())" },
+            { title: "Herencia", filename: "herencia.py", code: "class SerVivo:\n    def __init__(self, nombre):\n        self.nombre = nombre\n\nclass Humano(SerVivo):\n    def hablar(self):\n        return \"Hola!\"\n\nhumano = Humano(\"Carlos\")\nprint(humano.hablar())" }
+        ]
+    },
+    
+    exercises: [
+        { level: 1, title: "Calculadora", description: "Crea una calculadora con operaciones basicas" },
+        { level: 2, title: "Sistema de Notas", description: "Calcula promedio y determina aprobado" },
+        { level: 3, title: "Contador", description: "Itera y calcula totales con FOR" },
+        { level: 4, title: "Validar Usuario", description: "Valida username con while" },
+        { level: 5, title: "Lista de Productos", description: "Manipula listas de productos" },
+        { level: 6, title: "Registro", description: "Almacena informacion en diccionario" }
+    ],
+    
+    quiz: [
+        { question: "Como se declara una variable en Python?", options: ["var nombre = 'Ana'", "nombre = 'Ana'", "let nombre = 'Ana'", "int nombre = 'Ana'"], correct: 1 },
+        { question: "Cual es el tipo de dato de: precio = 19.99?", options: ["int", "str", "float", "bool"], correct: 2 },
+        { question: "Que operador calcula la potencia en Python?", options: ["^", "**", "pow()", "power()"], correct: 1 },
+        { question: "Como se escribe un comentario en Python?", options: ["// comentario", "# comentario", "/* comentario */", "-- comentario"], correct: 1 },
+        { question: "Cual es el operador 'and' logico en Python?", options: ["&&", "and", "AND", "&"], correct: 1 },
+        { question: "Como se define una funcion en Python?", options: ["function saludar()", "def saludar():", "func saludar()", "void saludar()"], correct: 1 },
+        { question: "Que metodo agrega un elemento al final de una lista?", options: ["add()", "append()", "push()", "insert()"], correct: 1 },
+        { question: "Como se accede al ultimo elemento de una lista?", options: ["lista[-1]", "lista[len(lista)]", "lista.last()", "lista(0)"], correct: 0 },
+        { question: "Que palabra clave se usa para crear una clase?", options: ["object", "struct", "class", "new"], correct: 2 },
+        { question: "Como se crea un diccionario vacio?", options: ["dict = []", "dict = ()", "dict = {}", "dict = dict()"], correct: 2 },
+        { question: "Cual es el operador de division entera?", options: ["/", "//", "%", ":"], correct: 1 },
+        { question: "Como se hace un bucle FOR del 0 al 4?", options: ["for i in range(5):", "for i in range(1,5):", "for i in 0..5:", "for i = 0 to 5:"], correct: 0 },
+        { question: "Que hace 'break' en un bucle?", options: ["Pausa el bucle", "Sale del bucle", "Continua siguiente iteracion", "Reinicia el bucle"], correct: 1 },
+        { question: "Como se importa un modulo en Python?", options: ["import nombre", "include nombre", "require nombre", "using nombre"], correct: 0 },
+        { question: "Que funcion muestra texto en pantalla?", options: ["echo()", "print()", "write()", "display()"], correct: 1 }
+    ]
+};
