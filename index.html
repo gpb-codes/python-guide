@@ -430,14 +430,23 @@
                 
                 <!-- Tabs -->
                 <div class="flex flex-wrap gap-2 mb-8 justify-center">
+                    <!-- Principiante -->
                     <button onclick="showTab('variables')" class="tab-btn px-4 py-2 rounded-lg bg-dark-700 text-dark-300 hover:bg-dark-600 active">Variables</button>
+                    <button onclick="showTab('tipos')" class="tab-btn px-4 py-2 rounded-lg bg-dark-700 text-dark-300 hover:bg-dark-600">Tipos</button>
                     <button onclick="showTab('operadores')" class="tab-btn px-4 py-2 rounded-lg bg-dark-700 text-dark-300 hover:bg-dark-600">Operadores</button>
                     <button onclick="showTab('condicionales')" class="tab-btn px-4 py-2 rounded-lg bg-dark-700 text-dark-300 hover:bg-dark-600">Condicionales</button>
                     <button onclick="showTab('for')" class="tab-btn px-4 py-2 rounded-lg bg-dark-700 text-dark-300 hover:bg-dark-600">FOR</button>
                     <button onclick="showTab('while')" class="tab-btn px-4 py-2 rounded-lg bg-dark-700 text-dark-300 hover:bg-dark-600">WHILE</button>
                     <button onclick="showTab('funciones')" class="tab-btn px-4 py-2 rounded-lg bg-dark-700 text-dark-300 hover:bg-dark-600">Funciones</button>
-                    <button onclick="showTab('listas')" class="tab-btn px-4 py-2 rounded-lg bg-dark-700 text-dark-300 hover:bg-dark-600">Listas</button>
-                    <button onclick="showTab('diccionarios')" class="tab-btn px-4 py-2 rounded-lg bg-dark-700 text-dark-300 hover:bg-dark-600">Diccionarios</button>
+                    <!-- Intermedio -->
+                    <button onclick="showTab('strings')" class="tab-btn px-4 py-2 rounded-lg bg-purple-700 text-purple-200 hover:bg-purple-600">Strings</button>
+                    <button onclick="showTab('listas')" class="tab-btn px-4 py-2 rounded-lg bg-purple-700 text-purple-200 hover:bg-purple-600">Listas</button>
+                    <button onclick="showTab('tuplas')" class="tab-btn px-4 py-2 rounded-lg bg-purple-700 text-purple-200 hover:bg-purple-600">Tuplas</button>
+                    <button onclick="showTab('sets')" class="tab-btn px-4 py-2 rounded-lg bg-purple-700 text-purple-200 hover:bg-purple-600">Sets</button>
+                    <button onclick="showTab('diccionarios')" class="tab-btn px-4 py-2 rounded-lg bg-purple-700 text-purple-200 hover:bg-purple-600">Diccionarios</button>
+                    <button onclick="showTab('comprensiones')" class="tab-btn px-4 py-2 rounded-lg bg-purple-700 text-purple-200 hover:bg-purple-600"> comprehensions</button>
+                    <button onclick="showTab('excepciones')" class="tab-btn px-4 py-2 rounded-lg bg-purple-700 text-purple-200 hover:bg-purple-600">Excepciones</button>
+                    <button onclick="showTab('archivos')" class="tab-btn px-4 py-2 rounded-lg bg-purple-700 text-purple-200 hover:bg-purple-600">Archivos</button>
                 </div>
                 
                 <!-- Content Tabs -->
@@ -1003,6 +1012,466 @@ copia = persona.copy()</code></pre>
                             </div>
                         </div>
                     </div>
+                    
+                    <!-- Tipos de Datos -->
+                    <div data-tab="tipos" class="tab-panel hidden grid lg:grid-cols-2 gap-8">
+                        <div class="syntax-card p-6">
+                            <h3 class="text-xl font-bold mb-4 text-cyan-400">Tipos Built-in</h3>
+                            <div class="code-window">
+                                <div class="code-header">
+                                    <div class="flex gap-2">
+                                        <div class="code-dot bg-red-500"></div>
+                                        <div class="code-dot bg-yellow-500"></div>
+                                        <div class="code-dot bg-green-500"></div>
+                                    </div>
+                                    <span class="text-dark-400 text-sm">tipos.py</span>
+                                </div>
+                                <div class="code-body">
+                                    <pre><code class="language-python"># Verificar tipo
+x = 42
+print(type(x))     # &lt;class 'int'&gt;
+
+# type() y isinstance()
+print(isinstance(x, int))       # True
+print(isinstance(x, float))    # False
+
+# None (nulo)
+valor = None
+print(valor is None)   # True
+
+# type() para comparaciones
+if type(x) == int:
+    print("Es un entero")</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="syntax-card p-6">
+                            <h3 class="text-xl font-bold mb-4 text-cyan-400">Funciones de Tipo</h3>
+                            <div class="code-window">
+                                <div class="code-header">
+                                    <div class="flex gap-2">
+                                        <div class="code-dot bg-red-500"></div>
+                                        <div class="code-dot bg-yellow-500"></div>
+                                        <div class="code-dot bg-green-500"></div>
+                                    </div>
+                                    <span class="text-dark-400 text-sm">tipo_funciones.py</span>
+                                </div>
+                                <div class="code-body">
+                                    <pre><code class="language-python"># Convertir tipos
+print(bool(1))        # True
+print(bool(0))        # False
+print(bool(""))        # False
+print(bool("texto"))   # True
+
+# str, int, float
+numero = "42"
+print(int(numero) + 8)    # 50
+print(float("3.14"))      # 3.14
+
+# repr (representación)
+print(repr("Hola\nMundo"))</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Strings (Intermedio) -->
+                    <div data-tab="strings" class="tab-panel hidden grid lg:grid-cols-2 gap-8">
+                        <div class="syntax-card p-6">
+                            <h3 class="text-xl font-bold mb-4 text-purple-400">Métodos de Strings</h3>
+                            <div class="code-window">
+                                <div class="code-header">
+                                    <div class="flex gap-2">
+                                        <div class="code-dot bg-red-500"></div>
+                                        <div class="code-dot bg-yellow-500"></div>
+                                        <div class="code-dot bg-green-500"></div>
+                                    </div>
+                                    <span class="text-dark-400 text-sm">string_metodos.py</span>
+                                </div>
+                                <div class="code-body">
+                                    <pre><code class="language-python">texto = "Hola Mundo"
+
+# Mayúsculas/minúsculas
+print(texto.upper())           # HOLA MUNDO
+print(texto.lower())           # hola mundo
+print(texto.capitalize())     # Hola mundo
+print(texto.title())           # Hola Mundo
+
+# Buscar y reemplazar
+print(texto.find("Mundo"))     # 5
+print(texto.replace("Mundo", "Python"))
+
+# Dividir y unir
+palabras = "uno,dos,tres"
+print(palabras.split(","))    # ['uno','dos','tres']
+print("-".join(palabras))</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="syntax-card p-6">
+                            <h3 class="text-xl font-bold mb-4 text-purple-400">Slicing de Strings</h3>
+                            <div class="code-window">
+                                <div class="code-header">
+                                    <div class="flex gap-2">
+                                        <div class="code-dot bg-red-500"></div>
+                                        <div class="code-dot bg-yellow-500"></div>
+                                        <div class="code-dot bg-green-500"></div>
+                                    </div>
+                                    <span class="text-dark-400 text-sm">string_slicing.py</span>
+                                </div>
+                                <div class="code-body">
+                                    <pre><code class="language-python">texto = "Python"
+
+# Indexación
+print(texto[0])        # P
+print(texto[-1])      # n
+
+# Slicing [inicio:fin]
+print(texto[0:3])      # Pyt
+print(texto[:3])       # Pyt
+print(texto[3:])       # hon
+
+# Con paso
+print(texto[::2])      # Pto
+print(texto[::-1])    # nohtyP
+
+# f-strings (formato)
+nombre = "Ana"
+print(f"Hola {nombre}")</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Tuplas -->
+                    <div data-tab="tuplas" class="tab-panel hidden grid lg:grid-cols-2 gap-8">
+                        <div class="syntax-card p-6">
+                            <h3 class="text-xl font-bold mb-4 text-yellow-400">Tuplas Básicas</h3>
+                            <div class="code-window">
+                                <div class="code-header">
+                                    <div class="flex gap-2">
+                                        <div class="code-dot bg-red-500"></div>
+                                        <div class="code-dot bg-yellow-500"></div>
+                                        <div class="code-dot bg-green-500"></div>
+                                    </div>
+                                    <span class="text-dark-400 text-sm">tuplas.py</span>
+                                </div>
+                                <div class="code-body">
+                                    <pre><code class="language-python"># Crear tupla (inmutable)
+tupla = (1, 2, 3)
+print(tupla[0])        # 1
+print(tupla[-1])       # 3
+
+# Tupla con un elemento
+tupla1 = (1,)  # Nota la coma
+
+# Desempaqueo
+coordenadas = (10, 20, 30)
+x, y, z = coordenadas
+print(x, y, z)    # 10 20 30
+
+# return múltiplos valores
+def obtener_datos():
+    return "Ana", 25
+
+nombre, edad = obtener_datos()</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="syntax-card p-6">
+                            <h3 class="text-xl font-bold mb-4 text-yellow-400">Tuplas vs Listas</h3>
+                            <div class="code-window">
+                                <div class="code-header">
+                                    <div class="flex gap-2">
+                                        <div class="code-dot bg-red-500"></div>
+                                        <div class="code-dot bg-yellow-500"></div>
+                                        <div class="code-dot bg-green-500"></div>
+                                    </div>
+                                    <span class="text-dark-400 text-sm">tupla_lista.py</span>
+                                </div>
+                                <div class="code-body">
+                                    <pre><code class="language-python"># Diferencia clave
+lista = [1, 2, 3]
+lista[0] = 0    # ✅ Allowed
+
+tupla = (1, 2, 3)
+# tupla[0] = 0  # ❌ Error!
+
+# Cuándo usar cada una
+# Lista: datos que cambian
+# Tupla: datos constantes, claves
+
+# namedtuple (avanzado)
+from collections import namedtuple
+Punto = namedtuple("Punto", ["x", "y"])
+p = Punto(10, 20)
+print(p.x, p.y)</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Sets -->
+                    <div data-tab="sets" class="tab-panel hidden grid lg:grid-cols-2 gap-8">
+                        <div class="syntax-card p-6">
+                            <h3 class="text-xl font-bold mb-4 text-pink-400">Sets Básicos</h3>
+                            <div class="code-window">
+                                <div class="code-header">
+                                    <div class="flex gap-2">
+                                        <div class="code-dot bg-red-500"></div>
+                                        <div class="code-dot bg-yellow-500"></div>
+                                        <div class="code-dot bg-green-500"></div>
+                                    </div>
+                                    <span class="text-dark-400 text-sm">sets.py</span>
+                                </div>
+                                <div class="code-body">
+                                    <pre><code class="language-python"># Crear set (únicos)
+numeros = {1, 2, 3, 3, 3}
+print(numeros)    # {1, 2, 3}
+
+# add, remove, discard
+numeros.add(4)
+numeros.discard(1)
+numeros.remove(2)
+
+# Operaciones de conjuntos
+a = {1, 2, 3}
+b = {3, 4, 5}
+
+print(a | b)    # Union {1,2,3,4,5}
+print(a & b)    # Intersección {3}
+print(a - b)    # Diferencia {1,2}
+print(a ^ b)    # Simétrica {1,2,4,5}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="syntax-card p-6">
+                            <h3 class="text-xl font-bold mb-4 text-pink-400">Sets para Datos Únicos</h3>
+                            <div class="code-window">
+                                <div class="code-header">
+                                    <div class="flex gap-2">
+                                        <div class="code-dot bg-red-500"></div>
+                                        <div class="code-dot bg-yellow-500"></div>
+                                        <div class="code-dot bg-green-500"></div>
+                                    </div>
+                                    <span class="text-dark-400 text-sm">set_usos.py</span>
+                                </div>
+                                <div class="code-body">
+                                    <pre><code class="language-python"># Eliminar duplicados
+nombres = ["Ana", "Bob", "Ana", "Carla"]
+unicos = set(nombres)
+print(list(unicos))  # ['Ana', 'Bob', 'Carla']
+
+# Verificar pertenencia (rápido)
+emails = {"ana@email.com", "bob@email.com"}
+print("ana@email.com" in emails)  # True
+
+# frozenset (inmutable)
+pares = frozenset([1, 2, 3])
+# pares.add(4)  # ❌ Error!</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Comprensiones -->
+                    <div data-tab="comprensiones" class="tab-panel hidden grid lg:grid-cols-2 gap-8">
+                        <div class="syntax-card p-6">
+                            <h3 class="text-xl font-bold mb-4 text-indigo-400">List Comprehension</h3>
+                            <div class="code-window">
+                                <div class="code-header">
+                                    <div class="flex gap-2">
+                                        <div class="code-dot bg-red-500"></div>
+                                        <div class="code-dot bg-yellow-500"></div>
+                                        <div class="code-dot bg-green-500"></div>
+                                    </div>
+                                    <span class="text-dark-400 text-sm">list_comp.py</span>
+                                </div>
+                                <div class="code-body">
+                                    <pre><code class="language-python"># Básico
+cuadrados = [x**2 for x in range(5)]
+print(cuadrados)    # [0,1,4,9,16]
+
+# Con condición
+pares = [x for x in range(10) if x % 2 == 0]
+print(pares)    # [0,2,4,6,8]
+
+# Múltiples transformations
+texto = "Hola Mundo"
+mayusculas = [c.upper() for c in texto]
+print(mayusculas)  # ['H','O','L','A',...]
+
+# Anidado
+matriz = [[j for j in range(3)] for i in range(3)]</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="syntax-card p-6">
+                            <h3 class="text-xl font-bold mb-4 text-indigo-400">Dict y Set Comprehension</h3>
+                            <div class="code-window">
+                                <div class="code-header">
+                                    <div class="flex gap-2">
+                                        <div class="code-dot bg-red-500"></div>
+                                        <div class="code-dot bg-yellow-500"></div>
+                                        <div class="code-dot bg-green-500"></div>
+                                    </div>
+                                    <span class="text-dark-400 text-sm">dict_comp.py</span>
+                                </div>
+                                <div class="code-body">
+                                    <pre><code class="language-python"># Dictionary comprehension
+nombres = ["Ana", "Bob", "Carla"]
+diccionario = {n: len(n) for n in nombres}
+print(diccionario)  # {'Ana':3,'Bob':3,'Carla':6}
+
+# Set comprehension
+numeros = [1, 2, 2, 3, 3, 3]
+unicos = {x for x in numeros}
+print(unicos)    # {1, 2, 3}
+
+# Ejemplo práctico
+palabras = ["hola", "mundo", "python"]
+largo = {p: len(p) for p in palabras}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Excepciones -->
+                    <div data-tab="excepciones" class="tab-panel hidden grid lg:grid-cols-2 gap-8">
+                        <div class="syntax-card p-6">
+                            <h3 class="text-xl font-bold mb-4 text-red-400">Try/Except</h3>
+                            <div class="code-window">
+                                <div class="code-header">
+                                    <div class="flex gap-2">
+                                        <div class="code-dot bg-red-500"></div>
+                                        <div class="code-dot bg-yellow-500"></div>
+                                        <div class="code-dot bg-green-500"></div>
+                                    </div>
+                                    <span class="text-dark-400 text-sm">excepciones.py</span>
+                                </div>
+                                <div class="code-body">
+                                    <pre><code class="language-python">try:
+    resultado = 10 / 0
+except ZeroDivisionError:
+    print("No se puede dividir por cero")
+except Exception as e:
+    print(f"Error: {e}")
+else:
+    print("Todo bien")
+finally:
+    print("Siempre se ejecuta")
+
+# Capturar múltiples
+try:
+    x = int("no es número")
+except (ValueError, TypeError):
+    print("Error de conversión")</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="syntax-card p-6">
+                            <h3 class="text-xl font-bold mb-4 text-red-400">Raise y Excepciones Personalizadas</h3>
+                            <div class="code-window">
+                                <div class="code-header">
+                                    <div class="flex gap-2">
+                                        <div class="code-dot bg-red-500"></div>
+                                        <div class="code-dot bg-yellow-500"></div>
+                                        <div class="code-dot bg-green-500"></div>
+                                    </div>
+                                    <span class="text-dark-400 text-sm">raise.py</span>
+                                </div>
+                                <div class="code-body">
+                                    <pre><code class="language-python"># Lanzar excepciones
+def dividir(a, b):
+    if b == 0:
+        raise ValueError("Divisor no puede ser 0")
+    return a / b
+
+# Excepción personalizada
+class MiError(Exception):
+    pass
+
+def validar(edad):
+    if edad < 0:
+        raise MiError("Edad negativa")
+
+# Try inside try
+try:
+    try:
+        x = validar(-5)
+    except MiError as e:
+        print(f"Error personalizado: {e}")
+except Exception:
+    pass</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Archivos -->
+                    <div data-tab="archivos" class="tab-panel hidden grid lg:grid-cols-2 gap-8">
+                        <div class="syntax-card p-6">
+                            <h3 class="text-xl font-bold mb-4 text-teal-400">Leer y Escribir Archivos</h3>
+                            <div class="code-window">
+                                <div class="code-header">
+                                    <div class="flex gap-2">
+                                        <div class="code-dot bg-red-500"></div>
+                                        <div class="code-dot bg-yellow-500"></div>
+                                        <div class="code-dot bg-green-500"></div>
+                                    </div>
+                                    <span class="text-dark-400 text-sm">archivos.py</span>
+                                </div>
+                                <div class="code-body">
+                                    <pre><code class="language-python"># Escribir archivo
+with open("archivo.txt", "w") as f:
+    f.write("Hola mundo\n")
+    f.write("Segunda línea")
+
+# Leer archivo
+with open("archivo.txt", "r") as f:
+    contenido = f.read()
+    print(contenido)
+
+# Leer línea por línea
+with open("archivo.txt", "r") as f:
+    for linea in f:
+        print(linea.strip())</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="syntax-card p-6">
+                            <h3 class="text-xl font-bold mb-4 text-teal-400">Modos y JSON</h3>
+                            <div class="code-window">
+                                <div class="code-header">
+                                    <div class="flex gap-2">
+                                        <div class="code-dot bg-red-500"></div>
+                                        <div class="code-dot bg-yellow-500"></div>
+                                        <div class="code-dot bg-green-500"></div>
+                                    </div>
+                                    <span class="text-dark-400 text-sm">json_archivos.py</span>
+                                </div>
+                                <div class="code-body">
+                                    <pre><code class="language-python"># Modos: r, w, a, r+, rb, wb
+
+# JSON para datos complejos
+import json
+
+datos = {"nombre": "Ana", "edad": 25}
+
+# Guardar JSON
+with open("datos.json", "w") as f:
+    json.dump(datos, f)
+
+# Leer JSON
+with open("datos.json", "r") as f:
+    datos = json.load(f)
+
+# Convertir a string
+texto = json.dumps(datos)</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1181,12 +1650,21 @@ else:
         
         // Tab functionality
         function showTab(tabName) {
-            // Update buttons
+            // Update buttons - remove active from all purple buttons first
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.remove('active');
-                if (btn.textContent.toLowerCase().includes(tabName.toLowerCase()) ||
-                    (tabName === 'for' && btn.textContent.includes('FOR')) ||
-                    (tabName === 'while' && btn.textContent.includes('WHILE'))) {
+            });
+            
+            // Find and activate the matching button
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                const btnText = btn.textContent.toLowerCase().trim();
+                const targetText = tabName.toLowerCase();
+                
+                if (btnText === targetText || 
+                    btnText === targetText ||
+                    (targetText === 'for' && btnText === 'for') ||
+                    (targetText === 'while' && btnText === 'while') ||
+                    (targetText === 'comprensiones' && btnText.includes('comprehensions'))) {
                     btn.classList.add('active');
                 }
             });
