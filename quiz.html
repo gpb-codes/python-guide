@@ -1,345 +1,342 @@
 <!DOCTYPE html>
-<html lang="es">
+<html class="dark" lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Python Guide - Test de Conocimiento</title>
-    <meta name="description" content="Evalua tu conocimiento de Python">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Bangers&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { 
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace'],
-                        display: ['Bangers', 'cursive']
-                    }
-                }
+    <title>Python Portal - Test de Conocimiento</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#ffb0cd",
+                    "surface-container-low": "#171c1f",
+                    "secondary-container": "#eec200",
+                    "inverse-primary": "#842bd2",
+                    "on-secondary-fixed": "#231b00",
+                    "on-surface-variant": "#cfc2d6",
+                    "error-container": "#93000a",
+                    "error": "#ffb4ab",
+                    "surface": "#0f1417",
+                    "primary": "#ddb7ff",
+                    "on-tertiary-fixed-variant": "#8c0053",
+                    "surface-container-highest": "#313539",
+                    "secondary-fixed": "#ffe083",
+                    "on-tertiary": "#640039",
+                    "on-error-container": "#ffdad6",
+                    "on-background": "#dfe3e7",
+                    "inverse-surface": "#dfe3e7",
+                    "surface-container-lowest": "#0a0f12",
+                    "on-secondary": "#3c2f00",
+                    "surface-container-high": "#262b2e",
+                    "secondary-fixed-dim": "#eec200",
+                    "outline": "#988d9f",
+                    "secondary": "#ffe083",
+                    "on-primary-fixed-variant": "#6900b3",
+                    "inverse-on-surface": "#2c3134",
+                    "primary-fixed": "#f0dbff",
+                    "surface-variant": "#313539",
+                    "on-primary-fixed": "#2c0051",
+                    "on-primary-container": "#400071",
+                    "on-primary": "#490080",
+                    "on-secondary-fixed-variant": "#574500",
+                    "primary-container": "#b76dff",
+                    "on-error": "#690005",
+                    "primary-fixed-dim": "#ddb7ff",
+                    "surface-tint": "#ddb7ff",
+                    "background": "#0f1417",
+                    "tertiary-container": "#f751a1",
+                    "surface-container": "#1b2023",
+                    "on-secondary-container": "#645000",
+                    "tertiary-fixed": "#ffd9e4",
+                    "on-tertiary-container": "#570032",
+                    "outline-variant": "#4d4354",
+                    "surface-bright": "#353a3d",
+                    "on-tertiary-fixed": "#3e0022",
+                    "tertiary": "#ffb0cd",
+                    "surface-dim": "#0f1417",
+                    "on-surface": "#dfe3e7"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "1rem",
+                    "margin": "32px",
+                    "gutter": "24px",
+                    "xs": "0.5rem",
+                    "unit": "4px",
+                    "md": "1.5rem",
+                    "lg": "2.5rem",
+                    "xl": "4rem"
+            },
+            "fontFamily": {
+                    "display-xl": ["Bangers"],
+                    "code-block": ["JetBrains Mono"],
+                    "headline-lg": ["Bangers"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["JetBrains Mono"],
+                    "headline-md": ["Bangers"]
+            },
+            "fontSize": {
+                    "display-xl": ["72px", {"lineHeight": "1.1", "letterSpacing": "0.05em", "fontWeight": "400"}],
+                    "code-block": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "headline-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "1", "fontWeight": "600"}],
+                    "headline-md": ["32px", {"lineHeight": "1.2", "fontWeight": "400"}]
             }
-        }
+          },
+        },
+      }
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
-        
-        * { scroll-behavior: smooth; margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body { 
-            background: #0d0d12; 
-            font-family: 'Inter', sans-serif;
-            color: #f1f5f9;
-            line-height: 1.7;
+        body {
+            background-color: #0f1417;
+            background-image: radial-gradient(circle at 50% 50%, #1b2023 0%, #0a0f12 100%);
+            min-height: 100vh;
         }
-        
-        #canvas-container { 
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            z-index: -1; opacity: 0.3;
+        .glass-card {
+            background: rgba(49, 53, 57, 0.1);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(221, 183, 255, 0.2);
         }
-        
-        .portal-bg {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: -2;
-            background: 
-                radial-gradient(ellipse at 30% 20%, rgba(168, 85, 247, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 70% 80%, rgba(236, 72, 153, 0.05) 0%, transparent 50%),
-                linear-gradient(180deg, #0d0d12 0%, #111118 100%);
+        .neon-glow-purple {
+            box-shadow: 0 0 15px rgba(183, 109, 255, 0.4);
         }
-        
-        .rick-card {
-            background: rgba(20, 20, 30, 0.9);
-            border: 1px solid rgba(168, 85, 247, 0.25);
-            border-radius: 16px;
-            padding: 24px;
-            transition: all 0.3s ease;
+        .neon-glow-pink {
+            box-shadow: 0 0 10px rgba(247, 81, 161, 0.3);
         }
-        
-        .rick-card:hover {
-            border-color: rgba(250, 204, 21, 0.4);
-            box-shadow: 0 8px 30px rgba(168, 85, 247, 0.15);
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
-        
-        .rick-gradient {
-            background: linear-gradient(135deg, #facc15, #a855f7, #ec4899);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .rick-yellow { color: #facc15; }
-        .rick-purple { color: #b88aff; }
-        
-        .portal-btn {
-            background: linear-gradient(135deg, #facc15, #a855f7);
-            border: none;
-            padding: 14px 32px;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 15px;
-            color: #0a0a0f;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .portal-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(250, 204, 21, 0.3); }
-        
-        .portal-btn-outline {
-            background: transparent;
-            border: 2px solid #a855f7;
-            padding: 14px 32px;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 15px;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .portal-btn-outline:hover { background: rgba(168, 85, 247, 0.2); border-color: #facc15; }
-        
-        .quiz-option { display: flex; align-items: center; padding: 14px 18px; margin-bottom: 10px; border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 10px; cursor: pointer; transition: all 0.2s; background: rgba(20, 20, 30, 0.8); }
-        .quiz-option:hover { border-color: #a855f7; background: rgba(40, 30, 50, 0.8); }
-        .quiz-option.selected { border-color: #facc15; background: rgba(50, 40, 20, 0.8); }
-        .quiz-option.correct { border-color: #22c55e; background: rgba(20, 40, 30, 0.8); }
-        .quiz-option.incorrect { border-color: #ef4444; background: rgba(40, 20, 20, 0.8); }
-        .quiz-option .option-marker { width: 22px; height: 22px; border: 2px solid rgba(168, 85, 247, 0.6); border-radius: 6px; margin-right: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .quiz-option.selected .option-marker { border-color: #facc15; background: #facc15; }
-        .quiz-option.correct .option-marker { border-color: #22c55e; background: #22c55e; }
-        .quiz-option.incorrect .option-marker { border-color: #ef4444; background: #ef4444; }
-        .quiz-option .option-text { color: #f1f5f9; font-size: 15px; }
-        
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0a0a0f; }
-        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #facc15, #a855f7); border-radius: 4px; }
     </style>
 </head>
-<body class="min-h-screen">
-    <div class="portal-bg"></div>
-    <div id="canvas-container"></div>
+<body class="text-on-surface font-body-md overflow-x-hidden">
+<nav class="fixed top-0 w-full z-50 bg-surface/30 backdrop-blur-lg border-b border-primary/20 shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
+    <div class="flex justify-between items-center w-full px-gutter max-w-full mx-auto h-16">
+        <a href="index.html" class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary text-3xl">code</span>
+            <div>
+                <div class="font-display-xl text-primary drop-shadow-[0_0_8px_rgba(221,183,255,0.8)]">PYTHON</div>
+                <p class="text-[10px] text-on-surface-variant -mt-1">Portal de Aprendizaje</p>
+            </div>
+        </a>
+        <a href="index.html" class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors font-label-sm">
+            <span class="material-symbols-outlined">arrow_back</span>
+            <span>Volver</span>
+        </a>
+    </div>
+</nav>
 
-    <header class="fixed top-0 left-0 right-0 z-50" style="background: rgba(13, 13, 18, 0.98); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(168, 85, 247, 0.2);">
-        <div class="max-w-4xl mx-auto px-6">
-            <nav class="flex items-center justify-between h-16">
-                <div class="flex items-center gap-3">
-                    <a href="index.html" class="flex items-center gap-3">
-                        <i class="fas fa-code text-2xl text-purple-500"></i>
-                        <div>
-                            <h1 class="text-2xl font-bold rick-gradient">PYTHON</h1>
-                            <p class="text-xs text-gray-400">Guia de Programacion</p>
-                        </div>
-                    </a>
-                </div>
-                <a href="index.html" class="nav-portal" style="color: rgba(255,255,255,0.7); font-weight: 500;">
-                    <i class="fas fa-arrow-left mr-2"></i>Volver
-                </a>
-            </nav>
+<main class="pt-24 pb-12 px-gutter max-w-5xl mx-auto flex flex-col items-center">
+    <div class="w-full mb-lg space-y-sm">
+        <div class="flex justify-between items-end mb-xs">
+            <span class="font-label-sm text-primary tracking-widest uppercase">Sincronizacion del Portal</span>
+            <span class="font-headline-md text-secondary" id="question-counter">Pregunta 1 de 15</span>
         </div>
-    </header>
+        <div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden border border-outline-variant/30">
+            <div id="progress-bar" class="h-full bg-gradient-to-r from-primary to-tertiary-container neon-glow-purple" style="width: 6.67%"></div>
+        </div>
+    </div>
 
-    <main class="pt-20 pb-16">
-        <div class="max-w-3xl mx-auto px-6">
-            <div class="text-center mb-12">
-                <h1 class="text-4xl md:text-5xl font-bold mb-4" style="font-family: 'Bangers', cursive; letter-spacing: 3px;">
-                    <span class="rick-gradient">TEST DE CONOCIMIENTO</span>
-                </h1>
-                <p class="text-lg text-gray-300">Responde las preguntas y verifica tu aprendizaje</p>
-                <p class="text-sm text-gray-500 mt-2">15 preguntas sobre Python</p>
+    <div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-lg items-start">
+        <div class="lg:col-span-8 glass-card rounded-xl p-lg relative overflow-hidden">
+            <div class="absolute -top-24 -right-24 w-48 h-48 bg-primary/10 blur-[80px] rounded-full"></div>
+            <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-tertiary/10 blur-[80px] rounded-full"></div>
+            
+            <div class="flex items-center space-x-sm mb-md">
+                <span class="px-xs py-1 rounded border border-primary/40 text-primary font-label-sm bg-primary/5" id="topic-tag">#Variables</span>
             </div>
             
-            <div id="quiz-container"></div>
+            <h1 class="font-headline-md text-on-surface mb-lg leading-tight" id="question-text">
+                Cargando pregunta...
+            </h1>
             
-            <div class="text-center mt-10">
-                <button onclick="checkAnswers()" class="portal-btn">
-                    <i class="fas fa-check mr-2"></i>Verificar Respuestas
+            <div class="space-y-md" id="options-container">
+                <!-- Options will be rendered here -->
+            </div>
+            
+            <div class="mt-xl flex flex-col sm:flex-row items-center justify-between gap-md">
+                <button onclick="resetQuiz()" class="w-full sm:w-auto px-lg py-md rounded-lg font-label-sm border border-outline-variant text-on-surface-variant hover:border-tertiary-container hover:text-tertiary transition-all flex items-center gap-2">
+                    <span class="material-symbols-outlined">refresh</span>
+                    Reiniciar
                 </button>
-                <button onclick="resetQuiz()" class="portal-btn-outline ml-4">
-                    <i class="fas fa-redo mr-2"></i>Reiniciar
+                <button onclick="checkAnswers()" class="w-full sm:w-auto px-xl py-md rounded-lg font-headline-md text-on-primary bg-primary-container hover:bg-primary transition-all flex items-center justify-center gap-2 neon-glow-purple">
+                    <span>Verificar Respuestas</span>
+                    <span class="material-symbols-outlined">trending_flat</span>
                 </button>
             </div>
-            
-            <div id="result" class="hidden mt-8 text-center">
-                <div class="rick-card inline-block px-8 py-6">
-                    <h3 class="text-2xl font-bold mb-2">Resultado</h3>
-                    <p class="text-4xl font-bold rick-gradient" id="score-text"></p>
-                    <p class="text-gray-400 mt-2" id="score-message"></p>
-                </div>
-            </div>
         </div>
-    </main>
 
-    <footer class="py-8" style="background: rgba(15, 15, 26, 0.8); border-top: 1px solid rgba(168, 85, 247, 0.2);">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <div class="flex items-center justify-center gap-3 mb-4">
-                <i class="fas fa-code text-xl text-purple-500"></i>
-                <span class="text-xl font-bold rick-gradient" style="font-family: 'Bangers', cursive;">PYTHON GUIDE</span>
-            </div>
-            <p class="text-gray-400 text-sm">Gabriel Pedreros - Aprende a programar con Python</p>
-        </div>
-    </footer>
-
-    <script src="data.js"></script>
-    <script>
-        let answers = {};
-        
-        function renderQuiz() {
-            const container = document.getElementById('quiz-container');
-            container.innerHTML = data.quiz.map((q, i) => `
-                <div class="rick-card mb-6">
-                    <h4 class="text-base font-semibold text-white mb-4 flex items-start gap-3">
-                        <span class="bg-gradient-to-r from-purple-500 to-pink-500 text-white w-7 h-7 rounded-lg flex items-center justify-center text-sm font-bold flex-shrink-0">${i + 1}</span>
-                        ${q.question}
-                    </h4>
-                    <div class="space-y-3">
-                        ${q.options.map((opt, j) => `
-                            <div class="quiz-option cursor-pointer ${answers[i] === j ? 'selected' : ''}" onclick="selectOption(${i}, ${j})">
-                                <span class="option-marker"></span>
-                                <span class="option-text">${opt}</span>
-                            </div>
-                        `).join('')}
+        <div class="lg:col-span-4 space-y-md">
+            <div class="glass-card rounded-xl p-md">
+                <h3 class="font-label-sm text-secondary uppercase tracking-widest mb-sm">Tu Progreso</h3>
+                <div class="flex items-center gap-md">
+                    <div class="w-12 h-12 rounded-lg bg-primary-container flex items-center justify-center">
+                        <span class="material-symbols-outlined text-primary text-2xl">person</span>
+                    </div>
+                    <div>
+                        <p class="text-on-surface font-headline-md leading-none">Explorador</p>
+                        <p class="text-primary font-label-sm">Nivel Python</p>
                     </div>
                 </div>
-            `).join('');
-        }
+                <div class="mt-md pt-md border-t border-outline-variant/30 flex justify-around">
+                    <div class="text-center">
+                        <p class="text-secondary font-headline-md" id="score-display">0%</p>
+                        <p class="text-on-surface-variant text-[10px] uppercase">Aciertos</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-tertiary font-headline-md" id="total-questions">15</p>
+                        <p class="text-on-surface-variant text-[10px] uppercase">Preguntas</p>
+                    </div>
+                </div>
+            </div>
 
-        function selectOption(qIndex, optIndex) {
-            answers[qIndex] = optIndex;
+            <div class="glass-card rounded-xl p-md border-tertiary/20">
+                <div class="flex items-center gap-xs mb-xs">
+                    <span class="material-symbols-outlined text-tertiary text-sm">lightbulb</span>
+                    <h4 class="font-label-sm text-tertiary uppercase">Consejo</h4>
+                </div>
+                <p class="text-on-surface-variant text-body-md italic" id="hint-text">
+                    Selecciona una respuesta y verifica tus conocimientos.
+                </p>
+            </div>
+
+            <div id="result-card" class="hidden p-md rounded-xl bg-surface-container-low border border-outline-variant/30">
+                <div class="text-center">
+                    <h3 class="font-headline-md text-primary mb-2">Resultado Final</h3>
+                    <p class="text-4xl font-bold text-secondary" id="final-score">0/15</p>
+                    <p class="text-on-surface-variant text-body-md mt-2" id="result-message"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="w-full py-lg mt-lg bg-surface-container-lowest border-t border-outline-variant">
+    <div class="flex flex-col items-center justify-center gap-md w-full px-gutter text-center">
+        <div class="font-headline-md text-primary drop-shadow-[0_0_5px_rgba(221,183,255,0.5)]">PYTHON PORTAL</div>
+        <p class="text-on-surface-variant font-body-md">
+            Aprende a programar con Python - Gabriel Pedreros
+        </p>
+    </div>
+</footer>
+
+<script src="data.js"></script>
+<script>
+    let answers = {};
+    let currentQuestion = 0;
+
+    function renderQuiz() {
+        const quiz = data.quiz;
+        const q = quiz[currentQuestion];
+        
+        document.getElementById('question-counter').textContent = `Pregunta ${currentQuestion + 1} de ${quiz.length}`;
+        document.getElementById('progress-bar').style.width = `${((currentQuestion + 1) / quiz.length) * 100}%`;
+        document.getElementById('topic-tag').textContent = `#PythonBasics`;
+        document.getElementById('question-text').textContent = q.question;
+        
+        const container = document.getElementById('options-container');
+        container.innerHTML = q.options.map((opt, j) => {
+            const isSelected = answers[currentQuestion] === j;
+            return `
+                <label class="group relative flex items-center p-md rounded-lg border ${isSelected ? 'border-primary/60 bg-primary/5' : 'border-outline-variant hover:border-primary/50 bg-surface-container-low/40'} cursor-pointer transition-all hover:scale-[1.01] ${isSelected ? 'neon-glow-purple' : ''}">
+                    <input class="hidden peer" type="radio" name="quiz_option" value="${j}" ${isSelected ? 'checked' : ''} onchange="selectOption(${j})"/>
+                    <div class="w-6 h-6 border-2 ${isSelected ? 'border-primary bg-primary' : 'border-outline'} rounded-full flex items-center justify-center transition-all">
+                        <span class="material-symbols-outlined text-on-primary text-[16px] ${isSelected ? '' : 'hidden'}" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                    </div>
+                    <span class="ml-md font-body-lg ${isSelected ? 'text-on-surface' : 'text-on-surface-variant group-hover:text-on-surface'}">${opt}</span>
+                </label>
+            `;
+        }).join('');
+    }
+
+    function selectOption(optionIndex) {
+        answers[currentQuestion] = optionIndex;
+        renderQuiz();
+    }
+
+    function nextQuestion() {
+        if (currentQuestion < data.quiz.length - 1) {
+            currentQuestion++;
             renderQuiz();
         }
+    }
 
-        function checkAnswers() {
-            let score = 0;
-            const questionElements = document.querySelectorAll('#quiz-container .rick-card');
-            
-            data.quiz.forEach((q, i) => {
-                const options = questionElements[i].querySelectorAll('.quiz-option');
-                options.forEach((opt, j) => {
-                    opt.classList.remove('correct', 'incorrect');
-                    if (j === q.correct) opt.classList.add('correct');
-                });
-                
-                if (answers[i] !== undefined) {
-                    if (answers[i] === q.correct) {
-                        score++;
-                    } else {
-                        options[answers[i]].classList.add('incorrect');
-                    }
-                }
-            });
-
-            const percentage = (score / data.quiz.length) * 100;
-            document.getElementById('score-text').textContent = `${score}/${data.quiz.length}`;
-            
-            let message = '';
-            if (percentage >= 80) message = 'Excelente! Dominas Python perfectamente!';
-            else if (percentage >= 60) message = 'Muy bien! Tienes un buen conocimiento de Python.';
-            else if (percentage >= 40) message = 'Bien! Pero puedes mejorar practicando mas.';
-            else message = 'Sigue estudiando! Repasa los temas basicos.';
-            
-            document.getElementById('score-message').textContent = message;
-            document.getElementById('result').classList.remove('hidden');
-        }
-
-        function resetQuiz() {
-            answers = {};
-            document.getElementById('result').classList.add('hidden');
-            renderQuiz();
-        }
-
-        function initThreeJS() {
-            const container = document.getElementById('canvas-container');
-            if (!container) return;
-
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, 0.1, 2000);
-            camera.position.z = 50;
-
-            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            container.appendChild(renderer.domElement);
-
-            const starsGeometry = new THREE.BufferGeometry();
-            const starsCount = 5000;
-            const starsPos = new Float32Array(starsCount * 3);
-            
-            for (let i = 0; i < starsCount * 3; i += 3) {
-                starsPos[i] = (Math.random() - 0.5) * 400;
-                starsPos[i + 1] = (Math.random() - 0.5) * 400;
-                starsPos[i + 2] = (Math.random() - 0.5) * 200;
-            }
-            
-            starsGeometry.setAttribute('position', new THREE.BufferAttribute(starsPos, 3));
-            const starsMaterial = new THREE.PointsMaterial({ size: 0.5, color: 0xffffff, transparent: true, opacity: 0.8 });
-            const stars = new THREE.Points(starsGeometry, starsMaterial);
-            scene.add(stars);
-
-            const particlesGeometry = new THREE.BufferGeometry();
-            const particlesCount = 4000;
-            const posArray = new Float32Array(particlesCount * 3);
-            const colorArray = new Float32Array(particlesCount * 3);
-            
-            const colors = [new THREE.Color(0xfacc15), new THREE.Color(0xa855f7), new THREE.Color(0xec4899)];
-            
-            for (let i = 0; i < particlesCount * 3; i += 3) {
-                posArray[i] = (Math.random() - 0.5) * 150;
-                posArray[i + 1] = (Math.random() - 0.5) * 150;
-                posArray[i + 2] = (Math.random() - 0.5) * 80;
-                
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                colorArray[i] = color.r;
-                colorArray[i + 1] = color.g;
-                colorArray[i + 2] = color.b;
-            }
-            
-            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-            particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colorArray, 3));
-            
-            const particlesMaterial = new THREE.PointsMaterial({
-                size: 0.08, vertexColors: true, transparent: true, opacity: 0.8, blending: THREE.AdditiveBlending
-            });
-            
-            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-            scene.add(particlesMesh);
-
-            let mouseX = 0, mouseY = 0, targetX = 0, targetY = 0;
-            
-            document.addEventListener('mousemove', (event) => {
-                mouseX = (event.clientX - window.innerWidth / 2) * 0.0005;
-                mouseY = (event.clientY - window.innerHeight / 2) * 0.0005;
-            });
-            
-            let time = 0;
-            function animate() {
-                requestAnimationFrame(animate);
-                time += 0.0005;
-                
-                targetX += (mouseX - targetX) * 0.05;
-                targetY += (mouseY - targetY) * 0.05;
-                
-                particlesMesh.rotation.y = time * 0.3 + targetX * 20;
-                particlesMesh.rotation.x = time * 0.1 + targetY * 20;
-                stars.rotation.y = time * 0.01;
-                
-                renderer.render(scene, camera);
-            }
-            
-            animate();
-            
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            renderQuiz();
-            initThreeJS();
+    function checkAnswers() {
+        let score = 0;
+        const quiz = data.quiz;
+        
+        quiz.forEach((q, i) => {
+            const isCorrect = answers[i] === q.correct;
+            if (isCorrect) score++;
         });
-    </script>
+
+        const percentage = (score / quiz.length) * 100;
+        
+        document.getElementById('score-display').textContent = `${Math.round(percentage)}%`;
+        document.getElementById('final-score').textContent = `${score}/${quiz.length}`;
+        
+        let message = '';
+        if (percentage >= 80) message = 'Excelente! Dominas Python perfectamente!';
+        else if (percentage >= 60) message = 'Muy bien! Tienes un buen conocimiento de Python.';
+        else if (percentage >= 40) message = 'Bien! Pero puedes mejorar practicando mas.';
+        else message = 'Sigue estudiando! Repasa los temas basicos.';
+        
+        document.getElementById('result-message').textContent = message;
+        document.getElementById('result-card').classList.remove('hidden');
+        document.getElementById('hint-text').textContent = `Respondiste ${score} de ${quiz.length} preguntas correctamente.`;
+        
+        // Show correct/incorrect for all
+        const container = document.getElementById('options-container');
+        container.innerHTML = quiz.map((q, i) => `
+            <div class="space-y-md mb-4">
+                <h4 class="font-semibold text-on-surface mb-2">${i + 1}. ${q.question}</h4>
+                ${q.options.map((opt, j) => {
+                    const isCorrect = j === q.correct;
+                    const isSelected = answers[i] === j;
+                    let classes = 'flex items-center p-md rounded-lg border ';
+                    
+                    if (isCorrect) {
+                        classes += 'border-green-500 bg-green-500/10';
+                    } else if (isSelected && !isCorrect) {
+                        classes += 'border-red-500 bg-red-500/10';
+                    } else {
+                        classes += 'border-outline-variant bg-surface-container-low/40';
+                    }
+                    
+                    return `
+                        <div class="${classes}">
+                            <div class="w-6 h-6 border-2 ${isCorrect ? 'border-green-500 bg-green-500' : isSelected ? 'border-red-500 bg-red-500' : 'border-outline'} rounded-full flex items-center justify-center">
+                                <span class="material-symbols-outlined text-on-surface text-[16px]" style="font-variation-settings: 'FILL' 1;">${isCorrect ? 'check' : isSelected ? 'close' : ''}</span>
+                            </div>
+                            <span class="ml-md font-body-lg ${isCorrect ? 'text-green-400' : isSelected ? 'text-red-400' : 'text-on-surface-variant'}">${opt}</span>
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+        `).join('');
+    }
+
+    function resetQuiz() {
+        answers = {};
+        currentQuestion = 0;
+        document.getElementById('result-card').classList.add('hidden');
+        document.getElementById('score-display').textContent = '0%';
+        document.getElementById('hint-text').textContent = 'Selecciona una respuesta y verifica tus conocimientos.';
+        renderQuiz();
+    }
+
+    document.addEventListener('DOMContentLoaded', renderQuiz);
+</script>
 </body>
 </html>
