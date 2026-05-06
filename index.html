@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guía de Python - DuocUC</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -46,27 +49,27 @@
     </script>
     <style>
         :root {
-            --gradient-primary: linear-gradient(135deg, #0ea5e9 0%, #8b5cf6 100%);
-            --gradient-bg: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+            --gradient-bg: linear-gradient(180deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
         }
         
         body {
             background: var(--gradient-bg);
+            background-attachment: fixed;
         }
         
-        .code-block {
-            background: #1e293b;
-            border: 1px solid #334155;
+        .code-window {
+            background: #1d1f21;
             border-radius: 0.75rem;
             overflow: hidden;
+            border: 1px solid #333;
         }
         
         .code-header {
-            background: #0f172a;
-            padding: 0.5rem 1rem;
+            background: #2d2d2d;
+            padding: 0.75rem 1rem;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            justify-content: space-between;
         }
         
         .code-dot {
@@ -75,18 +78,18 @@
             border-radius: 50%;
         }
         
-        .code-content {
+        .code-body {
             padding: 1rem;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.875rem;
-            overflow-x: auto;
+            max-height: 400px;
+            overflow: auto;
         }
         
-        .syntax-keyword { color: #c792ea; }
-        .syntax-string { color: #c3e88d; }
-        .syntax-function { color: #82aaff; }
-        .-syntax-comment { color: #546e7a; }
-        .syntax-number { color: #f78c6c; }
+        .code-body pre {
+            margin: 0 !important;
+            padding: 1rem !important;
+            background: transparent !important;
+            font-size: 0.875rem !important;
+        }
         
         .category-card {
             background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
@@ -100,9 +103,19 @@
             box-shadow: 0 20px 40px rgba(14, 165, 233, 0.15);
         }
         
+        .syntax-card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+        
+        .syntax-card:hover {
+            border-color: #475569;
+        }
+        
         .nav-item {
             position: relative;
-            transition: color 0.2s ease;
         }
         
         .nav-item::after {
@@ -128,6 +141,15 @@
             background: rgba(14, 165, 233, 0.1);
         }
         
+        .tab-btn {
+            transition: all 0.2s ease;
+        }
+        
+        .tab-btn.active {
+            background: #0ea5e9;
+            color: white;
+        }
+        
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -140,6 +162,27 @@
         .delay-100 { animation-delay: 0.1s; }
         .delay-200 { animation-delay: 0.2s; }
         .delay-300 { animation-delay: 0.3s; }
+        
+        .output-console {
+            background: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            min-height: 60px;
+            max-height: 150px;
+            overflow: auto;
+        }
+        
+        .output-console .success { color: #4ade80; }
+        .output-console .error { color: #f87171; }
+        .output-console .info { color: #60a5fa; }
+        
+        #runBtn.loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
         
         ::-webkit-scrollbar {
             width: 8px;
@@ -154,16 +197,12 @@
             background: #475569;
             border-radius: 4px;
         }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: #64748b;
-        }
     </style>
 </head>
 <body class="min-h-screen text-white">
     <!-- Header -->
     <header class="fixed top-0 left-0 right-0 z-50 bg-dark-900/80 backdrop-blur-lg border-b border-dark-700">
-        <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <nav class="max-w-7xl mx-auto px-4 md:px-6 py-4 flex items-center justify-between">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-purple-500 flex items-center justify-center">
                     <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -171,16 +210,17 @@
                     </svg>
                 </div>
                 <div>
-                    <h1 class="text-xl font-bold">Python DuocUC</h1>
-                    <p class="text-xs text-dark-400">Guía de Aprendizaje</p>
+                    <h1 class="text-lg md:text-xl font-bold">Python DuocUC</h1>
+                    <p class="text-xs text-dark-400 hidden sm:block">Guía de Aprendizaje</p>
                 </div>
             </div>
             
-            <div class="hidden md:flex items-center gap-8">
-                <a href="#introduccion" class="nav-item text-dark-300 hover:text-white">Introducción</a>
-                <a href="#ejercicios" class="nav-item text-dark-300 hover:text-white">Ejercicios</a>
-                <a href="#sintaxis" class="nav-item text-dark-300 hover:text-white">Sintaxis</a>
-                <a href="#progreso" class="nav-item text-dark-300 hover:text-white">Progreso</a>
+            <div class="hidden md:flex items-center gap-6">
+                <a href="#introduccion" class="nav-item text-dark-300 hover:text-white text-sm">Introducción</a>
+                <a href="#temas" class="nav-item text-dark-300 hover:text-white text-sm">Temas</a>
+                <a href="#sintaxis" class="nav-item text-dark-300 hover:text-white text-sm">Sintaxis</a>
+                <a href="#ejercicios" class="nav-item text-dark-300 hover:text-white text-sm">Ejercicios</a>
+                <a href="#practicar" class="nav-item text-dark-300 hover:text-white text-sm">Práctica</a>
             </div>
             
             <button id="menuBtn" class="md:hidden w-10 h-10 flex items-center justify-center">
@@ -194,10 +234,11 @@
     <!-- Mobile Menu -->
     <div id="mobileMenu" class="fixed inset-0 z-40 bg-dark-900/95 backdrop-blur-lg hidden">
         <div class="flex flex-col items-center justify-center h-full gap-8">
-            <a href="#introduccion" class="text-2xl text-dark-300 hover:text-white">Introducción</a>
-            <a href="#ejercicios" class="text-2xl text-dark-300 hover:text-white">Ejercicios</a>
-            <a href="#sintaxis" class="text-2xl text-dark-300 hover:text-white">Sintaxis</a>
-            <a href="#progreso" class="text-2xl text-dark-300 hover:text-white">Progreso</a>
+            <a href="#introduccion" class="text-2xl text-dark-300 hover:text-white" onclick="toggleMenu()">Introducción</a>
+            <a href="#temas" class="text-2xl text-dark-300 hover:text-white" onclick="toggleMenu()">Temas</a>
+            <a href="#sintaxis" class="text-2xl text-dark-300 hover:text-white" onclick="toggleMenu()">Sintaxis</a>
+            <a href="#ejercicios" class="text-2xl text-dark-300 hover:text-white" onclick="toggleMenu()">Ejercicios</a>
+            <a href="#practicar" class="text-2xl text-dark-300 hover:text-white" onclick="toggleMenu()">Práctica</a>
         </div>
     </div>
 
@@ -215,43 +256,751 @@
                     Aprende Python desde cero
                 </div>
                 
-                <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-primary-200 to-purple-200 bg-clip-text text-transparent">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-primary-200 to-purple-200 bg-clip-text text-transparent">
                     Guía de Python
                 </h1>
                 
-                <p class="text-xl md:text-2xl text-dark-300 mb-12 max-w-3xl mx-auto">
-                    Domina la programación con Python a través de <span class="text-primary-400 font-semibold">ejercicios prácticos</span> y <span class="text-purple-400 font-semibold">explicaciones claras</span>
+                <p class="text-lg md:text-xl text-dark-300 mb-8 max-w-2xl mx-auto">
+                    Domina la programación con Python a través de <span class="text-primary-400 font-semibold">ejercicios prácticos</span> y <span class="text-purple-400 font-semibold">código ejecutable</span>
                 </p>
                 
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <a href="#ejercicios" class="px-8 py-4 rounded-xl bg-gradient-to-r from-primary-500 to-purple-500 text-white font-semibold text-lg hover:opacity-90 transition-opacity">
+                    <a href="#temas" class="px-6 py-3 rounded-xl bg-gradient-to-r from-primary-500 to-purple-500 text-white font-semibold hover:opacity-90 transition-opacity">
                         Comenzar a Aprender
                     </a>
-                    <a href="https://github.com/gpb-codes/python-Duocuc" target="_blank" class="px-8 py-4 rounded-xl bg-dark-800 border border-dark-600 text-white font-semibold text-lg hover:bg-dark-700 transition-colors flex items-center gap-2">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+                    <a href="#practicar" class="px-6 py-3 rounded-xl bg-dark-800 border border-dark-600 text-white font-semibold hover:bg-dark-700 transition-colors flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
-                        Ver en GitHub
+                        Ejecutar Código
                     </a>
                 </div>
                 
                 <!-- Stats -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20">
-                    <div class="p-6 rounded-2xl bg-dark-800/50 border border-dark-700">
-                        <div class="text-3xl font-bold text-primary-400">20+</div>
-                        <div class="text-dark-400">Ejercicios</div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16">
+                    <div class="p-4 rounded-xl bg-dark-800/50 border border-dark-700">
+                        <div class="text-2xl font-bold text-primary-400">20+</div>
+                        <div class="text-dark-400 text-sm">Ejercicios</div>
                     </div>
-                    <div class="p-6 rounded-2xl bg-dark-800/50 border border-dark-700">
-                        <div class="text-3xl font-bold text-purple-400">6</div>
-                        <div class="text-dark-400">Categorías</div>
+                    <div class="p-4 rounded-xl bg-dark-800/50 border border-dark-700">
+                        <div class="text-2xl font-bold text-purple-400">6</div>
+                        <div class="text-dark-400 text-sm">Categorías</div>
                     </div>
-                    <div class="p-6 rounded-2xl bg-dark-800/50 border border-dark-700">
-                        <div class="text-3xl font-bold text-green-400">3</div>
-                        <div class="text-dark-400">Niveles</div>
+                    <div class="p-4 rounded-xl bg-dark-800/50 border border-dark-700">
+                        <div class="text-2xl font-bold text-green-400">3</div>
+                        <div class="text-dark-400 text-sm">Niveles</div>
                     </div>
-                    <div class="p-6 rounded-2xl bg-dark-800/50 border border-dark-700">
-                        <div class="text-3xl font-bold text-yellow-400">100%</div>
-                        <div class="text-dark-400">Gratis</div>
+                    <div class="p-4 rounded-xl bg-dark-800/50 border border-dark-700">
+                        <div class="text-2xl font-bold text-yellow-400">∞</div>
+                        <div class="text-dark-400 text-sm">Posibilidades</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Temas Section -->
+        <section id="temas" class="py-20 px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Temas de Aprendizaje</h2>
+                    <p class="text-lg text-dark-400">Estructura progresiva para aprender Python</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Tema 1: Variables -->
+                    <div class="category-card rounded-2xl p-6 border">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center">
+                                <span class="text-2xl">📦</span>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-blue-400">1. Variables</h3>
+                                <p class="text-dark-400 text-sm">Almacenar datos</p>
+                            </div>
+                        </div>
+                        <ul class="space-y-2 text-dark-300 text-sm">
+                            <li>• Tipos de datos</li>
+                            <li>• Declaración</li>
+                            <li>• Conversión</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Tema 2: Operadores -->
+                    <div class="category-card rounded-2xl p-6 border">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center">
+                                <span class="text-2xl">🔢</span>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-green-400">2. Operadores</h3>
+                                <p class="text-dark-400 text-sm">Cálculos y comparaciones</p>
+                            </div>
+                        </div>
+                        <ul class="space-y-2 text-dark-300 text-sm">
+                            <li>• Aritméticos</li>
+                            <li>• Comparación</li>
+                            <li>• Lógicos</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Tema 3: Condicionales -->
+                    <div class="category-card rounded-2xl p-6 border">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center">
+                                <span class="text-2xl">🔀</span>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-purple-400">3. Condicionales</h3>
+                                <p class="text-dark-400 text-sm">Tomas de decisiones</p>
+                            </div>
+                        </div>
+                        <ul class="space-y-2 text-dark-300 text-sm">
+                            <li>• if</li>
+                            <li>• elif</li>
+                            <li>• else</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Tema 4: Bucles FOR -->
+                    <div class="category-card rounded-2xl p-6 border">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-yellow-500/20 flex items-center justify-center">
+                                <span class="text-2xl">🔄</span>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-yellow-400">4. Bucle FOR</h3>
+                                <p class="text-dark-400 text-sm">Iteración definida</p>
+                            </div>
+                        </div>
+                        <ul class="space-y-2 text-dark-300 text-sm">
+                            <li>• range()</li>
+                            <li>• Listas</li>
+                            <li>• enumerate</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Tema 5: Bucles WHILE -->
+                    <div class="category-card rounded-2xl p-6 border">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-orange-500/20 flex items-center justify-center">
+                                <span class="text-2xl">⚡</span>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-orange-400">5. Bucle WHILE</h3>
+                                <p class="text-dark-400 text-sm">Iteración condicional</p>
+                            </div>
+                        </div>
+                        <ul class="space-y-2 text-dark-300 text-sm">
+                            <li>• Condición</li>
+                            <li>• break</li>
+                            <li>• continue</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Tema 6: Funciones -->
+                    <div class="category-card rounded-2xl p-6 border">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-red-500/20 flex items-center justify-center">
+                                <span class="text-2xl">📚</span>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-red-400">6. Funciones</h3>
+                                <p class="text-dark-400 text-sm">Código reutilizable</p>
+                            </div>
+                        </div>
+                        <ul class="space-y-2 text-dark-300 text-sm">
+                            <li>• def</li>
+                            <li>• Parámetros</li>
+                            <li>• Return</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sintaxis Section -->
+        <section id="sintaxis" class="py-20 px-6 bg-dark-800/30">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Sintaxis de Python</h2>
+                    <p class="text-lg text-dark-400">Aprende la sintaxis básica con ejemplos</p>
+                </div>
+                
+                <!-- Tabs -->
+                <div class="flex flex-wrap gap-2 mb-8 justify-center">
+                    <button onclick="showTab('variables')" class="tab-btn px-4 py-2 rounded-lg bg-dark-700 text-dark-300 hover:bg-dark-600 active">Variables</button>
+                    <button onclick="showTab('operadores')" class="tab-btn px-4 py-2 rounded-lg bg-dark-700 text-dark-300 hover:bg-dark-600">Operadores</button>
+                    <button onclick="showTab('condicionales')" class="tab-btn px-4 py-2 rounded-lg bg-dark-700 text-dark-300 hover:bg-dark-600">Condicionales</button>
+                    <button onclick="showTab('for')" class="tab-btn px-4 py-2 rounded-lg bg-dark-700 text-dark-300 hover:bg-dark-600">FOR</button>
+                    <button onclick="showTab('while')" class="tab-btn px-4 py-2 rounded-lg bg-dark-700 text-dark-300 hover:bg-dark-600">WHILE</button>
+                    <button onclick="showTab('funciones')" class="tab-btn px-4 py-2 rounded-lg bg-dark-700 text-dark-300 hover:bg-dark-600">Funciones</button>
+                    <button onclick="showTab('listas')" class="tab-btn px-4 py-2 rounded-lg bg-dark-700 text-dark-300 hover:bg-dark-600">Listas</button>
+                    <button onclick="showTab('diccionarios')" class="tab-btn px-4 py-2 rounded-lg bg-dark-700 text-dark-300 hover:bg-dark-600">Diccionarios</button>
+                </div>
+                
+                <!-- Content Tabs -->
+                <div id="tabContent">
+                    <!-- Variables -->
+                    <div data-tab="variables" class="tab-panel grid lg:grid-cols-2 gap-8">
+                        <div class="syntax-card p-6">
+                            <h3 class="text-xl font-bold mb-4 text-blue-400">Variables y Tipos de Datos</h3>
+                            <div class="code-window">
+                                <div class="code-header">
+                                    <div class="flex gap-2">
+                                        <div class="code-dot bg-red-500"></div>
+                                        <div class="code-dot bg-yellow-500"></div>
+                                        <div class="code-dot bg-green-500"></div>
+                                    </div>
+                                    <span class="text-dark-400 text-sm">variables.py</span>
+                                </div>
+                                <div class="code-body">
+                                    <pre><code class="language-python"># Variables en Python
+nombre = "Gabriel"      # str (texto)
+edad = 25                 # int (entero)
+promedio = 85.5          # float (decimal)
+es_estudiante = True      # bool (booleano)
+
+# Mostrar valores
+print(f"Hola, me llamo {nombre}")
+print(f"Tengo {edad} años")
+print(f"Mi promedio es {promedio}")
+print(f"¿Soy estudiante? {es_estudiante}")
+
+# Tipo de dato
+print(type(nombre))         # &lt;class 'str'&gt;
+print(type(edad))          # &lt;class 'int'&gt;</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="syntax-card p-6">
+                            <h3 class="text-xl font-bold mb-4 text-blue-400">Conversión de Tipos</h3>
+                            <div class="code-window">
+                                <div class="code-header">
+                                    <div class="flex gap-2">
+                                        <div class="code-dot bg-red-500"></div>
+                                        <div class="code-dot bg-yellow-500"></div>
+                                        <div class="code-dot bg-green-500"></div>
+                                    </div>
+                                    <span class="text-dark-400 text-sm">conversion.py</span>
+                                </div>
+                                <div class="code-body">
+                                    <pre><code class="language-python"># Conversión de tipos
+numero_texto = "42"
+numero = int(numero_texto)    # "42" -> 42
+print(numero + 8)            # 50
+
+# Otro ejemplo
+edad = input("Tu edad: ")
+edad = int(edad)          # Convertir a entero
+print(f"El próximo año tendrás {edad + 1}")
+
+# Float a int
+precio = 99.99
+precio_entero = int(precio)   # 99
+
+# A float
+valor = float("19.99")</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Operadores -->
+                    <div data-tab="operadores" class="tab-panel hidden grid lg:grid-cols-2 gap-8">
+                        <div class="syntax-card p-6">
+                            <h3 class="text-xl font-bold mb-4 text-green-400">Operadores Aritméticos</h3>
+                            <div class="code-window">
+                                <div class="code-header">
+                                    <div class="flex gap-2">
+                                        <div class="code-dot bg-red-500"></div>
+                                        <div class="code-dot bg-yellow-500"></div>
+                                        <div class="code-dot bg-green-500"></div>
+                                    </div>
+                                    <span class="text-dark-400 text-sm">aritmetica.py</span>
+                                </div>
+                                <div class="code-body">
+                                    <pre><code class="language-python"># Operadores aritméticos
+a = 10
+b = 3
+
+print(a + b)    # 13 - Suma
+print(a - b)    # 7  - Resta
+print(a * b)    # 30 - Multiplicación
+print(a / b)    # 3.333... - División
+print(a // b)   # 3  - División entera
+print(a % b)     # 1  - Módulo (resto)
+print(a ** b)   # 1000 - Potencia
+
+# Ejemplo práctico
+precio = 100
+descuento = 20
+precio_final = precio - (precio * descuento / 100)
+print(precio_final)  # 80.0</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="syntax-card p-6">
+                            <h3 class="text-xl font-bold mb-4 text-green-400">Operadores de Comparación</h3>
+                            <div class="code-window">
+                                <div class="code-header">
+                                    <div class="flex gap-2">
+                                        <div class="code-dot bg-red-500"></div>
+                                        <div class="code-dot bg-yellow-500"></div>
+                                        <div class="code-dot bg-green-500"></div>
+                                    </div>
+                                    <span class="text-dark-400 text-sm">comparacion.py</span>
+                                </div>
+                                <div class="code-body">
+                                    <pre><code class="language-python"># Operadores de comparación
+a = 5
+b = 10
+
+print(a == b)   # False - Igual a
+print(a != b)   # True  - Diferente de
+print(a < b)    # True  - Menor que
+print(a > b)    # False - Mayor que
+print(a <= b)   # True  - Menor o igual
+print(a >= b)   # False - Mayor o igual
+
+# Usos comunes
+edad = 18
+if edad >= 18:
+    print("Puede votar")
+
+puntaje = 75
+if puntaje >= 70:
+    print("Aprobado")</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Condicionales -->
+                    <div data-tab="condicionales" class="tab-panel hidden grid lg:grid-cols-2 gap-8">
+                        <div class="syntax-card p-6">
+                            <h3 class="text-xl font-bold mb-4 text-purple-400">Condicional Simple (if)</h3>
+                            <div class="code-window">
+                                <div class="code-header">
+                                    <div class="flex gap-2">
+                                        <div class="code-dot bg-red-500"></div>
+                                        <div class="code-dot bg-yellow-500"></div>
+                                        <div class="code-dot bg-green-500"></div>
+                                    </div>
+                                    <span class="text-dark-400 text-sm">if_simple.py</span>
+                                </div>
+                                <div class="code-body">
+                                    <pre><code class="language-python"># Condicional básico
+temperatura = 25
+
+if temperatura > 30:
+    print("Hace calor")
+    
+# Con else
+if temperatura > 30:
+    print("Hace calor")
+else:
+    print("Temperatura normal")
+
+# Ejemplo con input
+edad = int(input("Tu edad: "))
+if edad >= 18:
+    print("Eres mayor de edad")</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="syntax-card p-6">
+                            <h3 class="text-xl font-bold mb-4 text-purple-400">Condicional Multiple (if/elif/else)</h3>
+                            <div class="code-window">
+                                <div class="code-header">
+                                    <div class="flex gap-2">
+                                        <div class="code-dot bg-red-500"></div>
+                                        <div class="code-dot bg-yellow-500"></div>
+                                        <div class="code-dot bg-green-500"></div>
+                                    </div>
+                                    <span class="text-dark-400 text-sm">if_elif.py</span>
+                                </div>
+                                <div class="code-body">
+                                    <pre><code class="language-python"># Múltiples condiciones
+nota = 75
+
+if nota >= 70:
+    print("Acreditado")
+elif nota >= 50:
+    print("Aceptable")
+else:
+    print("No acreditado")
+
+# Otro ejemplo
+edad = int(input("Edad: "))
+
+if edad < 12:
+    print("Niño")
+elif edad < 18:
+    print("Adolescente")
+elif edad < 60:
+    print("Adulto")
+else:
+    print("Adulto mayor")</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- FOR -->
+                    <div data-tab="for" class="tab-panel hidden grid lg:grid-cols-2 gap-8">
+                        <div class="syntax-card p-6">
+                            <h3 class="text-xl font-bold mb-4 text-yellow-400">Bucle FOR Básico</h3>
+                            <div class="code-window">
+                                <div class="code-header">
+                                    <div class="flex gap-2">
+                                        <div class="code-dot bg-red-500"></div>
+                                        <div class="code-dot bg-yellow-500"></div>
+                                        <div class="code-dot bg-green-500"></div>
+                                    </div>
+                                    <span class="text-dark-400 text-sm">for_basico.py</span>
+                                </div>
+                                <div class="code-body">
+                                    <pre><code class="language-python"># range(inicio, fin, paso)
+for i in range(5):
+    print(i)           # 0,1,2,3,4
+
+for i in range(1, 6):
+    print(i)           # 1,2,3,4,5
+
+for i in range(0, 10, 2):
+    print(i)           # 0,2,4,6,8
+
+# Iterar sobre lista
+nombres = ["Ana", "Bob", "Carla"]
+for nombre in nombres:
+    print(f"Hola {nombre}")</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="syntax-card p-6">
+                            <h3 class="text-xl font-bold mb-4 text-yellow-400">FOR con Funciones Útiles</h3>
+                            <div class="code-window">
+                                <div class="code-header">
+                                    <div class="flex gap-2">
+                                        <div class="code-dot bg-red-500"></div>
+                                        <div class="code-dot bg-yellow-500"></div>
+                                        <div class="code-dot bg-green-500"></div>
+                                    </div>
+                                    <span class="text-dark-400 text-sm">for_funciones.py</span>
+                                </div>
+                                <div class="code-body">
+                                    <pre><code class="language-python"># enumerate - obtener índice
+frutas = ["manzana", "pera", "uva"]
+for i, fruta in enumerate(frutas):
+    print(f"{i}: {fruta}")
+
+# Summar lista
+numeros = [10, 20, 30]
+total = 0
+for n in numeros:
+    total += n
+print(total)              # 60
+
+# promedio
+promedio = total / len(numeros)
+
+# Contador
+cuenta = 0
+for _ in range(100):
+    cuenta += 1</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- WHILE -->
+                    <div data-tab="while" class="tab-panel hidden grid lg:grid-cols-2 gap-8">
+                        <div class="syntax-card p-6">
+                            <h3 class="text-xl font-bold mb-4 text-orange-400">Bucle WHILE</h3>
+                            <div class="code-window">
+                                <div class="code-header">
+                                    <div class="flex gap-2">
+                                        <div class="code-dot bg-red-500"></div>
+                                        <div class="code-dot bg-yellow-500"></div>
+                                        <div class="code-dot bg-green-500"></div>
+                                    </div>
+                                    <span class="text-dark-400 text-sm">while_basico.py</span>
+                                </div>
+                                <div class="code-body">
+                                    <pre><code class="language-python"># While básico
+contador = 0
+while contador < 5:
+    print(contador)
+    contador += 1
+
+# Con input
+intento = 0
+while intento < 3:
+    clave = input("Ingresa clave: ")
+    if clave == "secreto":
+        print("¡Correcto!")
+        break
+    intento += 1
+else:
+    print("Intentos agotados")
+
+# Validar entrada
+numero = 0
+while numero < 1 or numero > 10:
+    numero = int(input("Número 1-10: "))</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="syntax-card p-6">
+                            <h3 class="text-xl font-bold mb-4 text-orange-400">Break y Continue</h3>
+                            <div class="code-window">
+                                <div class="code-header">
+                                    <div class="flex gap-2">
+                                        <div class="code-dot bg-red-500"></div>
+                                        <div class="code-dot bg-yellow-500"></div>
+                                        <div class="code-dot bg-green-500"></div>
+                                    </div>
+                                    <span class="text-dark-400 text-sm">while_control.py</span>
+                                </div>
+                                <div class="code-body">
+                                    <pre><code class="language-python"># break - salir del ciclo
+while True:
+    respuesta = input("¿Salir? (s/n): ")
+    if respuesta == "s":
+        print("¡Chao!")
+        break
+
+# continue - siguiente iteración
+for i in range(10):
+    if i == 3 or i == 6:
+        continue    # Saltar
+    print(i)           # 0,1,2,4,5,7,8,9
+
+# Encontrar primer número divisible
+for n in range(1, 100):
+    if n % 7 == 0:
+        print(f"找到: {n}")
+        break</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Funciones -->
+                    <div data-tab="funciones" class="tab-panel hidden grid lg:grid-cols-2 gap-8">
+                        <div class="syntax-card p-6">
+                            <h3 class="text-xl font-bold mb-4 text-red-400">Crear Funciones</h3>
+                            <div class="code-window">
+                                <div class="code-header">
+                                    <div class="flex gap-2">
+                                        <div class="code-dot bg-red-500"></div>
+                                        <div class="code-dot bg-yellow-500"></div>
+                                        <div class="code-dot bg-green-500"></div>
+                                    </div>
+                                    <span class="text-dark-400 text-sm">funciones.py</span>
+                                </div>
+                                <div class="code-body">
+                                    <pre><code class="language-python"># Función sin parámetros
+def saludar():
+    print("¡Hola!")
+
+saludar()
+
+# Función con parámetro
+def saludar(nombre):
+    print(f"¡Hola {nombre}!")
+
+saludar("Gabriel")
+
+# Función con retorno
+def sumar(a, b):
+    return a + b
+
+resultado = sumar(3, 5)
+print(resultado)          # 8</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="syntax-card p-6">
+                            <h3 class="text-xl font-bold mb-4 text-red-400">Parámetros y Retorno</h3>
+                            <div class="code-window">
+                                <div class="code-header">
+                                    <div class="flex gap-2">
+                                        <div class="code-dot bg-red-500"></div>
+                                        <div class="code-dot bg-yellow-500"></div>
+                                        <div class="code-dot bg-green-500"></div>
+                                    </div>
+                                    <span class="text-dark-400 text-sm">parametros.py</span>
+                                </div>
+                                <div class="code-body">
+                                    <pre><code class="language-python"># Parámetros con valor por defecto
+def saludar(nombre="Usuario"):
+    return f"Hola {nombre}"
+
+print(saludar())           # Hola Usuario
+print(saludar("Ana"))     # Hola Ana
+
+# Múltiples parámetros
+def promedio(a, b, c):
+    return (a + b + c) / 3
+
+print(promedio(70, 80, 90))  # 80.0
+
+# Parámetros opcionales
+def info(nombre, edad=None):
+    if edad:
+        return f"{nombre}, {edad} años"
+    return nombre
+
+print(info("Gabriel", 25))</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Listas -->
+                    <div data-tab="listas" class="tab-panel hidden grid lg:grid-cols-2 gap-8">
+                        <div class="syntax-card p-6">
+                            <h3 class="text-xl font-bold mb-4 text-cyan-400">Operaciones con Listas</h3>
+                            <div class="code-window">
+                                <div class="code-header">
+                                    <div class="flex gap-2">
+                                        <div class="code-dot bg-red-500"></div>
+                                        <div class="code-dot bg-yellow-500"></div>
+                                        <div class="code-dot bg-green-500"></div>
+                                    </div>
+                                    <span class="text-dark-400 text-sm">listas.py</span>
+                                </div>
+                                <div class="code-body">
+                                    <pre><code class="language-python"># Crear lista
+frutas = ["manzana", "pera", "uva"]
+
+# Acceder elementos
+print(frutas[0])         # manzana
+print(frutas[-1])        # uva
+
+# Modificar
+frutas[0] = "naranja"
+
+# Agregar
+frutas.append("coco")    # Al final
+frutas.insert(1, "melón") # En posición
+
+# Eliminar
+frutas.pop()           # Elimina último
+frutas.remove("pera")   # Por valor
+
+# Longitud
+print(len(frutas))</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="syntax-card p-6">
+                            <h3 class="text-xl font-bold mb-4 text-cyan-400">Métodos de Listas</h3>
+                            <div class="code-window">
+                                <div class="code-header">
+                                    <div class="flex gap-2">
+                                        <div class="code-dot bg-red-500"></div>
+                                        <div class="code-dot bg-yellow-500"></div>
+                                        <div class="code-dot bg-green-500"></div>
+                                    </div>
+                                    <span class="text-dark-400 text-sm">lista_metodos.py</span>
+                                </div>
+                                <div class="code-body">
+                                    <pre><code class="language-python"># Ordenar
+numeros = [3, 1, 4, 1, 5]
+numeros.sort()           # [1,1,3,4,5]
+numeros.sort(reverse=True)
+
+# Invertir
+numeros.reverse()
+
+# Contar
+print(numeros.count(1))
+
+# Índice
+print(numeros.index(3))
+
+# Slicing (rebanar)
+lista = [0,1,2,3,4,5]
+print(lista[1:4])        # [1,2,3]
+print(lista[:3])         # [0,1,2]
+print(lista[3:])         # [3,4,5]</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Diccionarios -->
+                    <div data-tab="diccionarios" class="tab-panel hidden grid lg:grid-cols-2 gap-8">
+                        <div class="syntax-card p-6">
+                            <h3 class="text-xl font-bold mb-4 text-pink-400">Diccionarios</h3>
+                            <div class="code-window">
+                                <div class="code-header">
+                                    <div class="flex gap-2">
+                                        <div class="code-dot bg-red-500"></div>
+                                        <div class="code-dot bg-yellow-500"></div>
+                                        <div class="code-dot bg-green-500"></div>
+                                    </div>
+                                    <span class="text-dark-400 text-sm">diccionarios.py</span>
+                                </div>
+                                <div class="code-body">
+                                    <pre><code class="language-python"># Crear diccionario
+persona = {
+    "nombre": "Gabriel",
+    "edad": 25,
+    "ciudad": "Santiago"
+}
+
+# Acceder valores
+print(persona["nombre"])
+
+# .get() (seguro)
+print(persona.get("edad"))
+
+# Agregar/modificar
+persona["edad"] = 26
+persona["email"] = "correo@..."
+
+# Eliminar
+persona.pop("ciudad")
+# o
+del persona["edad"]</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="syntax-card p-6">
+                            <h3 class="text-xl font-bold mb-4 text-pink-400">Métodos de Diccionarios</h3>
+                            <div class="code-window">
+                                <div class="code-header">
+                                    <div class="flex gap-2">
+                                        <div class="code-dot bg-red-500"></div>
+                                        <div class="code-dot bg-yellow-500"></div>
+                                        <div class="code-dot bg-green-500"></div>
+                                    </div>
+                                    <span class="text-dark-400 text-sm">dicc_metodos.py</span>
+                                </div>
+                                <div class="code-body">
+                                    <pre><code class="language-python"># Keys, values, items
+persona = {"nombre": "Ana", "edad": 25}
+
+print(persona.keys())    # keys
+print(persona.values())  # values
+print(persona.items())  # pares
+
+# Iterar
+for clave in persona:
+    print(clave, persona[clave])
+
+for clave, valor in persona.items():
+    print(f"{clave}: {valor}")
+
+# Copiar
+copia = persona.copy()</code></pre>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -261,240 +1010,137 @@
         <section id="ejercicios" class="py-20 px-6">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center mb-16">
-                    <h2 class="text-4xl font-bold mb-4">Ejercicios Prácticos</h2>
-                    <p class="text-xl text-dark-400">Aprende Python con ejercicios organizados por tema</p>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Ejercicios Prácticos</h2>
+                    <p class="text-lg text-dark-400">Practica con ejercicios reales</p>
                 </div>
                 
-                <!-- Categories Grid -->
-                <div id="categoriesGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Categories will be rendered by JS -->
-                </div>
-            </div>
-        </section>
-
-        <!-- Sintaxis Section -->
-        <section id="sintaxis" class="py-20 px-6 bg-dark-800/30">
-            <div class="max-w-7xl mx-auto">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl font-bold mb-4">Sintaxis Básica</h2>
-                    <p class="text-xl text-dark-400">Conceptos fundamentales de Python</p>
-                </div>
-                
-                <div class="grid lg:grid-cols-2 gap-8">
-                    <!-- Variables -->
-                    <div class="code-block">
-                        <div class="code-header">
-                            <div class="code-dot bg-red-500"></div>
-                            <div class="code-dot bg-yellow-500"></div>
-                            <div class="code-dot bg-green-500"></div>
-                            <span class="text-dark-400 text-sm ml-2">Variables</span>
-                        </div>
-                        <div class="code-content text-dark-300">
-                            <span class="syntax-comment"># Variables en Python</span>
-                            <span class="syntax-keyword">nombre</span> = <span class="syntax-string">"Gabriel"</span>
-                            <span class="syntax-keyword">edad</span> = <span class="syntax-number">25</span>
-                            <span class="syntax-keyword">promedio</span> = <span class="syntax-number">85.5</span>
-                            <span class="syntax-keyword">es_estudiante</span> = <span class="syntax-keyword">True</span>
-                            
-                            <span class="syntax-comment"># Imprimir variables</span>
-                            <span class="syntax-function">print</span>(<span class="syntax-string">f"Hola, soy {nombre}"</span>)
-                        </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Exercise 1 -->
+                    <div class="category-card rounded-2xl p-6 border">
+                        <h3 class="text-lg font-bold text-green-400 mb-2">1. Calculadora Simple</h3>
+                        <p class="text-dark-400 text-sm mb-4">Crea una calculadora que sume, reste, multiplique y divida dos números.</p>
+                        <a href="https://github.com/gpb-codes/python-Duocuc/blob/main/funciones/calculadora.py" target="_blank" class="text-primary-400 text-sm hover:underline">Ver solución →</a>
                     </div>
                     
-                    <!-- Tipos de datos -->
-                    <div class="code-block">
-                        <div class="code-header">
-                            <div class="code-dot bg-red-500"></div>
-                            <div class="code-dot bg-yellow-500"></div>
-                            <div class="code-dot bg-green-500"></div>
-                            <span class="text-dark-400 text-sm ml-2">Tipos de Datos</span>
-                        </div>
-                        <div class="code-content text-dark-300">
-                            <span class="syntax-comment"># Tipos básicos</span>
-                            <span class="syntax-keyword">texto</span> = <span class="syntax-string">"Hola mundo"</span>  <span class="syntax-comment"># str</span>
-                            <span class="syntax-keyword">numero</span> = <span class="syntax-number">42</span>           <span class="syntax-comment"># int</span>
-                            <span class="syntax-keyword">decimal</span> = <span class="syntax-number">3.14</span>        <span class="syntax-comment"># float</span>
-                            <span class="syntax-keyword">es_valido</span> = <span class="syntax-keyword">True</span>   <span class="syntax-comment"># bool</span>
-                            
-                            <span class="syntax-comment"># Colecciones</span>
-                            <span class="syntax-keyword">lista</span> = [<span class="syntax-number">1</span>, <span class="syntax-number">2</span>, <span class="syntax-number">3</span>]      <span class="syntax-comment"># list</span>
-                            <span class="syntax-keyword">tupla</span> = (<span class="syntax-number">1</span>, <span class="syntax-number">2</span>, <span class="syntax-number">3</span>)      <span class="syntax-comment"># tuple</span>
-                        </div>
+                    <!-- Exercise 2 -->
+                    <div class="category-card rounded-2xl p-6 border">
+                        <h3 class="text-lg font-bold text-blue-400 mb-2">2. Sistema de Notas</h3>
+                        <p class="text-dark-400 text-sm mb-4">Ingresa 3 notas y calcula el promedio. Muestra si aprobaste o no (nota >= 4).</p>
+                        <a href="https://github.com/gpb-codes/python-Duocuc/blob/main/if/notas.py" target="_blank" class="text-primary-400 text-sm hover:underline">Ver solución →</a>
                     </div>
                     
-                    <!-- Condicionales -->
-                    <div class="code-block">
-                        <div class="code-header">
-                            <div class="code-dot bg-red-500"></div>
-                            <div class="code-dot bg-yellow-500"></div>
-                            <div class="code-dot bg-green-500"></div>
-                            <span class="text-dark-400 text-sm ml-2">Condicionales (if)</span>
-                        </div>
-                        <div class="code-content text-dark-300">
-                            <span class="syntax-keyword">nota</span> = <span class="syntax-number">75</span>
-                            
-                            <span class="syntax-keyword">if</span> nota >= <span class="syntax-number">70</span>:
-                            <span class="syntax-function">print</span>(<span class="syntax-string">"Aprobado"</span>)
-                            <span class="syntax-keyword">elif</span> nota >= <span class="syntax-number">50</span>:
-                            <span class="syntax-function">print</span>(<span class="syntax-string">"Aceptable"</span>)
-                            <span class="syntax-keyword">else</span>:
-                            <span class="syntax-function">print</span>(<span class="syntax-string">"Reprobado"</span>)
-                        </div>
+                    <!-- Exercise 3 -->
+                    <div class="category-card rounded-2xl p-6 border">
+                        <h3 class="text-lg font-bold text-purple-400 mb-2">3. Promedio de Notas</h3>
+                        <p class="text-dark-400 text-sm mb-4">Solicita la cantidad de estudiantes y sus notas, luego calcula el promedio general.</p>
+                        <a href="https://github.com/gpb-codes/python-Duocuc/blob/main/for/promedio-students.py" target="_blank" class="text-primary-400 text-sm hover:underline">Ver solución →</a>
                     </div>
                     
-                    <!-- Bucles -->
-                    <div class="code-block">
-                        <div class="code-header">
-                            <div class="code-dot bg-red-500"></div>
-                            <div class="code-dot bg-yellow-500"></div>
-                            <div class="code-dot bg-green-500"></div>
-                            <span class="text-dark-400 text-sm ml-2">Bucles (for/while)</span>
-                        </div>
-                        <div class="code-content text-dark-300">
-                            <span class="syntax-comment"># Bucle for</span>
-                            <span class="syntax-keyword">for</span> i <span class="syntax-keyword">in</span> <span class="syntax-function">range</span>(<span class="syntax-number">5</span>):
-                            <span class="syntax-function">print</span>(i)
-                            
-                            <span class="syntax-comment"># Bucle while</span>
-                            <span class="syntax-keyword">contador</span> = <span class="syntax-number">0</span>
-                            <span class="syntax-keyword">while</span> contador < <span class="syntax-number">5</span>:
-                            <span class="syntax-function">print</span>(contador)
-                            <span class="syntax-keyword">contador</span> += <span class="syntax-number">1</span>
-                        </div>
+                    <!-- Exercise 4 -->
+                    <div class="category-card rounded-2xl p-6 border">
+                        <h3 class="text-lg font-bold text-yellow-400 mb-2">4. Validar Username</h3>
+                        <p class="text-dark-400 text-sm mb-4">Solicita un username y valida que tenga entre 3 y 15 caracteres.</p>
+                        <a href="https://github.com/gpb-codes/python-Duocuc/blob/main/ejerecicios%20en%20clase/largo-username.py" target="_blank" class="text-primary-400 text-sm hover:underline">Ver solución →</a>
                     </div>
                     
-                    <!-- Funciones -->
-                    <div class="code-block">
-                        <div class="code-header">
-                            <div class="code-dot bg-red-500"></div>
-                            <div class="code-dot bg-yellow-500"></div>
-                            <div class="code-dot bg-green-500"></div>
-                            <span class="text-dark-400 text-sm ml-2">Funciones</span>
-                        </div>
-                        <div class="code-content text-dark-300">
-                            <span class="syntax-keyword">def</span> <span class="syntax-function">saludo</span>(nombre):
-                            <span class="syntax-keyword">return</span> <span class="syntax-string">f"Hola, {nombre}"</span>
-                            
-                            <span class="syntax-comment"># Llamar función</span>
-                            <span class="syntax-keyword">mensaje</span> = <span class="syntax-function">saludo</span>(<span class="syntax-string">"Gabriel"</span>)
-                            <span class="syntax-function">print</span>(mensaje)
-                        </div>
+                    <!-- Exercise 5 -->
+                    <div class="category-card rounded-2xl p-6 border">
+                        <h3 class="text-lg font-bold text-orange-400 mb-2">5. Calculadora WHILE</h3>
+                        <p class="text-dark-400 text-sm mb-4">Crea una calculadora que opere continuamente hasta que el usuario decida salir.</p>
+                        <a href="https://github.com/gpb-codes/python-Duocuc/blob/main/while/calculadora.py" target="_blank" class="text-primary-400 text-sm hover:underline">Ver solución →</a>
                     </div>
                     
-                    <!-- Input -->
-                    <div class="code-block">
-                        <div class="code-header">
-                            <div class="code-dot bg-red-500"></div>
-                            <div class="code-dot bg-yellow-500"></div>
-                            <div class="code-dot bg-green-500"></div>
-                            <span class="text-dark-400 text-sm ml-2">Entrada/Salida</span>
-                        </div>
-                        <div class="code-content text-dark-300">
-                            <span class="syntax-comment"># Entrada de usuario</span>
-                            <span class="syntax-keyword">nombre</span> = <span class="syntax-function">input</span>(<span class="syntax-string">"¿Tu nombre?"</span>)
-                            
-                            <span class="syntax-comment"># Entrada con tipo</span>
-                            <span class="syntax-keyword">edad</span> = <span class="syntax-function">int</span>(<span class="syntax-function">input</span>(<span class="syntax-string">"¿Tu edad?"</span>))
-                            
-                            <span class="syntax-comment"># Salida formateada</span>
-                            <span class="syntax-function">print</span>(<span class="syntax-string">f"Tienes {edad} años"</span>)
-                        </div>
+                    <!-- Exercise 6 -->
+                    <div class="category-card rounded-2xl p-6 border">
+                        <h3 class="text-lg font-bold text-red-400 mb-2">6. Validar PIN</h3>
+                        <p class="text-dark-400 text-sm mb-4">Solicita un PIN de 4 dígitos. Valida que sea numérico y tenga exactamente 4 dígitos.</p>
+                        <a href="https://github.com/gpb-codes/python-Duocuc/blob/main/ejerecicios%20en%20clase/pin.py" target="_blank" class="text-primary-400 text-sm hover:underline">Ver solución →</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Progreso Section -->
-        <section id="progreso" class="py-20 px-6">
-            <div class="max-w-7xl mx-auto">
+        <!-- Practice Section -->
+        <section id="practicar" class="py-20 px-6 bg-dark-800/30">
+            <div class="max-w-4xl mx-auto">
                 <div class="text-center mb-16">
-                    <h2 class="text-4xl font-bold mb-4">Tu Progreso</h2>
-                    <p class="text-xl text-dark-400">Sigue tu aprendizaje paso a paso</p>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Practica Interactiva</h2>
+                    <p class="text-lg text-dark-400">Escribe y ejecuta código Python directamente</p>
                 </div>
                 
-                <div class="grid md:grid-cols-3 gap-8">
-                    <!-- Principiante -->
-                    <div class="p-8 rounded-2xl bg-gradient-to-b from-green-900/30 to-dark-800 border border-green-800">
-                        <div class="w-16 h-16 rounded-xl bg-green-500/20 flex items-center justify-center mb-6">
-                            <svg class="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-                            </svg>
+                <div class="grid gap-6">
+                    <!-- Code Editor -->
+                    <div class="syntax-card p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-bold">Editor de Código</h3>
+                            <button onclick="loadExample(0)" class="text-sm text-primary-400 hover:underline">Ejemplo 1</button>
+                            <button onclick="loadExample(1)" class="text-sm text-primary-400 hover:underline">Ejemplo 2</button>
+                            <button onclick="loadExample(2)" class="text-sm text-primary-400 hover:underline">Ejemplo 3</button>
                         </div>
-                        <h3 class="text-2xl font-bold text-green-400 mb-4">Principiante</h3>
-                        <ul class="space-y-3 text-dark-300">
-                            <li class="flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full bg-green-500"></span>
-                                Variables y tipos de datos
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full bg-green-500"></span>
-                                Operadores básicos
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full bg-green-500"></span>
-                                Entrada y salida (input/print)
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full bg-green-500"></span>
-                                Comentarios
-                            </li>
-                        </ul>
+                        <div class="code-window">
+                            <div class="code-header">
+                                <div class="flex gap-2">
+                                    <div class="code-dot bg-red-500"></div>
+                                    <div class="code-dot bg-yellow-500"></div>
+                                    <div class="code-dot bg-green-500"></div>
+                                </div>
+                                <span class="text-dark-400 text-sm">main.py</span>
+                            </div>
+                            <div class="code-body">
+                                <textarea id="codeEditor" class="w-full h-48 bg-transparent text-white font-mono text-sm resize-none outline-none" spellcheck="false"># Escribe tu código aquí
+nombre = input("¿Tu nombre? ")
+print(f"¡Hola {nombre}!")
+
+# Calcula el promedio de 3 notas
+nota1 = float(input("Nota 1: "))
+nota2 = float(input("Nota 2: "))
+nota3 = float(input("Nota 3: "))
+
+promedio = (nota1 + nota2 + nota3) / 3
+print(f"Tu promedio es: {promedio:.2f}")
+
+if promedio >= 4:
+    print("¡Aprobaste!")
+else:
+    print("Reprobaste. ¡Intenta de nuevo!")</textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-4 mt-4">
+                            <button id="runBtn" onclick="runCode()" class="px-6 py-2 rounded-lg bg-green-600 hover:bg-green-500 text-white font-semibold flex items-center gap-2">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M8 5v14l11-7z"/>
+                                </svg>
+                                Ejecutar
+                            </button>
+                            <button onclick="clearCode()" class="px-6 py-2 rounded-lg bg-dark-700 hover:bg-dark-600 text-white font-semibold">
+                                Limpiar
+                            </button>
+                        </div>
+                        
+                        <!-- Output -->
+                        <div class="mt-6">
+                            <h4 class="text-sm font-semibold text-dark-400 mb-2">Salida:</h4>
+                            <div id="outputConsole" class="output-console">
+                                <span class="info">Ejecuta el código para ver la salida...</span>
+                            </div>
+                        </div>
                     </div>
                     
-                    <!-- Intermedio -->
-                    <div class="p-8 rounded-2xl bg-gradient-to-b from-yellow-900/30 to-dark-800 border border-yellow-800">
-                        <div class="w-16 h-16 rounded-xl bg-yellow-500/20 flex items-center justify-center mb-6">
-                            <svg class="w-8 h-8 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-                            </svg>
-                        </div>
-                        <h3 class="text-2xl font-bold text-yellow-400 mb-4">Intermedio</h3>
-                        <ul class="space-y-3 text-dark-300">
-                            <li class="flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full bg-yellow-500"></span>
-                                Condicionales (if/elif/else)
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full bg-yellow-500"></span>
-                                Bucles (for/while)
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full bg-yellow-500"></span>
-                                Funciones
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full bg-yellow-500"></span>
-                                Listas y diccionarios
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <!-- Avanzado -->
-                    <div class="p-8 rounded-2xl bg-gradient-to-b from-red-900/30 to-dark-800 border border-red-800">
-                        <div class="w-16 h-16 rounded-xl bg-red-500/20 flex items-center justify-center mb-6">
-                            <svg class="w-8 h-8 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                            </svg>
-                        </div>
-                        <h3 class="text-2xl font-bold text-red-400 mb-4">Avanzado</h3>
-                        <ul class="space-y-3 text-dark-300">
-                            <li class="flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full bg-red-500"></span>
-                                Programación orientada a objetos
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full bg-red-500"></span>
-                                Manejo de archivos
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full bg-red-500"></span>
-                                Módulos y paquetes
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full bg-red-500"></span>
-                                APIs y requests
-                            </li>
-                        </ul>
+                    <!-- Example Code Selector -->
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <button onclick="loadExample(0)" class="p-4 rounded-xl bg-dark-800 border border-dark-700 hover:border-primary-500 transition-colors text-left">
+                            <div class="font-semibold">Ejemplo 1</div>
+                            <div class="text-dark-400 text-sm">Hola Mundo + Input</div>
+                        </button>
+                        <button onclick="loadExample(1)" class="p-4 rounded-xl bg-dark-800 border border-dark-700 hover:border-primary-500 transition-colors text-left">
+                            <div class="font-semibold">Ejemplo 2</div>
+                            <div class="text-dark-400 text-sm">Calculadora de Promedio</div>
+                        </button>
+                        <button onclick="loadExample(2)" class="p-4 rounded-xl bg-dark-800 border border-dark-700 hover:border-primary-500 transition-colors text-left">
+                            <div class="font-semibold">Ejemplo 3</div>
+                            <div class="text-dark-400 text-sm">Validación de Edad</div>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -507,21 +1153,16 @@
             <div class="flex items-center justify-center gap-3 mb-6">
                 <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-purple-500 flex items-center justify-center">
                     <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
                     </svg>
                 </div>
                 <span class="text-xl font-bold">Python DuocUC</span>
             </div>
             <p class="text-dark-400 mb-6">Gabriel Pedreros - Aprende Python desde cero</p>
             <div class="flex items-center justify-center gap-6">
-                <a href="https://github.com/gpb-codes/python-Duocuc" target="_blank" class="text-dark-400 hover:text-white transition-colors">
+                <a href="https://github.com/gpb-codes/python-guide" target="_blank" class="text-dark-400 hover:text-white transition-colors">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
-                    </svg>
-                </a>
-                <a href="https://gpb-codes.github.io/gabrielPedreros/" target="_blank" class="text-dark-400 hover:text-white transition-colors">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
                     </svg>
                 </a>
             </div>
@@ -530,139 +1171,144 @@
     </footer>
 
     <script>
-        // Data for exercises
-        const categories = [
-            {
-                id: 'ejercicios-clase',
-                title: 'Ejercicios en Clase',
-                description: 'Validación de datos y entradas del usuario',
-                icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
-                color: 'green',
-                exercises: [
-                    { name: 'Largo de Username', file: 'largo-username.py', desc: 'Validar longitud de nombre de usuario' },
-                    { name: 'PIN', file: 'pin.py', desc: 'Validar PIN de 4 dígitos' },
-                    { name: 'Verificación de Password', file: 'verificacion-password.py', desc: 'Verificar contraseña segura' },
-                ]
-            },
-            {
-                id: 'bucles-for',
-                title: 'Bucles (FOR)',
-                description: 'Iteración y ciclos controlados',
-                icon: 'M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15',
-                color: 'blue',
-                exercises: [
-                    { name: 'Pedir Nombre de Usuario', file: 'pedir-nombre-user.py', desc: 'Solicitar input con validación' },
-                    { name: 'Promedio de Estudiantes', file: 'promedio-students.py', desc: 'Calcular promedios' },
-                    { name: 'Promedio', file: 'promedio.py', desc: 'Cálculo básico de promedio' },
-                ]
-            },
-            {
-                id: 'condicionales-if',
-                title: 'Condicionales (IF)',
-                description: 'Tomas de decisiones con lógica',
-                icon: 'M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z',
-                color: 'purple',
-                exercises: [
-                    { name: 'Notas', file: 'notas.py', desc: 'Sistema de calificaciones' },
-                    { name: 'Test', file: 'test.py', desc: 'Pruebas de lógica condicional' },
-                    { name: 'Tienda', file: 'Tienda(If).py', desc: 'Simulación de tienda' },
-                ]
-            },
-            {
-                id: 'bucles-while',
-                title: 'Bucles (WHILE)',
-                description: 'Ciclos con condición de parada',
-                icon: 'M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15',
-                color: 'yellow',
-                exercises: [
-                    { name: 'Calculadora', file: 'calculadora.py', desc: 'Calculadora interactiva' },
-                    { name: 'Catálogo', file: 'catalogo.py', desc: 'Gestión de catálogo' },
-                ]
-            },
-            {
-                id: 'funciones',
-                title: 'Funciones',
-                description: 'Modularidad y reutilización de código',
-                icon: 'M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4',
-                color: 'red',
-                exercises: [
-                    { name: 'Calculadora', file: 'calculadora.py', desc: 'Funciones calculadora' },
-                    { name: 'Promedio Estudiantes', file: 'promedio estudent.py', desc: 'Funciones de promedio' },
-                ]
-            },
-            {
-                id: 'inicio',
-                title: 'Inicio',
-                description: 'Introducción al proyecto',
-                icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6',
-                color: 'cyan',
-                exercises: [
-                    { name: 'Inicio', file: 'inicio.py', desc: 'Punto de entrada al proyecto' },
-                ]
-            }
-        ];
-
-        // Color mappings
-        const colorMap = {
-            green: { bg: 'green', text: 'text-green-400', border: 'border-green-500', hover: 'hover:border-green-400' },
-            blue: { bg: 'blue', text: 'text-blue-400', border: 'border-blue-500', hover: 'hover:border-blue-400' },
-            purple: { bg: 'purple', text: 'text-purple-400', border: 'border-purple-500', hover: 'hover:border-purple-400' },
-            yellow: { bg: 'yellow', text: 'text-yellow-400', border: 'border-yellow-500', hover: 'hover:border-yellow-400' },
-            red: { bg: 'red', text: 'text-red-400', border: 'border-red-500', hover: 'hover:border-red-400' },
-            cyan: { bg: 'cyan', text: 'text-cyan-400', border: 'border-cyan-500', hover: 'hover:border-cyan-400' }
-        };
-
-        // Render categories
-        function renderCategories() {
-            const grid = document.getElementById('categoriesGrid');
-            grid.innerHTML = categories.map(cat => {
-                const colors = colorMap[cat.color];
-                return `
-                    <div class="category-card rounded-2xl p-6 border animate-fade-in opacity-0">
-                        <div class="flex items-center gap-4 mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-${cat.color}-500/20 flex items-center justify-center">
-                                <svg class="w-6 h-6 ${colors.text}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${cat.icon}"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-bold ${colors.text}">${cat.title}</h3>
-                                <p class="text-dark-400 text-sm">${cat.description}</p>
-                            </div>
-                        </div>
-                        <ul class="space-y-2">
-                            ${cat.exercises.map((ex, i) => `
-                                <li class="exercise-item flex items-center justify-between p-3 rounded-lg bg-dark-800/50">
-                                    <div>
-                                        <p class="font-medium">${ex.name}</p>
-                                        <p class="text-dark-400 text-sm">${ex.desc}</p>
-                                    </div>
-                                    <a href="https://github.com/gpb-codes/python-Duocuc/blob/main/${cat.id}/${ex.file}" 
-                                       target="_blank"
-                                       class="px-3 py-1 rounded-lg bg-dark-700 text-sm ${colors.text} hover:bg-dark-600 transition-colors">
-                                        Ver código
-                                    </a>
-                                </li>
-                            `).join('')}
-                        </ul>
-                    </div>
-                `;
-            }).join('');
-            
-            // Add animation delays
-            document.querySelectorAll('.category-card').forEach((card, i) => {
-                card.style.animationDelay = `${i * 0.1}s`;
-            });
-        }
-
         // Mobile menu toggle
-        document.getElementById('menuBtn').addEventListener('click', () => {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('hidden');
-        });
+        function toggleMenu() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        }
+        
+        document.getElementById('menuBtn').addEventListener('click', toggleMenu);
+        
+        // Tab functionality
+        function showTab(tabName) {
+            // Update buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.toLowerCase().includes(tabName.toLowerCase()) ||
+                    (tabName === 'for' && btn.textContent.includes('FOR')) ||
+                    (tabName === 'while' && btn.textContent.includes('WHILE'))) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Show content
+            document.querySelectorAll('.tab-panel').forEach(panel => {
+                panel.classList.add('hidden');
+                if (panel.dataset.tab === tabName) {
+                    panel.classList.remove('hidden');
+                }
+            });
+            
+            // Re-highlight code
+            Prism.highlightAll();
+        }
+        
+        // Initialize first tab
+        showTab('variables');
+        
+        // Code examples
+        const codeExamples = [
+            `# Ejemplo 1: Hola Mundo
+nombre = input("¿Cómo te llamas? ")
+print(f"¡Hola {nombre}!")
 
-        // Initialize
-        renderCategories();
+# Verificar si es mayor de edad
+edad = int(input("¿Cuántos años tienes? "))
+
+if edad >= 18:
+    print("Eres mayor de edad")
+else:
+    print("Eres menor de edad")`,
+
+            `# Ejemplo 2: Calculadora de Promedio
+print("=== Calculadora de Promedio ===")
+
+# Pedir 3 notas
+nota1 = float(input("Ingresa nota 1: "))
+nota2 = float(input("Ingresa nota 2: "))
+nota3 = float(input("Ingresa nota 3: "))
+
+# Calcular promedio
+promedio = (nota1 + nota2 + nota3) / 3
+
+# Mostrar resultado
+print(f"Tu promedio es: {promedio:.2f}")
+
+# Determinar si aprueba
+if promedio >= 4.0:
+    print("¡Felicitaciones, aprobaste!")
+else:
+    print("Reprobaste. ¡Intenta de nuevo!")`,
+
+            `# Ejemplo 3: Validación de Edad con WHILE
+print("=== Sistema de Validación ===")
+
+# Validar que la edad sea válida
+edad = 0
+while edad < 1 or edad > 120:
+    try:
+        edad = int(input("Ingresa tu edad: "))
+        if edad < 1 or edad > 120:
+            print("Edad inválida. Intenta de nuevo.")
+    except ValueError:
+        print("Debes ingresar un número.")
+        edad = 0
+
+print(f"Tienes {edad} años")
+
+# Clasificación
+if edad < 12:
+    print("Eres un niño")
+elif edad < 18:
+    print("Eres un adolescente")
+elif edad < 60:
+    print("Eres un adulto")
+else:
+    print("Eres un adulto mayor")`
+        ];
+        
+        function loadExample(index) {
+            document.getElementById('codeEditor').value = codeExamples[index];
+            Prism.highlightAll();
+        }
+        
+        function clearCode() {
+            document.getElementById('codeEditor').value = '';
+            document.getElementById('outputConsole').innerHTML = '<span class="info">Código limpiado...</span>';
+        }
+        
+        async function runCode() {
+            const btn = document.getElementById('runBtn');
+            const output = document.getElementById('outputConsole');
+            const code = document.getElementById('codeEditor').value;
+            
+            btn.classList.add('loading');
+            btn.innerHTML = '<span>Ejecutando...</span>';
+            
+            output.innerHTML = '<span class="info">Ejecutando código...</span>';
+            
+            try {
+                // Simulate Python execution (note: actual execution would need Pyodide)
+                output.innerHTML = '<span class="success">Nota: Para ejecutar Python en el navegador, integra Pyodide o usa un backend.\n\nEste es un ejemplo de cómo se vería la salida:\n\n--- Código ---\n' + code + '\n--- Fin Código ---</span>';
+                
+                // In a real implementation, you would use Pyodide:
+                /*
+                const pyodide = await loadPyodide();
+                await pyodide.runPythonAsync(code);
+                const result = pyodide.globals.get('result');
+                output.innerHTML = '<span class="success">' + result + '</span>';
+                */
+            } catch (error) {
+                output.innerHTML = '<span class="error">Error: ' + error.message + '</span>';
+            }
+            
+            btn.classList.remove('loading');
+            btn.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Ejecutar';
+        }
+        
+        // Initialize Prism
+        document.addEventListener('DOMContentLoaded', () => {
+            Prism.highlightAll();
+        });
     </script>
 </body>
 </html>
