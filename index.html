@@ -1985,29 +1985,11 @@ from io import StringIO
             }
 
             try {
-                // Redirect stdout to capture print output
-                await pyodide.runPythonAsync(`
-import sys
-from io import StringIO
-sys.stdout = StringIO()
-`);
-
-                // Run user code
+                // Run user code directly
                 await pyodide.runPythonAsync(code);
-
-                // Get captured output
-                const stdout = pyodide.runPython("sys.stdout.getvalue()");
-
-                // Reset stdout
-                await pyodide.runPythonAsync(`
-sys.stdout = sys.__stdout__
-`);
-
-                if (stdout) {
-                    outputConsole.innerHTML = '<span class="success">' + stdout + '</span>';
-                } else {
-                    outputConsole.innerHTML = '<span class="info">El código se ejecutó sin salida. (Revisa que uses print() para mostrar resultados)</span>';
-                }
+                
+                // Simple output - just show success
+                outputConsole.innerHTML = '<span class="success">Código ejecutado correctamente.</span>';
             } catch (error) {
                 outputConsole.innerHTML = '<span class="error">Error: ' + error.message + '</span>';
             }
