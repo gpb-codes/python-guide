@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Temas - Python Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script id="tailwind-config">
+tailwind.config = {
+darkMode: "class",
+theme: {
+extend: {
+colors: {
+"primary": "#ddb7ff", "secondary": "#ffe083", "tertiary": "#ffb0cd",
+"surface": "#0f1417", "on-surface": "#dfe3e7", "on-surface-variant": "#cfc2d6",
+"surface-container": "#1b2023", "surface-container-low": "#171c1f", "surface-container-lowest": "#0a0f12",
+"surface-container-high": "#262b2e", "outline-variant": "#4d4354",
+"primary-container": "#b76dff", "on-primary": "#490080",
+"beginner": "#22c55e", "intermediate": "#3b82f6", "advanced": "#a855f7"
+},
+fontFamily: { "headline-md": ["Bangers"], "label-sm": ["JetBrains Mono"], "body-md": ["Inter"] }
+}
+}
+}
+</script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #0f1417; font-family: 'Inter', sans-serif; color: #dfe3e7; }
+.glass-card { background: rgba(27, 32, 35, 0.4); backdrop-filter: blur(12px); border: 1px solid rgba(221, 183, 255, 0.2); transition: all 0.3s; }
+.glass-card:hover { border-color: rgba(221, 183, 255, 0.6); transform: translateY(-4px); }
+</style>
+</head>
+<body>
+<!-- Header -->
+<header class="fixed top-0 w-full z-50 bg-surface/30 backdrop-blur-lg border-b border-primary/20">
+<nav class="flex justify-between items-center px-4 sm:px-6 max-w-7xl mx-auto h-16">
+<a href="index.html" class="flex items-center gap-3">
+<span class="text-primary text-xl sm:text-2xl font-bold" style="font-family: 'Bangers', cursive;">PYTHON PORTAL</span>
+</a>
+<div class="hidden md:flex items-center gap-4 sm:gap-6">
+<a href="temas.html" class="text-secondary font-bold border-b-2 border-secondary text-sm">Temas</a>
+<a href="sintaxis.html" class="text-on-surface-variant hover:text-primary text-sm">Sintaxis</a>
+<a href="ejercicios.html" class="text-on-surface-variant hover:text-primary text-sm">Ejercicios</a>
+<a href="quiz.html" class="text-on-surface-variant hover:text-primary text-sm">Quiz</a>
+</div>
+<button class="md:hidden p-2 text-on-surface-variant" onclick="toggleMenu()">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</nav>
+</header>
+
+<div id="mobile-menu" class="fixed inset-0 z-40 bg-surface/95 hidden flex-col items-center justify-center space-y-8">
+<button onclick="toggleMenu()" class="absolute top-4 right-4 p-2 text-on-surface-variant">
+<span class="material-symbols-outlined">close</span>
+</button>
+<a href="index.html" onclick="toggleMenu()" class="text-2xl">Inicio</a>
+<a href="sintaxis.html" onclick="toggleMenu()" class="text-2xl">Sintaxis</a>
+<a href="ejercicios.html" onclick="toggleMenu()" class="text-2xl">Ejercicios</a>
+<a href="quiz.html" onclick="toggleMenu()" class="text-2xl text-secondary">Quiz</a>
+</div>
+
+<main class="pt-20 px-4 sm:px-6 py-8 max-w-6xl mx-auto">
+<h1 class="text-3xl sm:text-4xl text-center mb-4" style="font-family: 'Bangers', cursive;">
+<span class="text-primary">Temas de Python</span>
+</h1>
+<p class="text-center text-on-surface-variant mb-8">20+ temas organizados por nivel</p>
+
+<!-- Filters -->
+<div class="flex flex-wrap justify-center gap-3 mb-8">
+<button onclick="filterTopics('all')" class="px-4 py-2 rounded-full border border-primary bg-primary/20 text-primary text-sm">Todos</button>
+<button onclick="filterTopics('beginner')" class="px-4 py-2 rounded-full border border-beginner text-beginner hover:bg-beginner/20 text-sm">Principiante</button>
+<button onclick="filterTopics('intermediate')" class="px-4 py-2 rounded-full border border-intermediate text-intermediate hover:bg-intermediate/20 text-sm">Intermedio</button>
+<button onclick="filterTopics('advanced')" class="px-4 py-2 rounded-full border border-advanced text-advanced hover:bg-advanced/20 text-sm">Avanzado</button>
+</div>
+
+<!-- Topics Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="topics-grid"></div>
+</main>
+
+<!-- Footer -->
+<footer class="px-4 py-8 bg-surface-container-lowest border-t border-outline-variant text-center">
+<p class="text-on-surface-variant text-sm">© 2024 Python Portal</p>
+</footer>
+
+<script src="data.js"></script>
+<script>
+function toggleMenu() {
+document.getElementById('mobile-menu').classList.toggle('hidden');
+}
+
+const colors = { beginner: 'beginner', intermediate: 'intermediate', advanced: 'advanced' };
+const icons = { beginner: 'fa-seedling', intermediate: 'fa-code', advanced: 'fa-rocket' };
+
+function filterTopics(level) {
+const container = document.getElementById('topics-grid');
+const topics = level === 'all' ? data.topics : data.topics.filter(t => t.level === level);
+
+container.innerHTML = topics.map(topic => `
+<a href="sintaxis.html?topic=${topic.title.toLowerCase()}" class="glass-card p-6 rounded-xl border-l-4 border-l-${colors[topic.level]} hover:scale-[1.02] block">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-10 h-10 rounded-lg bg-${colors[topic.level]}/20 flex items-center justify-center text-${colors[topic.level]}">
+<i class="fas ${topic.icon}"></i>
+</div>
+<h3 class="text-lg text-${colors[topic.level]}" style="font-family: 'Bangers', cursive;">${topic.title}</h3>
+</div>
+<p class="text-on-surface-variant text-sm mb-3">${topic.description}</p>
+<div class="flex flex-wrap gap-2">
+${topic.tags.slice(0, 3).map(tag => `<span class="px-2 py-1 rounded bg-surface-container-high text-[10px]">${tag}</span>`).join('')}
+</div>
+</a>
+`).join('');
+}
+
+filterTopics('all');
+
+// Check URL params
+const params = new URLSearchParams(window.location.search);
+const level = params.get('level');
+if (level) filterTopics(level);
+</script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sintaxis - Python Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script id="tailwind-config">
+tailwind.config = {
+darkMode: "class",
+theme: {
+extend: {
+colors: {
+"primary": "#ddb7ff", "secondary": "#ffe083", "tertiary": "#ffb0cd",
+"surface": "#0f1417", "on-surface": "#dfe3e7", "on-surface-variant": "#cfc2d6",
+"surface-container": "#1b2023", "surface-container-low": "#171c1f", "surface-container-lowest": "#0a0f12",
+"surface-container-high": "#262b2e", "outline-variant": "#4d4354",
+"primary-container": "#b76dff", "beginner": "#22c55e", "intermediate": "#3b82f6", "advanced": "#a855f7"
+},
+fontFamily: { "headline-md": ["Bangers"], "label-sm": ["JetBrains Mono"], "body-md": ["Inter"] }
+}
+}
+}
+</script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #0f1417; font-family: 'Inter', sans-serif; color: #dfe3e7; }
+.glass-card { background: rgba(27, 32, 35, 0.4); backdrop-filter: blur(12px); border: 1px solid rgba(221, 183, 255, 0.2); transition: all 0.3s; }
+pre[class*="language-"] { background: #1a1a24 !important; margin: 0 !important; padding: 1rem !important; font-size: 13px !important; }
+.token.keyword { color: #c792ea !important; }
+.token.string { color: #c3e88d !important; }
+.token.number { color: #f78c6c !important; }
+.token.function { color: #82aaff !important; }
+.token.comment { color: #6a7a8a !important; }
+</style>
+</head>
+<body>
+<!-- Header -->
+<header class="fixed top-0 w-full z-50 bg-surface/30 backdrop-blur-lg border-b border-primary/20">
+<nav class="flex justify-between items-center px-4 sm:px-6 max-w-7xl mx-auto h-16">
+<a href="index.html" class="flex items-center gap-3">
+<span class="text-primary text-xl sm:text-2xl font-bold" style="font-family: 'Bangers', cursive;">PYTHON PORTAL</span>
+</a>
+<div class="hidden md:flex items-center gap-4 sm:gap-6">
+<a href="temas.html" class="text-on-surface-variant hover:text-primary text-sm">Temas</a>
+<a href="sintaxis.html" class="text-secondary font-bold border-b-2 border-secondary text-sm">Sintaxis</a>
+<a href="ejercicios.html" class="text-on-surface-variant hover:text-primary text-sm">Ejercicios</a>
+<a href="quiz.html" class="text-on-surface-variant hover:text-primary text-sm">Quiz</a>
+</div>
+<button class="md:hidden p-2 text-on-surface-variant" onclick="toggleMenu()">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</nav>
+</header>
+
+<div id="mobile-menu" class="fixed inset-0 z-40 bg-surface/95 hidden flex-col items-center justify-center space-y-8">
+<button onclick="toggleMenu()" class="absolute top-4 right-4 p-2 text-on-surface-variant">
+<span class="material-symbols-outlined">close</span>
+</button>
+<a href="index.html" onclick="toggleMenu()" class="text-2xl">Inicio</a>
+<a href="temas.html" onclick="toggleMenu()" class="text-2xl">Temas</a>
+<a href="ejercicios.html" onclick="toggleMenu()" class="text-2xl">Ejercicios</a>
+<a href="quiz.html" onclick="toggleMenu()" class="text-2xl text-secondary">Quiz</a>
+</div>
+
+<main class="pt-20 px-4 sm:px-6 py-8 max-w-6xl mx-auto">
+<h1 class="text-3xl sm:text-4xl text-center mb-4" style="font-family: 'Bangers', cursive;">
+<span class="text-primary">Laboratorio de Sintaxis</span>
+</h1>
+<p class="text-center text-on-surface-variant mb-8">Ejemplos de código con resaltado de sintaxis</p>
+
+<!-- Tabs -->
+<div class="flex flex-wrap justify-center gap-2 mb-8" id="sintaxis-tabs"></div>
+
+<!-- Code Examples -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6" id="code-examples-grid"></div>
+</main>
+
+<!-- Footer -->
+<footer class="px-4 py-8 bg-surface-container-lowest border-t border-outline-variant text-center">
+<p class="text-on-surface-variant text-sm">© 2024 Python Portal</p>
+</footer>
+
+<script src="data.js"></script>
+<script>
+let activeTab = 'variables';
+
+function toggleMenu() {
+document.getElementById('mobile-menu').classList.toggle('hidden');
+}
+
+function renderTabs() {
+const container = document.getElementById('sintaxis-tabs');
+const tabs = data.tabs.slice(0, 12);
+
+container.innerHTML = tabs.map(tab => `
+<button onclick="showTab('${tab}')" class="px-4 py-2 rounded-full border ${activeTab === tab ? 'bg-primary-container text-on-primary-container' : 'border-outline-variant text-on-surface-variant hover:border-primary'} text-sm">
+${tab.charAt(0).toUpperCase() + tab.slice(1)}
+</button>
+`).join('');
+}
+
+function showTab(tabName) {
+activeTab = tabName;
+renderTabs();
+renderCodeExamples();
+}
+
+function escapeHtml(code) {
+return code.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function renderCodeExamples() {
+const container = document.getElementById('code-examples-grid');
+const examples = data.codeExamples[activeTab] || [];
+
+if (examples.length === 0) {
+container.innerHTML = '<p class="text-on-surface-variant">Selecciona una pestaña para ver ejemplos</p>';
+return;
+}
+
+container.innerHTML = examples.map(ex => `
+<div class="glass-card rounded-xl overflow-hidden">
+<div class="bg-surface-container-high px-4 py-2 flex items-center justify-between border-b border-outline-variant">
+<div class="flex gap-2">
+<div class="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
+<div class="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
+<div class="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+</div>
+<div class="text-on-surface-variant text-sm">${ex.title}</div>
+</div>
+<pre class="p-4 overflow-x-auto"><code class="language-python">${escapeHtml(ex.code)}</code></pre>
+</div>
+`).join('');
+
+Prism.highlightAll();
+}
+
+renderTabs();
+renderCodeExamples();
+
+// Check URL params
+const params = new URLSearchParams(window.location.search);
+const topic = params.get('topic');
+if (topic && data.codeExamples[topic]) {
+activeTab = topic;
+renderTabs();
+renderCodeExamples();
+}
+</script>
+</body>
+</html>

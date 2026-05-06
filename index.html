@@ -3,676 +3,402 @@
 <html class="dark" lang="es"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>PYTHON PORTAL - Guía de Programación Gratis</title>
+<title>PYTHON PORTAL - Aprende Python Gratis</title>
 <meta name="description" content="Aprende Python gratis desde cero hasta avanzado - Guía completa con ejercicios y ejemplos"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Bangers&amp;family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
-<script src="https://cdn.babylonjs.com/babylon.js"></script>
 <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "surface-container": "#1b2023",
-                    "primary-container": "#b76dff",
-                    "secondary-container": "#eec200",
-                    "surface-container-low": "#171c1f",
-                    "secondary-fixed": "#ffe083",
-                    "on-primary-fixed": "#2c0051",
-                    "on-primary-fixed-variant": "#6900b3",
-                    "outline-variant": "#4d4354",
-                    "tertiary-fixed-dim": "#ffb0cd",
-                    "on-primary-container": "#400071",
-                    "on-surface": "#dfe3e7",
-                    "surface-variant": "#313539",
-                    "on-error-container": "#ffdad6",
-                    "on-surface-variant": "#cfc2d6",
-                    "surface-tint": "#ddb7ff",
-                    "inverse-primary": "#842bd2",
-                    "primary-fixed-dim": "#ddb7ff",
-                    "primary": "#ddb7ff",
-                    "tertiary": "#ffb0cd",
-                    "on-error": "#690005",
-                    "tertiary-container": "#f751a1",
-                    "tertiary-fixed": "#ffd9e4",
-                    "on-tertiary": "#640039",
-                    "secondary": "#ffe083",
-                    "on-primary": "#490080",
-                    "surface-bright": "#353a3d",
-                    "primary-fixed": "#f0dbff",
-                    "on-tertiary-container": "#570032",
-                    "secondary-fixed-dim": "#eec200",
-                    "on-tertiary-fixed": "#3e0022",
-                    "error": "#ffb4ab",
-                    "on-secondary-fixed-variant": "#574500",
-                    "surface": "#0f1417",
-                    "background": "#0f1417",
-                    "on-secondary": "#3c2f00",
-                    "surface-container-lowest": "#0a0f12",
-                    "outline": "#988d9f",
-                    "inverse-on-surface": "#2c3134",
-                    "error-container": "#93000a",
-                    "surface-container-highest": "#313539",
-                    "on-secondary-fixed": "#231b00",
-                    "on-background": "#dfe3e7",
-                    "inverse-surface": "#dfe3e7",
-                    "surface-container-high": "#262b2e",
-                    "surface-dim": "#0f1417",
-                    "on-tertiary-fixed-variant": "#8c0053",
-                    "beginner": "#22c55e",
-                    "intermediate": "#3b82f6",
-                    "advanced": "#a855f7"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.25rem",
-                    "lg": "0.5rem",
-                    "xl": "0.75rem",
-                    "full": "9999px"
-            },
-            "spacing": {
-                    "sm": "1rem",
-                    "gutter": "24px",
-                    "margin": "32px",
-                    "xs": "0.5rem",
-                    "unit": "4px",
-                    "md": "1.5rem",
-                    "lg": "2.5rem",
-                    "xl": "4rem"
-            },
-            "fontFamily": {
-                    "headline-md": ["Bangers"],
-                    "label-sm": ["JetBrains Mono"],
-                    "display-xl": ["Bangers"],
-                    "body-md": ["Inter"],
-                    "body-lg": ["Inter"],
-                    "headline-lg": ["Bangers"],
-                    "code-block": ["JetBrains Mono"]
-            },
-            "fontSize": {
-                    "headline-md": ["32px", {"lineHeight": "1.2", "fontWeight": "400"}],
-                    "label-sm": ["12px", {"lineHeight": "1", "fontWeight": "600"}],
-                    "display-xl": ["72px", {"lineHeight": "1.1", "letterSpacing": "0.05em", "fontWeight": "400"}],
-                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
-                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
-                    "headline-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "400"}],
-                    "code-block": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}]
-            }
-          },
-        },
-      }
-    </script>
+tailwind.config = {
+darkMode: "class",
+theme: {
+extend: {
+colors: {
+"surface-container": "#1b2023",
+"primary-container": "#b76dff",
+"surface-container-low": "#171c1f",
+"primary": "#ddb7ff",
+"secondary": "#ffe083",
+"tertiary": "#ffb0cd",
+"surface": "#0f1417",
+"on-surface": "#dfe3e7",
+"on-surface-variant": "#cfc2d6",
+"on-primary": "#490080",
+"on-primary-container": "#400071",
+"on-secondary": "#3c2f00",
+"error": "#ffb4ab",
+"outline": "#988d9f",
+"outline-variant": "#4d4354",
+"surface-container-lowest": "#0a0f12",
+"surface-container-high": "#262b2e",
+"surface-container-highest": "#313539",
+"tertiary-container": "#f751a1",
+"on-tertiary-container": "#570032",
+"beginner": "#22c55e",
+"intermediate": "#3b82f6",
+"advanced": "#a855f7"
+},
+fontFamily: {
+"headline-md": ["Bangers"],
+"label-sm": ["JetBrains Mono"],
+"display-xl": ["Bangers"],
+"body-md": ["Inter"],
+"body-lg": ["Inter"],
+"headline-lg": ["Bangers"],
+"code-block": ["JetBrains Mono"]
+},
+fontSize: {
+"headline-md": ["32px", {"lineHeight": "1.2", "fontWeight": "400"}],
+"label-sm": ["12px", {"lineHeight": "1", "fontWeight": "600"}],
+"display-xl": ["72px", {"lineHeight": "1.1", "letterSpacing": "0.05em", "fontWeight": "400"}],
+"body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+"body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+"headline-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "400"}],
+"code-block": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}]
+}
+},
+},
+},
+}
+</script>
 <style>
-        .glass-card {
-            background: rgba(27, 32, 35, 0.4);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(221, 183, 255, 0.2);
-            transition: all 0.3s ease-in-out;
-        }
-        .glass-card:hover {
-            border-color: rgba(221, 183, 255, 0.6);
-            box-shadow: 0 0 20px rgba(183, 109, 255, 0.3);
-            transform: translateY(-4px);
-        }
-        .neon-glow-purple { box-shadow: 0 0 15px rgba(183, 109, 255, 0.4); }
-        .neon-glow-pink { box-shadow: 0 0 15px rgba(247, 81, 161, 0.4); }
-        .neon-glow-yellow { box-shadow: 0 0 15px rgba(238, 194, 0, 0.4); }
-        .neon-glow-green { box-shadow: 0 0 15px rgba(34, 197, 94, 0.4); }
-        .neon-glow-blue { box-shadow: 0 0 15px rgba(59, 130, 246, 0.4); }
-        
-        .portal-bg {
-            background: radial-gradient(circle at center, #2c0051 0%, #0f1417 70%);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .code-keyword { color: #c792ea; font-weight: 600; }
-        .code-string { color: #c3e88d; }
-        .code-number { color: #f78c6c; }
-        .code-comment { color: #546e7a; font-style: italic; }
-        .code-function { color: #82aaff; }
-        .code-builtin { color: #ffcb6b; }
-        .code-operator { color: #89ddff; }
-        .code-class { color: #ffcb6b; }
-        
-        /* Prism.js custom styles */
-        pre[class*="language-"] {
-            background: #1a1a24 !important;
-            margin: 0 !important;
-            padding: 1rem !important;
-            border-radius: 0 !important;
-            font-size: 13px !important;
-            line-height: 1.6 !important;
-        }
-        
-        code[class*="language-"] {
-            background: transparent !important;
-            font-family: 'JetBrains Mono', monospace !important;
-            font-size: 13px !important;
-        }
-        
-        .token.comment { color: #6a7a8a !important; }
-        .token.keyword { color: #c792ea !important; }
-        .token.string { color: #c3e88d !important; }
-        .token.number { color: #f78c6c !important; }
-        .token.function { color: #82aaff !important; }
-        .token.builtin { color: #ffcb6b !important; }
-        .token.operator { color: #89ddff !important; }
-        .token.class-name { color: #ffcb6b !important; }
-        .token.punctuation { color: #89ddff !important; }
-        .token.property { color: #f78c6c !important; }
-        .token.boolean { color: #f78c6c !important; }
-        .token.def { color: #82aaff !important; }
-        
-        #three-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-        }
-        
-        #babylon-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 1s ease;
-        }
-        
-        .tab-active {
-            background: linear-gradient(135deg, #b76dff, #f751a1);
-            color: white;
-            box-shadow: 0 0 15px rgba(183, 109, 255, 0.4);
-        }
-        
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0f1417; }
-        ::-webkit-scrollbar-thumb { background: #313539; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #4d4354; }
-    </style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+background: #0f1417;
+font-family: 'Inter', sans-serif;
+color: #dfe3e7;
+}
+
+.glass-card {
+background: rgba(27, 32, 35, 0.4);
+backdrop-filter: blur(12px);
+border: 1px solid rgba(221, 183, 255, 0.2);
+transition: all 0.3s ease-in-out;
+}
+.glass-card:hover {
+border-color: rgba(221, 183, 255, 0.6);
+box-shadow: 0 0 20px rgba(183, 109, 255, 0.3);
+transform: translateY(-4px);
+}
+
+.hero-gradient {
+background: radial-gradient(ellipse at center, #2c0051 0%, #0f1417 70%);
+}
+
+#three-canvas {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: -1;
+pointer-events: none;
+}
+
+.neon-glow-purple { box-shadow: 0 0 15px rgba(183, 109, 255, 0.4); }
+.neon-glow-pink { box-shadow: 0 0 15px rgba(247, 81, 161, 0.4); }
+.neon-glow-yellow { box-shadow: 0 0 15px rgba(238, 194, 0, 0.4); }
+
+pre[class*="language-"] {
+background: #1a1a24 !important;
+margin: 0 !important;
+padding: 1rem !important;
+border-radius: 0.5rem !important;
+font-size: 13px !important;
+}
+
+.token.comment { color: #6a7a8a !important; }
+.token.keyword { color: #c792ea !important; }
+.token.string { color: #c3e88d !important; }
+.token.number { color: #f78c6c !important; }
+.token.function { color: #82aaff !important; }
+.token.builtin { color: #ffcb6b !important; }
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #0f1417; }
+::-webkit-scrollbar-thumb { background: #313539; border-radius: 4px; }
+</style>
 </head>
-<body class="bg-surface text-on-surface font-body-md selection:bg-primary/30">
+<body class="min-h-screen">
 <canvas id="three-canvas"></canvas>
-<canvas id="babylon-canvas"></canvas>
-<!-- TopNavBar -->
-<header class="fixed top-0 w-full z-50 bg-surface/30 backdrop-blur-lg border-b border-primary/20 shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
-<nav class="flex justify-between items-center w-full px-4 max-w-full mx-auto h-16">
-<div class="flex items-center gap-4">
-<span class="font-display-xl text-primary drop-shadow-[0_0_8px_rgba(221,183,255,0.8)] text-xl sm:text-2xl sm:text-[32px] leading-none cursor-pointer" onclick="showSection('inicio')">PYTHON PORTAL</span>
+
+<!-- Header -->
+<header class="fixed top-0 w-full z-50 bg-surface/30 backdrop-blur-lg border-b border-primary/20">
+<nav class="flex justify-between items-center px-4 sm:px-6 max-w-7xl mx-auto h-16">
+<a href="index.html" class="flex items-center gap-3">
+<span class="text-primary text-xl sm:text-2xl font-bold" style="font-family: 'Bangers', cursive;">PYTHON PORTAL</span>
+</a>
+<div class="hidden md:flex items-center gap-4 sm:gap-6">
+<a href="temas.html" class="text-on-surface-variant hover:text-primary transition-colors text-sm">Temas</a>
+<a href="sintaxis.html" class="text-on-surface-variant hover:text-primary transition-colors text-sm">Sintaxis</a>
+<a href="ejercicios.html" class="text-on-surface-variant hover:text-primary transition-colors text-sm">Ejercicios</a>
+<a href="quiz.html" class="text-secondary font-bold border-b-2 border-secondary text-sm">Quiz</a>
 </div>
-<div class="hidden md:flex items-center space-x-lg">
-<a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm cursor-pointer" onclick="showSection('temas')">Temas</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm cursor-pointer" onclick="showSection('sintaxis')">Sintaxis</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm cursor-pointer" onclick="showSection('ejercicios')">Ejercicios</a>
-<a class="text-secondary font-bold border-b-2 border-secondary pb-1 font-label-sm cursor-pointer" onclick="showSection('quiz')">Quiz</a>
-</div>
-<button class="md:hidden p-2 text-on-surface-variant" onclick="toggleMobileMenu()">
+<button class="md:hidden p-2 text-on-surface-variant" onclick="toggleMenu()">
 <span class="material-symbols-outlined">menu</span>
 </button>
 </nav>
 </header>
+
 <!-- Mobile Menu -->
-<div id="mobile-menu" class="fixed inset-0 z-40 bg-surface/95 backdrop-blur-lg hidden transform transition-transform duration-300">
-<div class="flex flex-col items-center justify-center h-full space-y-8 pt-20">
-<button onclick="showSection('inicio'); toggleMobileMenu()" class="text-xl sm:text-2xl text-on-surface">Inicio</button>
-<button onclick="showSection('temas'); toggleMobileMenu()" class="text-xl sm:text-2xl text-on-surface">Temas</button>
-<button onclick="showSection('sintaxis'); toggleMobileMenu()" class="text-xl sm:text-2xl text-on-surface">Sintaxis</button>
-<button onclick="showSection('ejercicios'); toggleMobileMenu()" class="text-xl sm:text-2xl text-on-surface">Ejercicios</button>
-<button onclick="showSection('quiz'); toggleMobileMenu()" class="text-xl sm:text-2xl text-secondary">Quiz</button>
-<button onclick="toggleMobileMenu()" class="absolute top-4 right-4 p-2 text-on-surface-variant">
+<div id="mobile-menu" class="fixed inset-0 z-40 bg-surface/95 backdrop-blur-lg hidden flex flex-col items-center justify-center space-y-8">
+<button onclick="toggleMenu()" class="absolute top-4 right-4 p-2 text-on-surface-variant">
 <span class="material-symbols-outlined">close</span>
 </button>
+<a href="temas.html" onclick="toggleMenu()" class="text-2xl text-on-surface">Temas</a>
+<a href="sintaxis.html" onclick="toggleMenu()" class="text-2xl text-on-surface">Sintaxis</a>
+<a href="ejercicios.html" onclick="toggleMenu()" class="text-2xl text-on-surface">Ejercicios</a>
+<a href="quiz.html" onclick="toggleMenu()" class="text-2xl text-secondary">Quiz</a>
 </div>
-</div>
-<main class="pt-16">
-<!-- Hero Section -->
-<section id="inicio" class="portal-bg min-h-screen flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+
+<!-- Hero -->
+<section class="min-h-screen flex flex-col items-center justify-center text-center px-4 py-20 hero-gradient">
 <div class="max-w-4xl z-10">
-<div class="mb-md inline-block px-md py-xs rounded-full bg-surface-container-high border border-primary/30 text-primary font-label-sm">
-                    GUÍA COMPLETA 100% Gratis
-                </div>
-<h1 class="font-display-xl text-3xl sm:text-4xl lg:text-5xl mb-md tracking-widest flex flex-col gap-sm">
-<span class="text-primary drop-shadow-[0_0_20px_rgba(221,183,255,0.6)]">PROGRAMACIÓN</span>
-<span class="text-secondary drop-shadow-[0_0_20px_rgba(238,194,0,0.6)]">PYTHON</span>
+<div class="inline-block px-4 py-2 rounded-full bg-surface-container-high border border-primary/30 text-primary text-xs sm:text-sm mb-6">
+GUÍA 100% GRÁTIS
+</div>
+
+<h1 class="text-4xl sm:text-5xl lg:text-7xl mb-6 tracking-wider" style="font-family: 'Bangers', cursive;">
+<span class="text-primary drop-shadow-lg">PROGRAMACIÓN</span>
+<br/>
+<span class="text-secondary drop-shadow-lg">PYTHON</span>
 </h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant mb-xl max-w-2xl mx-auto">
-                    Domina Python desde cero. 25+ temas, 30+ ejercicios, 25+ preguntas de quiz. Todo gratis.
-                </p>
-<div class="flex flex-wrap justify-center gap-md mb-lg">
-<button class="bg-primary-container text-on-primary-container px-lg py-sm rounded-lg font-bold neon-glow-purple hover:scale-105 transition-all" onclick="showSection('temas')">
-                        Comenzar a Aprender
-                    </button>
-<button class="border-2 border-tertiary text-tertiary px-lg py-sm rounded-lg font-bold hover:bg-tertiary/10 transition-all" onclick="toggleEngine('babylon')">
-                        Cambiar Fondo
-                    </button>
+
+<p class="text-lg sm:text-xl text-on-surface-variant mb-8 max-w-2xl mx-auto">
+Domina Python desde cero. 20+ temas, 30+ ejercicios, 25+ preguntas de quiz.
+</p>
+
+<div class="flex flex-wrap justify-center gap-4 mb-12">
+<a href="temas.html" class="bg-primary-container text-on-primary-container px-6 py-3 rounded-lg font-bold neon-glow-purple hover:scale-105 transition-all">
+Comenzar a Aprender
+</a>
+<a href="quiz.html" class="border-2 border-tertiary text-tertiary px-6 py-3 rounded-lg font-bold hover:bg-tertiary/10 transition-all">
+Probar Quiz
+</a>
 </div>
-<div class="flex justify-center gap-lg text-center">
-<div class="glass-card p-md rounded-xl"><div class="font-headline-md text-headline-md text-beginner">20+</div><div class="font-label-sm text-on-surface-variant">Temas</div></div>
-<div class="glass-card p-md rounded-xl"><div class="font-headline-md text-headline-md text-intermediate">30+</div><div class="font-label-sm text-on-surface-variant">Ejercicios</div></div>
-<div class="glass-card p-md rounded-xl"><div class="font-headline-md text-headline-md text-advanced">25</div><div class="font-label-sm text-on-surface-variant">Preguntas</div></div>
+
+<!-- Stats -->
+<div class="grid grid-cols-3 gap-4 sm:gap-8 max-w-lg mx-auto">
+<div class="glass-card p-4 sm:p-6 rounded-xl">
+<div class="text-2xl sm:text-4xl font-bold text-beginner" style="font-family: 'Bangers', cursive;">20+</div>
+<div class="text-xs sm:text-sm text-on-surface-variant">Temas</div>
 </div>
+<div class="glass-card p-4 sm:p-6 rounded-xl">
+<div class="text-2xl sm:text-4xl font-bold text-intermediate" style="font-family: 'Bangers', cursive;">30+</div>
+<div class="text-xs sm:text-sm text-on-surface-variant">Ejercicios</div>
 </div>
-</section>
-<!-- Niveles Section -->
-<section class="px-4 sm:px-6 py-xl max-w-7xl mx-auto px-4 sm:px-6">
-<div class="mb-xl text-center">
-<h2 class="font-headline-lg text-xl sm:text-2xl sm:text-3xl lg:text-4xl text-on-surface mb-xs">Elige tu Nivel</h2>
-<div class="w-24 h-1 bg-primary mx-auto rounded-full"></div>
+<div class="glass-card p-4 sm:p-6 rounded-xl">
+<div class="text-2xl sm:text-4xl font-bold text-advanced" style="font-family: 'Bangers', cursive;">25</div>
+<div class="text-xs sm:text-sm text-on-surface-variant">Preguntas</div>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-lg mb-xl">
-<div class="glass-card p-lg rounded-xl border-l-4 border-l-beginner cursor-pointer hover:scale-[1.02]" onclick="filterByLevel('beginner')">
-<div class="flex items-center gap-md mb-md">
-<div class="w-12 h-12 rounded-lg bg-beginner/20 flex items-center justify-center text-beginner"><i class="fas fa-seedling text-xl sm:text-2xl"></i></div>
-<h3 class="font-headline-md text-headline-md text-beginner">Principiante</h3>
-</div>
-<p class="text-on-surface-variant font-body-md mb-md">Fundamentos: variables, operadores, condicionales, bucles, funciones básicas.</p>
-<div class="flex flex-wrap gap-xs"><span class="px-xs py-1 rounded bg-surface-variant text-[10px] font-label-sm">6 temas</span><span class="px-xs py-1 rounded bg-surface-variant text-[10px] font-label-sm">8 ejercicios</span></div>
-</div>
-<div class="glass-card p-lg rounded-xl border-l-4 border-l-intermediate cursor-pointer hover:scale-[1.02]" onclick="filterByLevel('intermediate')">
-<div class="flex items-center gap-md mb-md">
-<div class="w-12 h-12 rounded-lg bg-intermediate/20 flex items-center justify-center text-intermediate"><i class="fas fa-code text-xl sm:text-2xl"></i></div>
-<h3 class="font-headline-md text-headline-md text-intermediate">Intermedio</h3>
-</div>
-<p class="text-on-surface-variant font-body-md mb-md">Estructuras: listas, diccionarios, sets, tuplas, comprensión, módulos.</p>
-<div class="flex flex-wrap gap-xs"><span class="px-xs py-1 rounded bg-surface-variant text-[10px] font-label-sm">6 temas</span><span class="px-xs py-1 rounded bg-surface-variant text-[10px] font-label-sm">12 ejercicios</span></div>
-</div>
-<div class="glass-card p-lg rounded-xl border-l-4 border-l-advanced cursor-pointer hover:scale-[1.02]" onclick="filterByLevel('advanced')">
-<div class="flex items-center gap-md mb-md">
-<div class="w-12 h-12 rounded-lg bg-advanced/20 flex items-center justify-center text-advanced"><i class="fas fa-rocket text-xl sm:text-2xl"></i></div>
-<h3 class="font-headline-md text-headline-md text-advanced">Avanzado</h3>
-</div>
-<p class="text-on-surface-variant font-body-md mb-md">POO: clases, herencia, excepciones, archivos, decoradores, generadores.</p>
-<div class="flex flex-wrap gap-xs"><span class="px-xs py-1 rounded bg-surface-variant text-[10px] font-label-sm">8 temas</span><span class="px-xs py-1 rounded bg-surface-variant text-[10px] font-label-sm">10 ejercicios</span></div>
 </div>
 </div>
 </section>
-<!-- Temas Grid -->
-<section id="temas" class="px-4 sm:px-6 py-xl max-w-7xl mx-auto px-4 sm:px-6 scroll-mt-20">
-<div class="mb-xl text-center">
-<h2 class="font-headline-lg text-xl sm:text-2xl sm:text-3xl lg:text-4xl text-on-surface mb-xs">Todos los Temas</h2>
-<p class="text-on-surface-variant">20+ temas organizados por nivel</p>
+
+<!-- Niveles Preview -->
+<section class="px-4 sm:px-6 py-16 sm:py-20 max-w-6xl mx-auto">
+<h2 class="text-2xl sm:text-3xl text-center mb-10" style="font-family: 'Bangers', cursive;">
+<span class="text-on-surface">Elige tu Nivel</span>
+</h2>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+<a href="temas.html?level=beginner" class="glass-card p-6 rounded-xl border-l-4 border-l-beginner hover:scale-[1.02] block">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 rounded-lg bg-beginner/20 flex items-center justify-center text-beginner">
+<i class="fas fa-seedling text-xl"></i>
 </div>
-<div class="flex flex-wrap justify-center gap-sm mb-lg">
-<button class="px-md py-xs rounded-full border border-primary bg-primary/20 text-primary font-label-sm cursor-pointer" onclick="filterByLevel('all')">Todos</button>
-<button class="px-md py-xs rounded-full border border-beginner text-beginner hover:bg-beginner/20 font-label-sm cursor-pointer" onclick="filterByLevel('beginner')">Principiante</button>
-<button class="px-md py-xs rounded-full border border-intermediate text-intermediate hover:bg-intermediate/20 font-label-sm cursor-pointer" onclick="filterByLevel('intermediate')">Intermedio</button>
-<button class="px-md py-xs rounded-full border border-advanced text-advanced hover:bg-advanced/20 font-label-sm cursor-pointer" onclick="filterByLevel('advanced')">Avanzado</button>
+<h3 class="text-xl text-beginner" style="font-family: 'Bangers', cursive;">Principiante</h3>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg" id="topics-grid"></div>
-</section>
-<!-- Sintaxis Section -->
-<section id="sintaxis" class="px-4 sm:px-6 py-xl bg-surface-container-lowest/50 scroll-mt-20">
-<div class="max-w-5xl mx-auto">
-<div class="mb-xl">
-<h2 class="font-headline-lg text-xl sm:text-2xl sm:text-3xl lg:text-4xl text-primary text-center">Laboratorio de Sintaxis</h2>
-<p class="text-on-surface-variant text-center">Ejemplos de código con resaltado de sintaxis</p>
+<p class="text-on-surface-variant text-sm mb-4">Variables, operadores, condicionales, bucles, funciones.</p>
+<div class="text-xs text-beginner">6 temas • 8 ejercicios</div>
+</a>
+<a href="temas.html?level=intermediate" class="glass-card p-6 rounded-xl border-l-4 border-l-intermediate hover:scale-[1.02] block">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 rounded-lg bg-intermediate/20 flex items-center justify-center text-intermediate">
+<i class="fas fa-code text-xl"></i>
 </div>
-<div class="flex flex-wrap justify-center gap-sm mb-lg" id="sintaxis-tabs"></div>
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-lg" id="code-examples-grid"></div>
+<h3 class="text-xl text-intermediate" style="font-family: 'Bangers', cursive;">Intermedio</h3>
 </div>
-</section>
-<!-- Ejercicios Section -->
-<section id="ejercicios" class="px-4 sm:px-6 py-xl max-w-7xl mx-auto px-4 sm:px-6 scroll-mt-20">
-<div class="mb-xl">
-<h2 class="font-headline-lg text-xl sm:text-2xl sm:text-3xl lg:text-4xl text-secondary text-center">Misiones de Entrenamiento</h2>
-<p class="text-on-surface-variant text-center">30+ ejercicios prácticos organizados por nivel</p>
+<p class="text-on-surface-variant text-sm mb-4">Listas, diccionarios, sets, tuplas, módulos.</p>
+<div class="text-xs text-intermediate">6 temas • 12 ejercicios</div>
+</a>
+<a href="temas.html?level=advanced" class="glass-card p-6 rounded-xl border-l-4 border-l-advanced hover:scale-[1.02] block">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 rounded-lg bg-advanced/20 flex items-center justify-center text-advanced">
+<i class="fas fa-rocket text-xl"></i>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md" id="exercises-grid"></div>
-</section>
-<!-- Quiz Section -->
-<section id="quiz" class="px-4 sm:px-6 py-xl bg-surface-container-lowest/50 scroll-mt-20">
-<div class="max-w-4xl mx-auto">
-<div class="text-center mb-xl">
-<h2 class="font-headline-lg text-xl sm:text-2xl sm:text-3xl lg:text-4xl text-on-surface mb-md">Pon a Prueba tus Conocimientos</h2>
-<p class="text-on-surface-variant">25 preguntas de opción múltiple</p>
+<h3 class="text-xl text-advanced" style="font-family: 'Bangers', cursive;">Avanzado</h3>
 </div>
-<div class="glass-card rounded-xl p-lg mb-lg">
-<div id="quiz-container"></div>
-</div>
-<div class="flex justify-center gap-md">
-<button class="bg-tertiary-container text-on-tertiary-container px-xl py-md rounded-xl font-bold neon-glow-pink hover:scale-105 transition-all" onclick="checkAnswers()">Verificar Respuestas</button>
-<button class="border border-outline-variant text-on-surface-variant px-lg py-md rounded-xl font-bold hover:bg-surface-variant/20 transition-all" onclick="resetQuiz()">Reiniciar</button>
-</div>
-<div id="quiz-result" class="hidden mt-lg text-center glass-card p-lg rounded-xl">
-<h3 class="font-headline-md text-primary mb-md">Resultado</h3>
-<p class="font-headline-lg text-secondary" id="score-text"></p>
-<p class="text-on-surface-variant" id="score-message"></p>
-</div>
+<p class="text-on-surface-variant text-sm mb-4">POO, excepciones, archivos, decoradores.</p>
+<div class="text-xs text-advanced">8 temas • 10 ejercicios</div>
+</a>
 </div>
 </section>
+
+<!-- Features -->
+<section class="px-4 sm:px-6 py-16 bg-surface-container-lowest/50">
+<div class="max-w-6xl mx-auto">
+<h2 class="text-2xl sm:text-3xl text-center mb-10" style="font-family: 'Bangers', cursive;">
+<span class="text-primary">Lo que aprenderás</span>
+</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="glass-card p-6 rounded-xl">
+<i class="fas fa-database text-2xl text-secondary mb-3"></i>
+<h4 class="font-bold mb-2">Variables y Tipos</h4>
+<p class="text-on-surface-variant text-sm">int, float, str, bool, type conversion</p>
+</div>
+<div class="glass-card p-6 rounded-xl">
+<i class="fas fa-calculator text-2xl text-primary mb-3"></i>
+<h4 class="font-bold mb-2">Operadores</h4>
+<p class="text-on-surface-variant text-sm">Aritméticos, comparación, lógicos</p>
+</div>
+<div class="glass-card p-6 rounded-xl">
+<i class="fas fa-code-branch text-2xl text-tertiary mb-3"></i>
+<h4 class="font-bold mb-2">Condicionales</h4>
+<p class="text-on-surface-variant text-sm">if, elif, else, match</p>
+</div>
+<div class="glass-card p-6 rounded-xl">
+<i class="fas fa-redo text-2xl text-secondary mb-3"></i>
+<h4 class="font-bold mb-2">Bucles</h4>
+<p class="text-on-surface-variant text-sm">for, while, break, continue</p>
+</div>
+<div class="glass-card p-6 rounded-xl">
+<i class="fas fa-cogs text-2xl text-primary mb-3"></i>
+<h4 class="font-bold mb-2">Funciones</h4>
+<p class="text-on-surface-variant text-sm">def, return, args, kwargs, lambda</p>
+</div>
+<div class="glass-card p-6 rounded-xl">
+<i class="fas fa-project-diagram text-2xl text-tertiary mb-3"></i>
+<h4 class="font-bold mb-2">POO</h4>
+<p class="text-on-surface-variant text-sm">Clases, herencia, polimorfismo</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- CTA -->
+<section class="px-4 sm:px-6 py-16 text-center">
+<div class="max-w-2xl mx-auto">
+<h2 class="text-2xl sm:text-3xl mb-4" style="font-family: 'Bangers', cursive;">
+<span class="text-on-surface">¿Listo para aprender?</span>
+</h2>
+<p class="text-on-surface-variant mb-8">Empieza ahora gratis. No necesitas instalación.</p>
+<a href="temas.html" class="inline-block bg-tertiary-container text-on-tertiary-container px-8 py-4 rounded-xl font-bold neon-glow-pink hover:scale-105 transition-all">
+Comenzar Gratis
+</a>
+</div>
+</section>
+
 <!-- Footer -->
-<footer class="w-full py-xl bg-surface-container-lowest border-t border-outline-variant flex flex-col items-center justify-center space-y-md px-4 sm:px-6 text-center">
-<span class="font-headline-md text-primary text-xl sm:text-2xl">PYTHON PORTAL</span>
-<p class="font-body-md text-body-md text-on-surface-variant max-w-md mx-auto">Guía de Python 100% gratis para aprender programación.</p>
-<div class="flex gap-md mt-md">
-<a class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant hover:bg-primary hover:text-on-primary transition-all" href="https://github.com/gpb-codes" target="_blank"><i class="fab fa-github"></i></a>
+<footer class="px-4 sm:px-6 py-12 bg-surface-container-lowest border-t border-outline-variant text-center">
+<p class="text-on-surface-variant mb-4">© 2024 Python Portal - Gabriel Pedreros</p>
+<div class="flex justify-center gap-4">
+<a href="https://github.com/gpb-codes" target="_blank" class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant hover:bg-primary hover:text-on-primary transition-all">
+<i class="fab fa-github"></i>
+</a>
 </div>
-<p class="text-on-surface-variant text-sm">© 2024 Python Portal - Gabriel Pedreros</p>
 </footer>
-</main>
-<script src="data.js"></script>
+
 <script>
-let currentEngine = 'three';
-        let activeTab = 'variables';
-        let currentLevel = 'all';
-        
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        }
-        
-        function renderCodeExamples() {
-            const container = document.getElementById('code-examples-grid');
-            const examples = data.codeExamples[activeTab] || [];
-            
-            if (examples.length === 0) {
-                container.innerHTML = '<p class="text-on-surface-variant">Selecciona una pestaña para ver ejemplos</p>';
-                return;
-            }
-            
-            container.innerHTML = examples.map(ex => `
-                <div class="glass-card rounded-xl overflow-hidden">
-                    <div class="bg-surface-container-high px-md py-sm flex items-center justify-between border-b border-outline-variant">
-                        <div class="flex gap-2">
-                            <div class="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
-                            <div class="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
-                            <div class="w-3 h-3 rounded-full bg-[#27c93f]"></div>
-                        </div>
-                        <div class="text-on-surface-variant font-label-sm">${ex.title}</div>
-                        <span class="px-xs py-xs rounded bg-${ex.level === 'beginner' ? 'beginner' : ex.level === 'intermediate' ? 'intermediate' : 'advanced'}/20 text-[10px] font-label-sm text-${ex.level === 'beginner' ? 'beginner' : ex.level === 'intermediate' ? 'intermediate' : 'advanced'}">${ex.level}</span>
-                    </div>
-                    <pre class="p-md font-code-block text-code-block overflow-x-auto text-sm"><code class="language-python">${escapeHtml(ex.code)}</code></pre>
-                </div>
-            `).join('');
-            
-            Prism.highlightAll();
-        }
-        
-        function escapeHtml(code) {
-            return code
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;');
-        }
-        
-        function renderTopics(level = 'all') {
-            const container = document.getElementById('topics-grid');
-            const topics = level === 'all' ? data.topics : data.topics.filter(t => t.level === level);
-            
-            const colors = { beginner: 'beginner', intermediate: 'intermediate', advanced: 'advanced' };
-            const icons = { beginner: 'fa-seedling', intermediate: 'fa-code', advanced: 'fa-rocket' };
-            
-            container.innerHTML = topics.map(topic => `
-                <div class="glass-card p-md rounded-xl border-l-4 border-l-${colors[topic.level]} cursor-pointer hover:scale-[1.02]" onclick="showCodeTab('${topic.title.toLowerCase()}')">
-                    <div class="flex items-center gap-md mb-md">
-                        <div class="w-10 h-10 rounded-lg bg-${colors[topic.level]}/20 flex items-center justify-center text-${colors[topic.level]}">
-                            <i class="fas ${topic.icon}"></i>
-                        </div>
-                        <h3 class="font-headline-md text-headline-md text-${colors[topic.level]}">${topic.title}</h3>
-                    </div>
-                    <p class="text-on-surface-variant font-body-md mb-md">${topic.description}</p>
-                    <div class="flex flex-wrap gap-xs">
-                        ${topic.tags.slice(0, 3).map(tag => `<span class="px-xs py-1 rounded bg-surface-variant text-[10px] font-label-sm">${tag}</span>`).join('')}
-                    </div>
-                </div>
-            `).join('');
-        }
-        
-        function renderSintaxisTabs() {
-            const container = document.getElementById('sintaxis-tabs');
-            const tabs = data.tabs.slice(0, 12);
-            
-            container.innerHTML = tabs.map(tab => `
-                <button class="px-md py-xs rounded-full border ${activeTab === tab ? 'tab-active' : 'border-outline-variant text-on-surface-variant hover:border-primary'} font-label-sm cursor-pointer" onclick="showCodeTab('${tab}')">${tab.charAt(0).toUpperCase() + tab.slice(1)}</button>
-            `).join('');
-        }
-        
-        function showCodeTab(tabName) {
-            activeTab = tabName;
-            renderSintaxisTabs();
-            renderCodeExamples();
-            document.getElementById('sintaxis').scrollIntoView({ behavior: 'smooth' });
-        }
-        
-        function renderExercises() {
-            const container = document.getElementById('exercises-grid');
-            
-            container.innerHTML = data.exercises.map(ex => `
-                <div class="glass-card p-md rounded-xl border-l-4 border-l-${ex.difficulty === 'beginner' ? 'beginner' : ex.difficulty === 'intermediate' ? 'intermediate' : 'advanced'}">
-                    <div class="flex justify-between items-start mb-md">
-                        <span class="font-headline-md text-headline-md text-${ex.difficulty === 'beginner' ? 'beginner' : ex.difficulty === 'intermediate' ? 'intermediate' : 'advanced'}">Nivel ${ex.level}</span>
-                        <span class="px-xs py-xs rounded ${ex.difficulty === 'beginner' ? 'bg-beginner/20' : ex.difficulty === 'intermediate' ? 'bg-intermediate/20' : 'bg-advanced/20'} text-[10px] font-label-sm text-${ex.difficulty === 'beginner' ? 'beginner' : ex.difficulty === 'intermediate' ? 'intermediate' : 'advanced'}">${ex.difficulty}</span>
-                    </div>
-                    <h4 class="font-headline-md text-headline-md text-on-surface mb-xs">${ex.title}</h4>
-                    <p class="text-on-surface-variant font-body-md text-sm mb-md">${ex.description}</p>
-                    <div class="flex flex-wrap gap-xs">
-                        ${ex.tags.slice(0, 3).map(tag => `<span class="px-xs py-1 rounded bg-surface-variant text-[10px] font-label-sm">${tag}</span>`).join('')}
-                    </div>
-                </div>
-            `).join('');
-        }
-        
-        let answers = {};
-        
-        function renderQuiz() {
-            const container = document.getElementById('quiz-container');
-            
-            container.innerHTML = data.quiz.map((q, i) => `
-                <div class="mb-lg">
-                    <h4 class="font-semibold text-on-surface mb-md flex items-start gap-sm">
-                        <span class="w-6 h-6 rounded-lg bg-primary-container flex items-center justify-center text-xs font-bold flex-shrink-0">${i + 1}</span>
-                        ${q.question}
-                    </h4>
-                    <div class="space-y-xs">
-                        ${q.options.map((opt, j) => `
-                            <div class="quiz-option p-sm rounded-lg border ${answers[i] === j ? 'border-primary bg-primary/10' : 'border-outline-variant hover:border-primary'} cursor-pointer transition-all" onclick="selectOption(${i}, ${j})">
-                                <span class="text-on-surface-variant ${answers[i] === j ? 'text-primary' : ''}">${opt}</span>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            `).join('');
-        }
-        
-        function selectOption(qIndex, optIndex) {
-            answers[qIndex] = optIndex;
-            renderQuiz();
-        }
-        
-        function checkAnswers() {
-            let score = 0;
-            
-            data.quiz.forEach((q, i) => {
-                if (answers[i] === q.correct) score++;
-            });
-            
-            const percentage = (score / data.quiz.length) * 100;
-            document.getElementById('score-text').textContent = `${score}/${data.quiz.length} (${Math.round(percentage)}%)`;
-            
-            let message = '';
-            if (percentage >= 80) message = '¡Excelente! Dominas Python perfectamente!';
-            else if (percentage >= 60) message = '¡Muy bien! Tienes un buen conocimiento.';
-            else if (percentage >= 40) message = 'Bien, pero puedes mejorar.';
-            else message = 'Sigue estudiando los temas basics.';
-            
-            document.getElementById('score-message').textContent = message;
-            document.getElementById('quiz-result').classList.remove('hidden');
-        }
-        
-        function resetQuiz() {
-            answers = {};
-            document.getElementById('quiz-result').classList.add('hidden');
-            renderQuiz();
-        }
-        
-        function filterByLevel(level) {
-            currentLevel = level;
-            renderTopics(level);
-            document.getElementById('temas').scrollIntoView({ behavior: 'smooth' });
-        }
-        
-        function showSection(section) {
-            document.getElementById(section).scrollIntoView({ behavior: 'smooth' });
-        }
-        
-        function toggleEngine(engine) {
-            currentEngine = engine;
-            
-            if (engine === 'three') {
-                document.getElementById('three-canvas').style.opacity = '1';
-                document.getElementById('babylon-canvas').style.opacity = '0';
-                animateThree();
-            } else {
-                document.getElementById('three-canvas').style.opacity = '0';
-                document.getElementById('babylon-canvas').style.opacity = '1';
-                if (!babylonScene) initBabylon();
-            }
-        }
-        
-        // Three.js
-        const threeCanvas = document.getElementById('three-canvas');
-        const threeScene = new THREE.Scene();
-        const threeCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
-        threeCamera.position.z = 50;
-        
-        const threeRenderer = new THREE.WebGLRenderer({ canvas: threeCanvas, antialias: true, alpha: true });
-        threeRenderer.setSize(window.innerWidth, window.innerHeight);
-        
-        const starsGeometry = new THREE.BufferGeometry();
-        const starsCount = 5000;
-        const starsPos = new Float32Array(starsCount * 3);
-        
-        for (let i = 0; i < starsCount * 3; i += 3) {
-            starsPos[i] = (Math.random() - 0.5) * 400;
-            starsPos[i + 1] = (Math.random() - 0.5) * 400;
-            starsPos[i + 2] = (Math.random() - 0.5) * 200;
-        }
-        
-        starsGeometry.setAttribute('position', new THREE.BufferAttribute(starsPos, 3));
-        const starsMaterial = new THREE.PointsMaterial({ size: 0.5, color: 0xffffff, transparent: true, opacity: 0.8 });
-        const stars = new THREE.Points(starsGeometry, starsMaterial);
-        threeScene.add(stars);
-        
-        const particlesGeometry = new THREE.BufferGeometry();
-        const particlesCount = 4000;
-        const posArray = new Float32Array(particlesCount * 3);
-        const colorArray = new Float32Array(particlesCount * 3);
-        
-        const colors = [new THREE.Color(0xddb7ff), new THREE.Color(0xf751a1), new THREE.Color(0xffe083)];
-        
-        for (let i = 0; i < particlesCount * 3; i += 3) {
-            posArray[i] = (Math.random() - 0.5) * 150;
-            posArray[i + 1] = (Math.random() - 0.5) * 150;
-            posArray[i + 2] = (Math.random() - 0.5) * 80;
-            
-            const color = colors[Math.floor(Math.random() * colors.length)];
-            colorArray[i] = color.r;
-            colorArray[i + 1] = color.g;
-            colorArray[i + 2] = color.b;
-        }
-        
-        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-        particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colorArray, 3));
-        
-        const particlesMaterial = new THREE.PointsMaterial({
-            size: 0.08, vertexColors: true, transparent: true, opacity: 0.8, blending: THREE.AdditiveBlending
-        });
-        
-        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-        threeScene.add(particlesMesh);
-        
-        let mouseX = 0, mouseY = 0, targetX = 0, targetY = 0;
-        
-        document.addEventListener('mousemove', (event) => {
-            mouseX = (event.clientX - window.innerWidth / 2) * 0.0005;
-            mouseY = (event.clientY - window.innerHeight / 2) * 0.0005;
-        });
-        
-        let threeTime = 0;
-        function animateThree() {
-            if (currentEngine !== 'three') return;
-            
-            requestAnimationFrame(animateThree);
-            threeTime += 0.0005;
-            
-            targetX += (mouseX - targetX) * 0.05;
-            targetY += (mouseY - targetY) * 0.05;
-            
-            particlesMesh.rotation.y = threeTime * 0.3 + targetX * 20;
-            particlesMesh.rotation.x = threeTime * 0.1 + targetY * 20;
-            stars.rotation.y = threeTime * 0.01;
-            
-            threeRenderer.render(threeScene, threeCamera);
-        }
-        
-        // Babylon.js
-        const babylonCanvas = document.getElementById('babylon-canvas');
-        const babylonEngine = new BABYLON.Engine(babylonCanvas, true);
-        let babylonScene = null;
-        
-        function createBabylonScene() {
-            const scene = new BABYLON.Scene(babylonEngine);
-            scene.clearColor = new BABYLON.Color4(0, 0, 0, 0);
-            
-            const camera = new BABYLON.ArcRotateCamera("camera", -Math.PI / 2, Math.PI / 2.5, 50, BABYLON.Vector3.Zero(), scene);
-            
-            const particleSystem = new BABYLON.ParticleSystem("particles", 4000, scene);
-            particleSystem.particleTexture = new BABYLON.Texture("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdv8GQAAAA0SURBVChTY/wPBAxQmgFKJ0L+/0Gqxkj0RqbKgkANLFS5Bf8htYjRhFaZQPf/LRBDaiFke8BWBhD1gawMIGsDWRlA1gayMjCcAQA3XQ0RD7qQeQAAAABJRU5ErkJggg==", scene);
-            
-            particleSystem.emitter = new BABYLON.Vector3(0, 0, 0);
-            particleSystem.minEmitBox = new BABYLON.Vector3(-50, -50, -20);
-            particleSystem.maxEmitBox = new BABYLON.Vector3(50, 50, 20);
-            
-            particleSystem.color1 = new BABYLON.Color4(0.86, 0.72, 1, 1);
-            particleSystem.color2 = new BABYLON.Color4(0.97, 0.32, 0.63, 1);
-            particleSystem.colorDead = new BABYLON.Color4(1, 0.88, 0.51, 0);
-            
-            particleSystem.minSize = 0.1;
-            particleSystem.maxSize = 0.3;
-            particleSystem.minLifeTime = 5;
-            particleSystem.maxLifeTime = 10;
-            particleSystem.emitRate = 500;
-            particleSystem.blendMode = BABYLON.ParticleSystem.BLENDMODE_ADD;
-            particleSystem.start();
-            
-            return scene;
-        }
-        
-        function initBabylon() {
-            babylonScene = createBabylonScene();
-            
-            babylonEngine.runRenderLoop(function() {
-                if (currentEngine === 'babylon' && babylonScene) {
-                    babylonScene.render();
-                }
-            });
-        }
-        
-        window.addEventListener('resize', () => {
-            threeCamera.aspect = window.innerWidth / window.innerHeight;
-            threeCamera.updateProjectionMatrix();
-            threeRenderer.setSize(window.innerWidth, window.innerHeight);
-            babylonEngine.resize();
-        });
-        
-        // Initialize
-        renderTopics();
-        renderSintaxisTabs();
-        renderCodeExamples();
-        renderExercises();
-        renderQuiz();
-        animateThree();
-    </script>
-</body></html>
+// Mobile Menu
+function toggleMenu() {
+document.getElementById('mobile-menu').classList.toggle('hidden');
+}
+
+// Three.js Background
+const canvas = document.getElementById('three-canvas');
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
+camera.position.z = 50;
+
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+// Stars
+const starsGeometry = new THREE.BufferGeometry();
+const starsCount = 5000;
+const starsPos = new Float32Array(starsCount * 3);
+
+for (let i = 0; i < starsCount * 3; i += 3) {
+starsPos[i] = (Math.random() - 0.5) * 400;
+starsPos[i + 1] = (Math.random() - 0.5) * 400;
+starsPos[i + 2] = (Math.random() - 0.5) * 200;
+}
+
+starsGeometry.setAttribute('position', new THREE.BufferAttribute(starsPos, 3));
+const starsMaterial = new THREE.PointsMaterial({ size: 0.5, color: 0xffffff, transparent: true, opacity: 0.8 });
+const stars = new THREE.Points(starsGeometry, starsMaterial);
+scene.add(stars);
+
+// Particles
+const particlesGeometry = new THREE.BufferGeometry();
+const particlesCount = 4000;
+const posArray = new Float32Array(particlesCount * 3);
+const colorArray = new Float32Array(particlesCount * 3);
+
+const colors = [new THREE.Color(0xddb7ff), new THREE.Color(0xf751a1), new THREE.Color(0xffe083)];
+
+for (let i = 0; i < particlesCount * 3; i += 3) {
+posArray[i] = (Math.random() - 0.5) * 150;
+posArray[i + 1] = (Math.random() - 0.5) * 150;
+posArray[i + 2] = (Math.random() - 0.5) * 80;
+
+const color = colors[Math.floor(Math.random() * colors.length)];
+colorArray[i] = color.r;
+colorArray[i + 1] = color.g;
+colorArray[i + 2] = color.b;
+}
+
+particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colorArray, 3));
+
+const particlesMaterial = new THREE.PointsMaterial({
+size: 0.08,
+vertexColors: true,
+transparent: true,
+opacity: 0.8,
+blending: THREE.AdditiveBlending
+});
+
+const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+scene.add(particlesMesh);
+
+// Mouse
+let mouseX = 0, mouseY = 0, targetX = 0, targetY = 0;
+
+document.addEventListener('mousemove', (event) => {
+mouseX = (event.clientX - window.innerWidth / 2) * 0.0005;
+mouseY = (event.clientY - window.innerHeight / 2) * 0.0005;
+});
+
+let time = 0;
+function animate() {
+requestAnimationFrame(animate);
+time += 0.0005;
+
+targetX += (mouseX - targetX) * 0.05;
+targetY += (mouseY - targetY) * 0.05;
+
+particlesMesh.rotation.y = time * 0.3 + targetX * 20;
+particlesMesh.rotation.x = time * 0.1 + targetY * 20;
+stars.rotation.y = time * 0.01;
+
+renderer.render(scene, camera);
+}
+
+animate();
+
+window.addEventListener('resize', () => {
+camera.aspect = window.innerWidth / window.innerHeight;
+camera.updateProjectionMatrix();
+renderer.setSize(window.innerWidth, window.innerHeight);
+});
+</script>
+</body>
+</html>

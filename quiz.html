@@ -121,23 +121,35 @@
     </style>
 </head>
 <body class="text-on-surface font-body-md overflow-x-hidden">
-<nav class="fixed top-0 w-full z-50 bg-surface/30 backdrop-blur-lg border-b border-primary/20 shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
-    <div class="flex justify-between items-center w-full px-gutter max-w-full mx-auto h-16">
-        <a href="index.html" class="flex items-center gap-3">
-            <span class="material-symbols-outlined text-primary text-3xl">code</span>
-            <div>
-                <div class="font-display-xl text-primary drop-shadow-[0_0_8px_rgba(221,183,255,0.8)]">PYTHON</div>
-                <p class="text-[10px] text-on-surface-variant -mt-1">Portal de Aprendizaje</p>
-            </div>
-        </a>
-        <a href="index.html" class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors font-label-sm">
-            <span class="material-symbols-outlined">arrow_back</span>
-            <span>Volver</span>
-        </a>
-    </div>
+<!-- Header -->
+<header class="fixed top-0 w-full z-50 bg-surface/30 backdrop-blur-lg border-b border-primary/20">
+<nav class="flex justify-between items-center px-4 sm:px-6 max-w-7xl mx-auto h-16">
+<a href="index.html" class="flex items-center gap-3">
+<span class="text-primary text-xl sm:text-2xl font-bold" style="font-family: 'Bangers', cursive;">PYTHON PORTAL</span>
+</a>
+<div class="hidden md:flex items-center gap-4 sm:gap-6">
+<a href="temas.html" class="text-on-surface-variant hover:text-primary text-sm">Temas</a>
+<a href="sintaxis.html" class="text-on-surface-variant hover:text-primary text-sm">Sintaxis</a>
+<a href="ejercicios.html" class="text-on-surface-variant hover:text-primary text-sm">Ejercicios</a>
+<a href="quiz.html" class="text-secondary font-bold border-b-2 border-secondary text-sm">Quiz</a>
+</div>
+<button class="md:hidden p-2 text-on-surface-variant" onclick="toggleMenu()">
+<span class="material-symbols-outlined">menu</span>
+</button>
 </nav>
+</header>
 
-<main class="pt-24 pb-12 px-gutter max-w-5xl mx-auto flex flex-col items-center">
+<div id="mobile-menu" class="fixed inset-0 z-40 bg-surface/95 hidden flex-col items-center justify-center space-y-8">
+<button onclick="toggleMenu()" class="absolute top-4 right-4 p-2 text-on-surface-variant">
+<span class="material-symbols-outlined">close</span>
+</button>
+<a href="index.html" onclick="toggleMenu()" class="text-2xl">Inicio</a>
+<a href="temas.html" onclick="toggleMenu()" class="text-2xl">Temas</a>
+<a href="sintaxis.html" onclick="toggleMenu()" class="text-2xl">Sintaxis</a>
+<a href="ejercicios.html" onclick="toggleMenu()" class="text-2xl">Ejercicios</a>
+</div>
+
+<main class="pt-20 px-4 sm:px-6 py-8 max-w-4xl mx-auto">
     <div class="w-full mb-lg space-y-sm">
         <div class="flex justify-between items-end mb-xs">
             <span class="font-label-sm text-primary tracking-widest uppercase">Sincronizacion del Portal</span>
@@ -336,7 +348,14 @@
         renderQuiz();
     }
 
-    document.addEventListener('DOMContentLoaded', renderQuiz);
+    document.addEventListener('DOMContentLoaded', () => {
+    renderQuiz();
+    
+    // Add toggleMenu function
+    window.toggleMenu = function() {
+        document.getElementById('mobile-menu').classList.toggle('hidden');
+    };
+});
 </script>
 </body>
 </html>
