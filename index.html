@@ -208,9 +208,9 @@
 <canvas id="babylon-canvas"></canvas>
 <!-- TopNavBar -->
 <header class="fixed top-0 w-full z-50 bg-surface/30 backdrop-blur-lg border-b border-primary/20 shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
-<nav class="flex justify-between items-center w-full px-gutter max-w-full mx-auto h-16">
+<nav class="flex justify-between items-center w-full px-4 max-w-full mx-auto h-16">
 <div class="flex items-center gap-4">
-<span class="font-display-xl text-primary drop-shadow-[0_0_8px_rgba(221,183,255,0.8)] text-[32px] leading-none cursor-pointer" onclick="showSection('inicio')">PYTHON PORTAL</span>
+<span class="font-display-xl text-primary drop-shadow-[0_0_8px_rgba(221,183,255,0.8)] text-xl sm:text-2xl sm:text-[32px] leading-none cursor-pointer" onclick="showSection('inicio')">PYTHON PORTAL</span>
 </div>
 <div class="hidden md:flex items-center space-x-lg">
 <a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm cursor-pointer" onclick="showSection('temas')">Temas</a>
@@ -218,16 +218,32 @@
 <a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm cursor-pointer" onclick="showSection('ejercicios')">Ejercicios</a>
 <a class="text-secondary font-bold border-b-2 border-secondary pb-1 font-label-sm cursor-pointer" onclick="showSection('quiz')">Quiz</a>
 </div>
+<button class="md:hidden p-2 text-on-surface-variant" onclick="toggleMobileMenu()">
+<span class="material-symbols-outlined">menu</span>
+</button>
 </nav>
 </header>
-<main class="lg:ml-0 pt-16">
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="fixed inset-0 z-40 bg-surface/95 backdrop-blur-lg hidden transform transition-transform duration-300">
+<div class="flex flex-col items-center justify-center h-full space-y-8 pt-20">
+<button onclick="showSection('inicio'); toggleMobileMenu()" class="text-xl sm:text-2xl text-on-surface">Inicio</button>
+<button onclick="showSection('temas'); toggleMobileMenu()" class="text-xl sm:text-2xl text-on-surface">Temas</button>
+<button onclick="showSection('sintaxis'); toggleMobileMenu()" class="text-xl sm:text-2xl text-on-surface">Sintaxis</button>
+<button onclick="showSection('ejercicios'); toggleMobileMenu()" class="text-xl sm:text-2xl text-on-surface">Ejercicios</button>
+<button onclick="showSection('quiz'); toggleMobileMenu()" class="text-xl sm:text-2xl text-secondary">Quiz</button>
+<button onclick="toggleMobileMenu()" class="absolute top-4 right-4 p-2 text-on-surface-variant">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+</div>
+<main class="pt-16">
 <!-- Hero Section -->
-<section id="inicio" class="portal-bg min-h-screen flex flex-col items-center justify-center text-center px-gutter py-xl">
+<section id="inicio" class="portal-bg min-h-screen flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
 <div class="max-w-4xl z-10">
 <div class="mb-md inline-block px-md py-xs rounded-full bg-surface-container-high border border-primary/30 text-primary font-label-sm">
                     GUÍA COMPLETA 100% Gratis
                 </div>
-<h1 class="font-display-xl text-display-xl mb-md tracking-widest flex flex-col gap-sm">
+<h1 class="font-display-xl text-3xl sm:text-4xl lg:text-5xl mb-md tracking-widest flex flex-col gap-sm">
 <span class="text-primary drop-shadow-[0_0_20px_rgba(221,183,255,0.6)]">PROGRAMACIÓN</span>
 <span class="text-secondary drop-shadow-[0_0_20px_rgba(238,194,0,0.6)]">PYTHON</span>
 </h1>
@@ -250,15 +266,15 @@
 </div>
 </section>
 <!-- Niveles Section -->
-<section class="px-gutter py-xl max-w-7xl mx-auto">
+<section class="px-4 sm:px-6 py-xl max-w-7xl mx-auto px-4 sm:px-6">
 <div class="mb-xl text-center">
-<h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Elige tu Nivel</h2>
+<h2 class="font-headline-lg text-xl sm:text-2xl sm:text-3xl lg:text-4xl text-on-surface mb-xs">Elige tu Nivel</h2>
 <div class="w-24 h-1 bg-primary mx-auto rounded-full"></div>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-3 gap-lg mb-xl">
 <div class="glass-card p-lg rounded-xl border-l-4 border-l-beginner cursor-pointer hover:scale-[1.02]" onclick="filterByLevel('beginner')">
 <div class="flex items-center gap-md mb-md">
-<div class="w-12 h-12 rounded-lg bg-beginner/20 flex items-center justify-center text-beginner"><i class="fas fa-seedling text-2xl"></i></div>
+<div class="w-12 h-12 rounded-lg bg-beginner/20 flex items-center justify-center text-beginner"><i class="fas fa-seedling text-xl sm:text-2xl"></i></div>
 <h3 class="font-headline-md text-headline-md text-beginner">Principiante</h3>
 </div>
 <p class="text-on-surface-variant font-body-md mb-md">Fundamentos: variables, operadores, condicionales, bucles, funciones básicas.</p>
@@ -266,7 +282,7 @@
 </div>
 <div class="glass-card p-lg rounded-xl border-l-4 border-l-intermediate cursor-pointer hover:scale-[1.02]" onclick="filterByLevel('intermediate')">
 <div class="flex items-center gap-md mb-md">
-<div class="w-12 h-12 rounded-lg bg-intermediate/20 flex items-center justify-center text-intermediate"><i class="fas fa-code text-2xl"></i></div>
+<div class="w-12 h-12 rounded-lg bg-intermediate/20 flex items-center justify-center text-intermediate"><i class="fas fa-code text-xl sm:text-2xl"></i></div>
 <h3 class="font-headline-md text-headline-md text-intermediate">Intermedio</h3>
 </div>
 <p class="text-on-surface-variant font-body-md mb-md">Estructuras: listas, diccionarios, sets, tuplas, comprensión, módulos.</p>
@@ -274,7 +290,7 @@
 </div>
 <div class="glass-card p-lg rounded-xl border-l-4 border-l-advanced cursor-pointer hover:scale-[1.02]" onclick="filterByLevel('advanced')">
 <div class="flex items-center gap-md mb-md">
-<div class="w-12 h-12 rounded-lg bg-advanced/20 flex items-center justify-center text-advanced"><i class="fas fa-rocket text-2xl"></i></div>
+<div class="w-12 h-12 rounded-lg bg-advanced/20 flex items-center justify-center text-advanced"><i class="fas fa-rocket text-xl sm:text-2xl"></i></div>
 <h3 class="font-headline-md text-headline-md text-advanced">Avanzado</h3>
 </div>
 <p class="text-on-surface-variant font-body-md mb-md">POO: clases, herencia, excepciones, archivos, decoradores, generadores.</p>
@@ -283,9 +299,9 @@
 </div>
 </section>
 <!-- Temas Grid -->
-<section id="temas" class="px-gutter py-xl max-w-7xl mx-auto scroll-mt-20">
+<section id="temas" class="px-4 sm:px-6 py-xl max-w-7xl mx-auto px-4 sm:px-6 scroll-mt-20">
 <div class="mb-xl text-center">
-<h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Todos los Temas</h2>
+<h2 class="font-headline-lg text-xl sm:text-2xl sm:text-3xl lg:text-4xl text-on-surface mb-xs">Todos los Temas</h2>
 <p class="text-on-surface-variant">20+ temas organizados por nivel</p>
 </div>
 <div class="flex flex-wrap justify-center gap-sm mb-lg">
@@ -297,10 +313,10 @@
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg" id="topics-grid"></div>
 </section>
 <!-- Sintaxis Section -->
-<section id="sintaxis" class="px-gutter py-xl bg-surface-container-lowest/50 scroll-mt-20">
+<section id="sintaxis" class="px-4 sm:px-6 py-xl bg-surface-container-lowest/50 scroll-mt-20">
 <div class="max-w-5xl mx-auto">
 <div class="mb-xl">
-<h2 class="font-headline-lg text-headline-lg text-primary text-center">Laboratorio de Sintaxis</h2>
+<h2 class="font-headline-lg text-xl sm:text-2xl sm:text-3xl lg:text-4xl text-primary text-center">Laboratorio de Sintaxis</h2>
 <p class="text-on-surface-variant text-center">Ejemplos de código con resaltado de sintaxis</p>
 </div>
 <div class="flex flex-wrap justify-center gap-sm mb-lg" id="sintaxis-tabs"></div>
@@ -308,18 +324,18 @@
 </div>
 </section>
 <!-- Ejercicios Section -->
-<section id="ejercicios" class="px-gutter py-xl max-w-7xl mx-auto scroll-mt-20">
+<section id="ejercicios" class="px-4 sm:px-6 py-xl max-w-7xl mx-auto px-4 sm:px-6 scroll-mt-20">
 <div class="mb-xl">
-<h2 class="font-headline-lg text-headline-lg text-secondary text-center">Misiones de Entrenamiento</h2>
+<h2 class="font-headline-lg text-xl sm:text-2xl sm:text-3xl lg:text-4xl text-secondary text-center">Misiones de Entrenamiento</h2>
 <p class="text-on-surface-variant text-center">30+ ejercicios prácticos organizados por nivel</p>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md" id="exercises-grid"></div>
 </section>
 <!-- Quiz Section -->
-<section id="quiz" class="px-gutter py-xl bg-surface-container-lowest/50 scroll-mt-20">
+<section id="quiz" class="px-4 sm:px-6 py-xl bg-surface-container-lowest/50 scroll-mt-20">
 <div class="max-w-4xl mx-auto">
 <div class="text-center mb-xl">
-<h2 class="font-headline-lg text-headline-lg text-on-surface mb-md">Pon a Prueba tus Conocimientos</h2>
+<h2 class="font-headline-lg text-xl sm:text-2xl sm:text-3xl lg:text-4xl text-on-surface mb-md">Pon a Prueba tus Conocimientos</h2>
 <p class="text-on-surface-variant">25 preguntas de opción múltiple</p>
 </div>
 <div class="glass-card rounded-xl p-lg mb-lg">
@@ -337,8 +353,8 @@
 </div>
 </section>
 <!-- Footer -->
-<footer class="w-full py-xl bg-surface-container-lowest border-t border-outline-variant flex flex-col items-center justify-center space-y-md px-gutter text-center">
-<span class="font-headline-md text-primary text-2xl">PYTHON PORTAL</span>
+<footer class="w-full py-xl bg-surface-container-lowest border-t border-outline-variant flex flex-col items-center justify-center space-y-md px-4 sm:px-6 text-center">
+<span class="font-headline-md text-primary text-xl sm:text-2xl">PYTHON PORTAL</span>
 <p class="font-body-md text-body-md text-on-surface-variant max-w-md mx-auto">Guía de Python 100% gratis para aprender programación.</p>
 <div class="flex gap-md mt-md">
 <a class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant hover:bg-primary hover:text-on-primary transition-all" href="https://github.com/gpb-codes" target="_blank"><i class="fab fa-github"></i></a>
@@ -346,17 +362,18 @@
 <p class="text-on-surface-variant text-sm">© 2024 Python Portal - Gabriel Pedreros</p>
 </footer>
 </main>
-<!-- Floating Action Button -->
-<button class="fixed bottom-margin right-margin w-16 h-16 rounded-full bg-primary-container text-on-primary-container shadow-2xl flex items-center justify-center z-50 hover:scale-110 active:scale-95 transition-all md:hidden">
-<span class="material-symbols-outlined text-3xl">menu</span>
-</button>
 <script src="data.js"></script>
 <script>
-        let currentEngine = 'three';
+let currentEngine = 'three';
         let activeTab = 'variables';
         let currentLevel = 'all';
         
-function renderCodeExamples() {
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+        
+        function renderCodeExamples() {
             const container = document.getElementById('code-examples-grid');
             const examples = data.codeExamples[activeTab] || [];
             
