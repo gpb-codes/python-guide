@@ -1741,22 +1741,28 @@ texto = json.dumps(datos)</code></pre>
                             <div class="code-body">
                                 <textarea id="codeEditor"
                                     class="w-full h-48 bg-transparent text-white font-mono text-sm resize-none outline-none"
-                                    spellcheck="false"># Escribe tu código aquí
-nombre = input("¿Tu nombre? ")
-print(f"¡Hola {nombre}!")
+                                    spellcheck="false"># Ejemplo: Calculadora de Promedio
+print("=== Calculadora de Promedio ===")
 
-# Calcula el promedio de 3 notas
-nota1 = float(input("Nota 1: "))
-nota2 = float(input("Nota 2: "))
-nota3 = float(input("Nota 3: "))
+# Notas predefinidas
+nota1 = 70
+nota2 = 80
+nota3 = 90
 
+# Calcular promedio
 promedio = (nota1 + nota2 + nota3) / 3
-print(f"Tu promedio es: {promedio:.2f}")
 
-if promedio >= 4:
-    print("¡Aprobaste!")
+# Mostrar resultado
+print("Nota 1: " + str(nota1))
+print("Nota 2: " + str(nota2))
+print("Nota 3: " + str(nota3))
+print("Promedio: " + str(round(promedio, 2)))
+
+# Determinar si aprueba
+if promedio >= 70:
+    print("Felicitaciones, aprobaste!")
 else:
-    print("Reprobaste. ¡Intenta de nuevo!")</textarea>
+    print("Reprobaste. Intenta de nuevo!")</textarea>
                             </div>
                         </div>
 
@@ -1877,11 +1883,11 @@ else:
         const codeExamples = [
             `# Ejemplo 1: Hola Mundo
 nombre = "Gabriel"
-print(f"¡Hola {nombre}!")
+print("Hola " + nombre)
 
 # Variables
 edad = 25
-print(f"Tengo {edad} años")
+print("Tengo " + str(edad) + " anios")
 
 # Condicional
 if edad >= 18:
@@ -1892,7 +1898,7 @@ else:
             `# Ejemplo 2: Calculadora de Promedio
 print("=== Calculadora de Promedio ===")
 
-# Notas predefinidas (para browser)
+# Notas predefinidas
 nota1 = 70
 nota2 = 80
 nota3 = 90
@@ -1901,16 +1907,16 @@ nota3 = 90
 promedio = (nota1 + nota2 + nota3) / 3
 
 # Mostrar resultado
-print(f"Nota 1: {nota1}")
-print(f"Nota 2: {nota2}")
-print(f"Nota 3: {nota3}")
-print(f"Promedio: {promedio:.2f}")
+print("Nota 1: " + str(nota1))
+print("Nota 2: " + str(nota2))
+print("Nota 3: " + str(nota3))
+print("Promedio: " + str(round(promedio, 2)))
 
 # Determinar si aprueba
 if promedio >= 70:
-    print("¡Felicitaciones, aprobaste!")
+    print("Felicitaciones, aprobaste!")
 else:
-    print("Reprobaste. ¡Intenta de nuevo!")`,
+    print("Reprobaste. Intenta de nuevo!")`,
 
             `# Ejemplo 3: Listas y Ciclos
 print("=== Ejemplo con Listas ===")
@@ -1920,16 +1926,16 @@ nombres = ["Ana", "Bob", "Carla", "Diana"]
 
 # Iterar con for
 for nombre in nombres:
-    print(f"Hola {nombre}!")
+    print("Hola " + nombre)
 
 # Calcular promedio de notas
 notas = [85, 90, 78, 92, 88]
 total = 0
 for nota in notas:
-    total += nota
+    total = total + nota
     
 promedio = total / len(notas)
-print(f"\nPromedio de notas: {promedio:.2f}")`
+print("Promedio de notas: " + str(round(promedio, 2)))`
         ];
 
         function loadExample(index) {
