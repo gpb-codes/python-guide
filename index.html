@@ -429,31 +429,6 @@ function renderCodeExamples() {
             document.getElementById('sintaxis').scrollIntoView({ behavior: 'smooth' });
         }
         
-        function renderCodeExamples() {
-            const container = document.getElementById('code-examples-grid');
-            const examples = data.codeExamples[activeTab] || [];
-            
-            if (examples.length === 0) {
-                container.innerHTML = '<p class="text-on-surface-variant">Selecciona una pestaña para ver ejemplos</p>';
-                return;
-            }
-            
-            container.innerHTML = examples.map(ex => `
-                <div class="glass-card rounded-xl overflow-hidden">
-                    <div class="bg-surface-container-high px-md py-sm flex items-center justify-between border-b border-outline-variant">
-                        <div class="flex gap-2">
-                            <div class="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
-                            <div class="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
-                            <div class="w-3 h-3 rounded-full bg-[#27c93f]"></div>
-                        </div>
-                        <div class="text-on-surface-variant font-label-sm">${ex.title}</div>
-                        <span class="px-xs py-xs rounded bg-${ex.level === 'beginner' ? 'beginner' : ex.level === 'intermediate' ? 'intermediate' : 'advanced'}/20 text-[10px] font-label-sm text-${ex.level === 'beginner' ? 'beginner' : ex.level === 'intermediate' ? 'intermediate' : 'advanced'}">${ex.level}</span>
-                    </div>
-                    <pre class="p-md font-code-block text-code-block overflow-x-auto text-sm"><code>${syntaxHighlight(ex.code)}</code></pre>
-                </div>
-            `).join('');
-        }
-        
         function renderExercises() {
             const container = document.getElementById('exercises-grid');
             
