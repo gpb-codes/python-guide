@@ -667,17 +667,20 @@ numero_texto = "42"
 numero = int(numero_texto)    # "42" -> 42
 print(numero + 8)            # 50
 
-# Otro ejemplo
-edad = input("Tu edad: ")
-edad = int(edad)          # Convertir a entero
-print(f"El próximo año tendrás {edad + 1}")
-
 # Float a int
 precio = 99.99
 precio_entero = int(precio)   # 99
 
-# A float
-valor = float("19.99")</code></pre>
+# String a float
+valor = float("19.99")
+
+# Int a string
+edad = 25
+print("Tengo " + str(edad) + " años")
+
+# Bool a int
+print(int(True))   # 1
+print(int(False))  # 0</code></pre>
                                 </div>
                             </div>
                         </div>
@@ -779,8 +782,8 @@ if temperatura > 30:
 else:
     print("Temperatura normal")
 
-# Ejemplo con input
-edad = int(input("Tu edad: "))
+# Ejemplo con condición
+edad = 18
 if edad >= 18:
     print("Eres mayor de edad")</code></pre>
                                 </div>
@@ -809,7 +812,7 @@ else:
     print("No acreditado")
 
 # Otro ejemplo
-edad = int(input("Edad: "))
+edad = 25
 
 if edad < 12:
     print("Niño")
@@ -872,7 +875,7 @@ frutas = ["manzana", "pera", "uva"]
 for i, fruta in enumerate(frutas):
     print(f"{i}: {fruta}")
 
-# Summar lista
+# Sumar lista
 numeros = [10, 20, 30]
 total = 0
 for n in numeros:
@@ -911,21 +914,19 @@ while contador < 5:
     print(contador)
     contador += 1
 
-# Con input
+# Con condición
 intento = 0
 while intento < 3:
-    clave = input("Ingresa clave: ")
-    if clave == "secreto":
-        print("¡Correcto!")
-        break
+    print(f"Intento {intento + 1}")
     intento += 1
 else:
-    print("Intentos agotados")
+    print("Intentos completados")
 
-# Validar entrada
+# Validar número
 numero = 0
 while numero < 1 or numero > 10:
-    numero = int(input("Número 1-10: "))</code></pre>
+    numero = 5  # valor de ejemplo
+    print(f"Número válido: {numero}")</code></pre>
                                 </div>
                             </div>
                         </div>
@@ -942,11 +943,10 @@ while numero < 1 or numero > 10:
                                 </div>
                                 <div class="code-body">
                                     <pre><code class="language-python"># break - salir del ciclo
-while True:
-    respuesta = input("¿Salir? (s/n): ")
-    if respuesta == "s":
-        print("¡Chao!")
-        break
+for i in range(10):
+    if i == 5:
+        break    # Sale cuando i = 5
+    print(i)      # 0,1,2,3,4
 
 # continue - siguiente iteración
 for i in range(10):
@@ -957,7 +957,7 @@ for i in range(10):
 # Encontrar primer número divisible
 for n in range(1, 100):
     if n % 7 == 0:
-        print(f"找到: {n}")
+        print(f"Encontrado: {n}")
         break</code></pre>
                                 </div>
                             </div>
@@ -1180,72 +1180,10 @@ copia = persona.copy()</code></pre>
                         </div>
                     </div>
 
-                    <!-- Tipos de Datos -->
-                    <div data-tab="tipos" class="tab-panel hidden grid lg:grid-cols-2 gap-8">
-                        <div class="syntax-card glass-card p-6 rounded-2xl">
-                            <h3 class="text-xl font-bold mb-4 text-cyan-400">Tipos Built-in</h3>
-                            <div class="code-window">
-                                <div class="code-header">
-                                    <div class="flex gap-2">
-                                        <div class="code-dot bg-red-500"></div>
-                                        <div class="code-dot bg-yellow-500"></div>
-                                        <div class="code-dot bg-green-500"></div>
-                                    </div>
-                                    <span class="text-gray-400 text-sm">tipos.py</span>
-                                </div>
-                                <div class="code-body">
-                                    <pre><code class="language-python"># Verificar tipo
-x = 42
-print(type(x))     # &lt;class 'int'&gt;
-
-# type() y isinstance()
-print(isinstance(x, int))       # True
-print(isinstance(x, float))    # False
-
-# None (nulo)
-valor = None
-print(valor is None)   # True
-
-# type() para comparaciones
-if type(x) == int:
-    print("Es un entero")</code></pre>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="syntax-card glass-card p-6 rounded-2xl">
-                            <h3 class="text-xl font-bold mb-4 text-cyan-400">Funciones de Tipo</h3>
-                            <div class="code-window">
-                                <div class="code-header">
-                                    <div class="flex gap-2">
-                                        <div class="code-dot bg-red-500"></div>
-                                        <div class="code-dot bg-yellow-500"></div>
-                                        <div class="code-dot bg-green-500"></div>
-                                    </div>
-                                    <span class="text-gray-400 text-sm">tipo_funciones.py</span>
-                                </div>
-                                <div class="code-body">
-                                    <pre><code class="language-python"># Convertir tipos
-print(bool(1))        # True
-print(bool(0))        # False
-print(bool(""))        # False
-print(bool("texto"))   # True
-
-# str, int, float
-numero = "42"
-print(int(numero) + 8)    # 50
-print(float("3.14"))      # 3.14
-
-# repr (representación)
-print(repr("Hola\nMundo"))</code></pre>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Strings (Intermedio) -->
+                    <!-- Strings -->
                     <div data-tab="strings" class="tab-panel hidden grid lg:grid-cols-2 gap-8">
                         <div class="syntax-card glass-card p-6 rounded-2xl">
-                            <h3 class="text-xl font-bold mb-4 text-purple-400">Métodos de Strings</h3>
+                            <h3 class="text-xl font-bold mb-4 text-green-400">Métodos de Strings</h3>
                             <div class="code-window">
                                 <div class="code-header">
                                     <div class="flex gap-2">
@@ -1276,7 +1214,7 @@ print("-".join(palabras))</code></pre>
                             </div>
                         </div>
                         <div class="syntax-card glass-card p-6 rounded-2xl">
-                            <h3 class="text-xl font-bold mb-4 text-purple-400">Slicing de Strings</h3>
+                            <h3 class="text-xl font-bold mb-4 text-green-400">Slicing de Strings</h3>
                             <div class="code-window">
                                 <div class="code-header">
                                     <div class="flex gap-2">
@@ -1381,7 +1319,7 @@ print(p.x, p.y)</code></pre>
                     <!-- Sets -->
                     <div data-tab="sets" class="tab-panel hidden grid lg:grid-cols-2 gap-8">
                         <div class="syntax-card glass-card p-6 rounded-2xl">
-                            <h3 class="text-xl font-bold mb-4 text-pink-400">Sets Básicos</h3>
+                            <h3 class="text-xl font-bold mb-4 text-purple-400">Sets Básicos</h3>
                             <div class="code-window">
                                 <div class="code-header">
                                     <div class="flex gap-2">
@@ -1413,7 +1351,7 @@ print(a ^ b)    # Simétrica {1,2,4,5}</code></pre>
                             </div>
                         </div>
                         <div class="syntax-card glass-card p-6 rounded-2xl">
-                            <h3 class="text-xl font-bold mb-4 text-pink-400">Sets para Datos Únicos</h3>
+                            <h3 class="text-xl font-bold mb-4 text-purple-400">Sets para Datos Únicos</h3>
                             <div class="code-window">
                                 <div class="code-header">
                                     <div class="flex gap-2">
@@ -1444,7 +1382,7 @@ pares = frozenset([1, 2, 3])
                     <!-- Comprensiones -->
                     <div data-tab="comprensiones" class="tab-panel hidden grid lg:grid-cols-2 gap-8">
                         <div class="syntax-card glass-card p-6 rounded-2xl">
-                            <h3 class="text-xl font-bold mb-4 text-indigo-400">List Comprehension</h3>
+                            <h3 class="text-xl font-bold mb-4 text-cyan-400">List Comprehension</h3>
                             <div class="code-window">
                                 <div class="code-header">
                                     <div class="flex gap-2">
@@ -1474,7 +1412,7 @@ matriz = [[j for j in range(3)] for i in range(3)]</code></pre>
                             </div>
                         </div>
                         <div class="syntax-card glass-card p-6 rounded-2xl">
-                            <h3 class="text-xl font-bold mb-4 text-indigo-400">Dict y Set Comprehension</h3>
+                            <h3 class="text-xl font-bold mb-4 text-cyan-400">Dict y Set Comprehension</h3>
                             <div class="code-window">
                                 <div class="code-header">
                                     <div class="flex gap-2">
@@ -1578,7 +1516,7 @@ except Exception:
                     <!-- Archivos -->
                     <div data-tab="archivos" class="tab-panel hidden grid lg:grid-cols-2 gap-8">
                         <div class="syntax-card glass-card p-6 rounded-2xl">
-                            <h3 class="text-xl font-bold mb-4 text-teal-400">Leer y Escribir Archivos</h3>
+                            <h3 class="text-xl font-bold mb-4 text-blue-400">Leer y Escribir Archivos</h3>
                             <div class="code-window">
                                 <div class="code-header">
                                     <div class="flex gap-2">
@@ -1607,7 +1545,7 @@ with open("archivo.txt", "r") as f:
                             </div>
                         </div>
                         <div class="syntax-card glass-card p-6 rounded-2xl">
-                            <h3 class="text-xl font-bold mb-4 text-teal-400">Modos y JSON</h3>
+                            <h3 class="text-xl font-bold mb-4 text-blue-400">Modos y JSON</h3>
                             <div class="code-window">
                                 <div class="code-header">
                                     <div class="flex gap-2">
@@ -1652,66 +1590,60 @@ texto = json.dumps(datos)</code></pre>
                 </div>
 
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Exercise 1 -->
-                    <div class="category-card gradient-border rounded-2xl p-6">
-                        <h3 class="text-lg font-bold text-green-400 mb-2">1. Calculadora Simple</h3>
-                        <p class="text-gray-400 text-sm mb-4">Crea una calculadora que sume, reste, multiplique y divida
-                            dos números.</p>
-                        <a href="https://github.com/gpb-codes/python-Duocuc/blob/main/funciones/calculadora.py"
-                            target="_blank" class="text-primary-400 text-sm hover:underline">Ver solución →</a>
+                    <!-- Ejercicio 1 -->
+                    <div class="exercise-item glass-card p-6 rounded-xl border border-dark-700">
+                        <h3 class="text-lg font-bold text-cyan-400 mb-2">1. Calculadora Simple</h3>
+                        <p class="text-gray-400 text-sm mb-4">Crea una calculadora que sume, reste, multiplique y divida dos números.</p>
+                        <a href="https://github.com/gpb-codes/python-Duocuc/blob/main/funciones/calculadora.py" target="_blank"
+                            class="text-primary-400 text-sm hover:underline">Ver solución →</a>
                     </div>
 
-                    <!-- Exercise 2 -->
-                    <div class="category-card gradient-border rounded-2xl p-6">
-                        <h3 class="text-lg font-bold text-blue-400 mb-2">2. Sistema de Notas</h3>
-                        <p class="text-gray-400 text-sm mb-4">Ingresa 3 notas y calcula el promedio. Muestra si
-                            aprobaste o no (nota >= 4).</p>
+                    <!-- Ejercicio 2 -->
+                    <div class="exercise-item glass-card p-6 rounded-xl border border-dark-700">
+                        <h3 class="text-lg font-bold text-cyan-400 mb-2">2. Sistema de Notas</h3>
+                        <p class="text-gray-400 text-sm mb-4">Ingresa 3 notas y calcula el promedio. Muestra si aprobaste o no (nota >= 4).</p>
                         <a href="https://github.com/gpb-codes/python-Duocuc/blob/main/if/notas.py" target="_blank"
                             class="text-primary-400 text-sm hover:underline">Ver solución →</a>
                     </div>
 
-                    <!-- Exercise 3 -->
-                    <div class="category-card gradient-border rounded-2xl p-6">
-                        <h3 class="text-lg font-bold text-purple-400 mb-2">3. Promedio de Notas</h3>
-                        <p class="text-gray-400 text-sm mb-4">Solicita la cantidad de estudiantes y sus notas, luego
-                            calcula el promedio general.</p>
-                        <a href="https://github.com/gpb-codes/python-Duocuc/blob/main/for/promedio-students.py"
-                            target="_blank" class="text-primary-400 text-sm hover:underline">Ver solución →</a>
+                    <!-- Ejercicio 3 -->
+                    <div class="exercise-item glass-card p-6 rounded-xl border border-dark-700">
+                        <h3 class="text-lg font-bold text-cyan-400 mb-2">3. Promedio de Notas</h3>
+                        <p class="text-gray-400 text-sm mb-4">Solicita la cantidad de estudiantes y sus notas, luego calcula el promedio general.</p>
+                        <a href="https://github.com/gpb-codes/python-Duocuc/blob/main/for/promedio-students.py" target="_blank"
+                            class="text-primary-400 text-sm hover:underline">Ver solución →</a>
                     </div>
 
-                    <!-- Exercise 4 -->
-                    <div class="category-card gradient-border rounded-2xl p-6">
-                        <h3 class="text-lg font-bold text-yellow-400 mb-2">4. Validar Username</h3>
-                        <p class="text-gray-400 text-sm mb-4">Solicita un username y valida que tenga entre 3 y 15
-                            caracteres.</p>
-                        <a href="https://github.com/gpb-codes/python-Duocuc/blob/main/ejerecicios%20en%20clase/largo-username.py"
-                            target="_blank" class="text-primary-400 text-sm hover:underline">Ver solución →</a>
+                    <!-- Ejercicio 4 -->
+                    <div class="exercise-item glass-card p-6 rounded-xl border border-dark-700">
+                        <h3 class="text-lg font-bold text-cyan-400 mb-2">4. Validar Username</h3>
+                        <p class="text-gray-400 text-sm mb-4">Solicita un username y valida que tenga entre 3 y 15 caracteres.</p>
+                        <a href="https://github.com/gpb-codes/python-Duocuc/blob/main/ejerecicios%20en%20clase/largo-username.py" target="_blank"
+                            class="text-primary-400 text-sm hover:underline">Ver solución →</a>
                     </div>
 
-                    <!-- Exercise 5 -->
-                    <div class="category-card gradient-border rounded-2xl p-6">
-                        <h3 class="text-lg font-bold text-orange-400 mb-2">5. Calculadora WHILE</h3>
-                        <p class="text-gray-400 text-sm mb-4">Crea una calculadora que opere continuamente hasta que el
-                            usuario decida salir.</p>
-                        <a href="https://github.com/gpb-codes/python-Duocuc/blob/main/while/calculadora.py"
-                            target="_blank" class="text-primary-400 text-sm hover:underline">Ver solución →</a>
+                    <!-- Ejercicio 5 -->
+                    <div class="exercise-item glass-card p-6 rounded-xl border border-dark-700">
+                        <h3 class="text-lg font-bold text-cyan-400 mb-2">5. Calculadora WHILE</h3>
+                        <p class="text-gray-400 text-sm mb-4">Crea una calculadora que opere continuamente hasta que el usuario decida salir.</p>
+                        <a href="https://github.com/gpb-codes/python-Duocuc/blob/main/while/calculadora.py" target="_blank"
+                            class="text-primary-400 text-sm hover:underline">Ver solución →</a>
                     </div>
 
-                    <!-- Exercise 6 -->
-                    <div class="category-card gradient-border rounded-2xl p-6">
-                        <h3 class="text-lg font-bold text-red-400 mb-2">6. Validar PIN</h3>
-                        <p class="text-gray-400 text-sm mb-4">Solicita un PIN de 4 dígitos. Valida que sea numérico y
-                            tenga exactamente 4 dígitos.</p>
-                        <a href="https://github.com/gpb-codes/python-Duocuc/blob/main/ejerecicios%20en%20clase/pin.py"
-                            target="_blank" class="text-primary-400 text-sm hover:underline">Ver solución →</a>
+                    <!-- Ejercicio 6 -->
+                    <div class="exercise-item glass-card p-6 rounded-xl border border-dark-700">
+                        <h3 class="text-lg font-bold text-cyan-400 mb-2">6. Validar PIN</h3>
+                        <p class="text-gray-400 text-sm mb-4">Solicita un PIN de 4 dígitos. Valida que sea numérico y tenga exactamente 4 dígitos.</p>
+                        <a href="https://github.com/gpb-codes/python-Duocuc/blob/main/ejerecicios%20en%20clase/pin.py" target="_blank"
+                            class="text-primary-400 text-sm hover:underline">Ver solución →</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Practice Section -->
+        <!-- Practica Interactiva Section -->
         <section id="practicar" class="py-20 px-6 bg-dark-800/30">
-            <div class="max-w-4xl mx-auto">
+            <div class="max-w-7xl mx-auto">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl md:text-4xl font-bold mb-4">Practica Interactiva</h2>
                     <p class="text-lg text-gray-400">Escribe y ejecuta código Python directamente</p>
@@ -1722,12 +1654,12 @@ texto = json.dumps(datos)</code></pre>
                     <div class="syntax-card glass-card p-6 rounded-2xl">
                         <div class="flex items-center justify-between mb-4">
                             <h3 class="text-lg font-bold">Editor de Código</h3>
-                            <button onclick="loadExample(0)" class="text-sm text-primary-400 hover:underline">Ejemplo
-                                1</button>
-                            <button onclick="loadExample(1)" class="text-sm text-primary-400 hover:underline">Ejemplo
-                                2</button>
-                            <button onclick="loadExample(2)" class="text-sm text-primary-400 hover:underline">Ejemplo
-                                3</button>
+                            <div class="flex gap-3">
+                                <button onclick="loadExample(0)" class="text-sm text-primary-400 hover:underline">Ejemplo 1</button>
+                                <button onclick="loadExample(1)" class="text-sm text-primary-400 hover:underline">Ejemplo 2</button>
+                                <button onclick="loadExample(2)" class="text-sm text-primary-400 hover:underline">Ejemplo 3</button>
+                                <button onclick="loadExample(3)" class="text-sm text-primary-400 hover:underline">Ejemplo 4</button>
+                            </div>
                         </div>
                         <div class="code-window">
                             <div class="code-header">
@@ -1739,62 +1671,39 @@ texto = json.dumps(datos)</code></pre>
                                 <span class="text-gray-400 text-sm">main.py</span>
                             </div>
                             <div class="code-body">
-                                <textarea id="codeEditor"
-                                    class="w-full h-48 bg-transparent text-white font-mono text-sm resize-none outline-none"
-                                    spellcheck="false"># Ejemplo: Calculadora de Promedio
-print("=== Calculadora de Promedio ===")
-
-# Notas predefinidas
-nota1 = 70
-nota2 = 80
-nota3 = 90
-
-# Calcular promedio
-promedio = (nota1 + nota2 + nota3) / 3
-
-# Mostrar resultado
-print("Nota 1: " + str(nota1))
-print("Nota 2: " + str(nota2))
-print("Nota 3: " + str(nota3))
-print("Promedio: " + str(round(promedio, 2)))
-
-# Determinar si aprueba
-if promedio >= 70:
-    print("Felicitaciones, aprobaste!")
-else:
-    print("Reprobaste. Intenta de nuevo!")</textarea>
+                                <textarea id="codeEditor" class="w-full h-64 bg-transparent text-white font-mono text-sm p-4 focus:outline-none resize-none" placeholder="# Escribe tu código Python aquí..."></textarea>
                             </div>
                         </div>
 
                         <div class="flex gap-4 mt-4">
                             <button id="runBtn" onclick="runCode()"
-                                class="px-6 py-2 rounded-lg bg-green-600 hover:bg-green-500 text-white font-semibold flex items-center gap-2">
+                                class="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 text-white font-semibold hover:opacity-90 transition-opacity flex items-center gap-2">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M8 5v14l11-7z" />
+                                    <path d="M8 5v14l11-7z"/>
                                 </svg>
                                 Ejecutar
                             </button>
                             <button onclick="clearCode()"
-                                class="px-6 py-2 rounded-lg bg-dark-700 hover:bg-dark-600 text-white font-semibold">
+                                class="px-6 py-3 rounded-xl glass-card text-white font-semibold hover:bg-white/10 transition-all">
                                 Limpiar
                             </button>
                         </div>
 
-                        <!-- Output -->
+                        <!-- Output Console -->
                         <div class="mt-6">
                             <h4 class="text-sm font-semibold text-gray-400 mb-2">Salida:</h4>
                             <div id="outputConsole" class="output-console">
-                                <span class="info">Ejecuta el código para ver la salida...</span>
+                                Ejecuta el código para ver la salida...
                             </div>
                         </div>
                     </div>
 
                     <!-- Example Code Selector -->
-                    <div class="grid md:grid-cols-3 gap-4">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                         <button onclick="loadExample(0)"
                             class="p-4 rounded-xl bg-dark-800 border border-dark-700 hover:border-primary-500 transition-colors text-left">
                             <div class="font-semibold">Ejemplo 1</div>
-                            <div class="text-gray-400 text-sm">Hola Mundo + Input</div>
+                            <div class="text-gray-400 text-sm">Hola Mundo + Variables</div>
                         </button>
                         <button onclick="loadExample(1)"
                             class="p-4 rounded-xl bg-dark-800 border border-dark-700 hover:border-primary-500 transition-colors text-left">
@@ -1804,7 +1713,12 @@ else:
                         <button onclick="loadExample(2)"
                             class="p-4 rounded-xl bg-dark-800 border border-dark-700 hover:border-primary-500 transition-colors text-left">
                             <div class="font-semibold">Ejemplo 3</div>
-                            <div class="text-gray-400 text-sm">Validación de Edad</div>
+                            <div class="text-gray-400 text-sm">Listas y Ciclos</div>
+                        </button>
+                        <button onclick="loadExample(3)"
+                            class="p-4 rounded-xl bg-dark-800 border border-dark-700 hover:border-primary-500 transition-colors text-left">
+                            <div class="font-semibold">Ejemplo 4</div>
+                            <div class="text-gray-400 text-sm">Conversion de Tipos</div>
                         </button>
                     </div>
                 </div>
@@ -1826,62 +1740,59 @@ else:
                 <a href="https://github.com/gpb-codes/python-guide" target="_blank"
                     class="text-gray-400 hover:text-white transition-colors">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                        <path
-                            d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
+                        <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/>
                     </svg>
                 </a>
             </div>
-            <p class="text-gray-500 text-sm mt-8">© 2026 Python Guide.</p>
+            <p class="text-gray-500 text-sm mt-6">© 2026 Python Guide</p>
         </div>
     </footer>
 
+    <!-- Mobile Menu Toggle Script -->
     <script>
-        // Mobile menu toggle
         function toggleMenu() {
-            document.getElementById('mobileMenu').classList.toggle('hidden');
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
         }
 
         document.getElementById('menuBtn').addEventListener('click', toggleMenu);
 
         // Tab functionality
         function showTab(tabName) {
-            // Update buttons - remove active from all purple buttons first
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-
-            // Find and activate the matching button
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                const btnText = btn.textContent.toLowerCase().trim();
-                const targetText = tabName.toLowerCase();
-
-                if (btnText === targetText ||
-                    btnText === targetText ||
-                    (targetText === 'for' && btnText === 'for') ||
-                    (targetText === 'while' && btnText === 'while') ||
-                    (targetText === 'comprensiones' && btnText.includes('comprehensions'))) {
-                    btn.classList.add('active');
-                }
-            });
-
-            // Show content
+            // Hide all panels
             document.querySelectorAll('.tab-panel').forEach(panel => {
                 panel.classList.add('hidden');
-                if (panel.dataset.tab === tabName) {
-                    panel.classList.remove('hidden');
-                }
             });
-
-            // Re-highlight code
-            Prism.highlightAll();
+            
+            // Show selected panel
+            document.querySelector(`[data-tab="${tabName}"]`).classList.remove('hidden');
+            
+            // Update button states
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+                btn.classList.add('bg-dark-700', 'text-dark-300');
+                btn.classList.remove('bg-purple-700', 'text-purple-200');
+            });
+            
+            // Highlight active button
+            event.target.classList.add('active');
+            event.target.classList.remove('bg-dark-700', 'text-dark-300');
+            event.target.classList.add('bg-primary-500', 'text-white');
+            
+            // Apply purple style for intermediate tabs
+            const intermediateTabs = ['strings', 'listas', 'tuplas', 'sets', 'diccionarios', 'comprensiones', 'excepciones', 'archivos'];
+            if (intermediateTabs.includes(tabName)) {
+                event.target.classList.remove('bg-primary-500', 'text-white');
+                event.target.classList.add('bg-purple-700', 'text-purple-200');
+            }
         }
 
-        // Initialize first tab
+        // Initialize default tab
         showTab('variables');
 
         // Code examples (without input() for browser compatibility)
         const codeExamples = [
-            `# Ejemplo 1: Hola Mundo
+            `# Ejemplo 1: Hola Mundo + Variables
 nombre = "Gabriel"
 print("Hola " + nombre)
 
@@ -1935,7 +1846,32 @@ for nota in notas:
     total = total + nota
     
 promedio = total / len(notas)
-print("Promedio de notas: " + str(round(promedio, 2)))`
+print("Promedio de notas: " + str(round(promedio, 2)))`,
+
+            `# Ejemplo 4: Conversion de Tipos
+print("=== Conversion de Tipos ===")
+
+# String a int
+numero_texto = "42"
+numero = int(numero_texto)
+print("String '42' a int: " + str(numero) + " + 8 = " + str(numero + 8))
+
+# Float a int
+precio = 99.99
+precio_entero = int(precio)
+print("Float 99.99 a int: " + str(precio_entero))
+
+# String a float
+valor = float("19.99")
+print("String '19.99' a float: " + str(valor))
+
+# Int a string
+edad = 25
+print("Int 25 a string: 'Tengo ' + str(25) + ' anios' = Tengo " + str(edad) + " anios")
+
+# Bool a int
+print("Bool True a int: " + str(int(True)))
+print("Bool False a int: " + str(int(False)))`
         ];
 
         function loadExample(index) {
@@ -1991,11 +1927,21 @@ from io import StringIO
             }
 
             try {
-                // Run user code directly
+                // Capturar stdout de Python
+                await pyodide.runPythonAsync(`
+import sys
+from io import StringIO
+sys.stdout = StringIO()
+`);
                 await pyodide.runPythonAsync(code);
+                const output = await pyodide.runPythonAsync("sys.stdout.getvalue()");
+                await pyodide.runPythonAsync("sys.stdout = sys.__stdout__");
                 
-                // Simple output - just show success
-                outputConsole.innerHTML = '<span class="success">Código ejecutado correctamente.</span>';
+                if (output && output.trim()) {
+                    outputConsole.innerHTML = '<span class="success">' + output.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>') + '</span>';
+                } else {
+                    outputConsole.innerHTML = '<span class="info">Codigo ejecutado correctamente (sin salida).</span>';
+                }
             } catch (error) {
                 outputConsole.innerHTML = '<span class="error">Error: ' + error.message + '</span>';
             }
@@ -2027,123 +1973,78 @@ from io import StringIO
 
             // Create floating particles (matrix rain effect)
             const particlesGeometry = new THREE.BufferGeometry();
-            const particlesCount = 200;
+            const particlesCount = 700;
             const posArray = new Float32Array(particlesCount * 3);
-            const colorsArray = new Float32Array(particlesCount * 3);
 
-            for (let i = 0; i < particlesCount * 3; i += 3) {
+            for (let i = 0; i < particlesCount * 3; i++) {
                 posArray[i] = (Math.random() - 0.5) * 50;
-                posArray[i + 1] = (Math.random() - 0.5) * 50;
-                posArray[i + 2] = (Math.random() - 0.5) * 50;
-
-                // Cyan to purple colors
-                const color = new THREE.Color();
-                color.setHSL(Math.random() * 0.2 + 0.5, 1, 0.5);
-                colorsArray[i] = color.r;
-                colorsArray[i + 1] = color.g;
-                colorsArray[i + 2] = color.b;
             }
 
             particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-            particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colorsArray, 3));
 
             const particlesMaterial = new THREE.PointsMaterial({
-                size: 0.15,
-                vertexColors: true,
+                size: 0.02,
+                color: 0x0ea5e9,
                 transparent: true,
                 opacity: 0.8,
-                blending: THREE.AdditiveBlending
             });
 
             const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
             scene.add(particlesMesh);
 
-            // Create floating geometric shapes
-            const shapes = [];
-            const geometryTypes = [
-                new THREE.IcosahedronGeometry(0.5, 0),
-                new THREE.OctahedronGeometry(0.5, 0),
-                new THREE.TetrahedronGeometry(0.5, 0),
-                new THREE.TorusGeometry(0.3, 0.1, 8, 16)
-            ];
-
-            for (let i = 0; i < 15; i++) {
-                const geo = geometryTypes[Math.floor(Math.random() * geometryTypes.length)];
-                const mat = new THREE.MeshBasicMaterial({
-                    color: Math.random() > 0.5 ? 0x0ea5e9 : 0x8b5cf6,
-                    wireframe: true,
-                    transparent: true,
-                    opacity: 0.3
-                });
-                const mesh = new THREE.Mesh(geo, mat);
-
-                mesh.position.set(
-                    (Math.random() - 0.5) * 30,
-                    (Math.random() - 0.5) * 30,
-                    (Math.random() - 0.5) * 20
-                );
-
-                mesh.rotation.set(
-                    Math.random() * Math.PI,
-                    Math.random() * Math.PI,
-                    Math.random() * Math.PI
-                );
-
-                mesh.userData = {
-                    rotSpeed: {
-                        x: (Math.random() - 0.5) * 0.01,
-                        y: (Math.random() - 0.5) * 0.01
-                    },
-                    floatSpeed: Math.random() * 0.005 + 0.002,
-                    floatOffset: Math.random() * Math.PI * 2
-                };
-
-                shapes.push(mesh);
-                scene.add(mesh);
-            }
-
-            // Create connections (network effect)
-            const lineMaterial = new THREE.LineBasicMaterial({
+            // Create additional gradient spheres
+            const sphereGeometry = new THREE.SphereGeometry(1, 32, 32);
+            
+            // Cyan sphere
+            const cyanMaterial = new THREE.MeshBasicMaterial({
                 color: 0x0ea5e9,
                 transparent: true,
-                opacity: 0.15
+                opacity: 0.1
             });
+            const cyanSphere = new THREE.Mesh(sphereGeometry, cyanMaterial);
+            cyanSphere.position.set(-10, 5, -15);
+            cyanSphere.scale.set(8, 8, 8);
+            scene.add(cyanSphere);
 
-            // Mouse interaction
+            // Purple sphere
+            const purpleMaterial = new THREE.MeshBasicMaterial({
+                color: 0x8b5cf6,
+                transparent: true,
+                opacity: 0.1
+            });
+            const purpleSphere = new THREE.Mesh(sphereGeometry, purpleMaterial);
+            purpleSphere.position.set(10, -5, -15);
+            purpleSphere.scale.set(6, 6, 6);
+            scene.add(purpleSphere);
+
+            // Animation
             let mouseX = 0;
             let mouseY = 0;
 
-            document.addEventListener('mousemove', (e) => {
-                mouseX = (e.clientX / window.innerWidth) * 2 - 1;
-                mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+            document.addEventListener('mousemove', (event) => {
+                mouseX = event.clientX / window.innerWidth - 0.5;
+                mouseY = event.clientY / window.innerHeight - 0.5;
             });
 
-            // Animation loop
-            let time = 0;
-            function animate() {
+            const animate = () => {
                 requestAnimationFrame(animate);
-                time += 0.01;
 
                 // Rotate particles
-                particlesMesh.rotation.y = time * 0.05;
-                particlesMesh.rotation.x = time * 0.02;
+                particlesMesh.rotation.y += 0.001;
+                particlesMesh.rotation.x += 0.001;
 
-                // Animate shapes
-                shapes.forEach((shape, i) => {
-                    shape.rotation.x += shape.userData.rotSpeed.x;
-                    shape.rotation.y += shape.userData.rotSpeed.y;
-
-                    // Floating motion
-                    shape.position.y += Math.sin(time * shape.userData.floatSpeed * 100 + shape.userData.floatOffset) * 0.01;
-                });
-
-                // Camera follows mouse
-                camera.position.x += (mouseX * 2 - camera.position.x) * 0.02;
-                camera.position.y += (mouseY * 2 - camera.position.y) * 0.02;
+                // Gentle camera movement
+                camera.position.x += (mouseX * 2 - camera.position.x) * 0.05;
+                camera.position.y += (-mouseY * 2 - camera.position.y) * 0.05;
                 camera.lookAt(scene.position);
 
+                // Pulse effect on spheres
+                const time = Date.now() * 0.001;
+                cyanSphere.scale.set(8 + Math.sin(time) * 0.5, 8 + Math.sin(time) * 0.5, 8 + Math.sin(time) * 0.5);
+                purpleSphere.scale.set(6 + Math.cos(time) * 0.3, 6 + Math.cos(time) * 0.3, 6 + Math.cos(time) * 0.3);
+
                 renderer.render(scene, camera);
-            }
+            };
 
             animate();
 
