@@ -182,7 +182,7 @@
                     <a href="#temas" class="nav-portal">Temas</a>
                     <a href="#sintaxis" class="nav-portal">Sintaxis</a>
                     <a href="#ejercicios" class="nav-portal">Ejercicios</a>
-                    <a href="#test" class="nav-portal">Test</a>
+                    <a href="quiz.html" class="nav-portal">Test</a>
                 </div>
                 <button id="menuBtn" class="md:hidden p-2 text-white">
                     <i class="fas fa-bars text-xl"></i>
@@ -197,7 +197,7 @@
             <a href="#temas" class="text-2xl text-white" onclick="toggleMenu()">Temas</a>
             <a href="#sintaxis" class="text-2xl text-white" onclick="toggleMenu()">Sintaxis</a>
             <a href="#ejercicios" class="text-2xl text-white" onclick="toggleMenu()">Ejercicios</a>
-            <a href="#test" class="text-2xl text-white" onclick="toggleMenu()">Test</a>
+            <a href="quiz.html" class="text-2xl text-white" onclick="toggleMenu()">Test</a>
         </div>
     </div>
 
@@ -270,32 +270,6 @@
                     <p class="text-gray-400">Pon a prueba tus conocimientos</p>
                 </div>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="exercises-container"></div>
-            </div>
-        </section>
-
-        <section id="test" style="background: rgba(0,0,0,0.3);">
-            <div class="container">
-                <div class="text-center mb-12">
-                    <h2 class="text-4xl md:text-5xl font-bold mb-4" style="font-family: 'Bangers', cursive; letter-spacing: 3px;">
-                        <span class="rick-gradient">TEST DE CONOCIMIENTO</span>
-                    </h2>
-                    <p class="text-gray-400">Responde las preguntas y verifica tu aprendizaje</p>
-                </div>
-                
-                <div class="max-w-3xl mx-auto" id="quiz-container"></div>
-                
-                <div class="text-center mt-10">
-                    <button onclick="checkAnswers()" class="portal-btn"><i class="fas fa-check mr-2"></i>Verificar Respuestas</button>
-                    <button onclick="resetQuiz()" class="portal-btn-outline ml-4"><i class="fas fa-redo mr-2"></i>Reiniciar</button>
-                </div>
-                
-                <div id="result" class="hidden mt-8 text-center">
-                    <div class="rick-card inline-block px-8 py-6">
-                        <h3 class="text-2xl font-bold mb-2">Resultado</h3>
-                        <p class="text-4xl font-bold rick-gradient" id="score-text"></p>
-                        <p class="text-gray-400 mt-2" id="score-message"></p>
-                    </div>
-                </div>
             </div>
         </section>
     </main>

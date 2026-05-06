@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Guide - Test de Conocimiento</title>
+    <meta name="description" content="Evalua tu conocimiento de Python">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Bangers&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                        display: ['Bangers', 'cursive']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+        
+        * { scroll-behavior: smooth; margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            background: #0d0d12; 
+            font-family: 'Inter', sans-serif;
+            color: #f1f5f9;
+            line-height: 1.7;
+        }
+        
+        #canvas-container { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            z-index: -1; opacity: 0.3;
+        }
+        
+        .portal-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: -2;
+            background: 
+                radial-gradient(ellipse at 30% 20%, rgba(168, 85, 247, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 80%, rgba(236, 72, 153, 0.05) 0%, transparent 50%),
+                linear-gradient(180deg, #0d0d12 0%, #111118 100%);
+        }
+        
+        .rick-card {
+            background: rgba(20, 20, 30, 0.9);
+            border: 1px solid rgba(168, 85, 247, 0.25);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+        
+        .rick-card:hover {
+            border-color: rgba(250, 204, 21, 0.4);
+            box-shadow: 0 8px 30px rgba(168, 85, 247, 0.15);
+        }
+        
+        .rick-gradient {
+            background: linear-gradient(135deg, #facc15, #a855f7, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .rick-yellow { color: #facc15; }
+        .rick-purple { color: #b88aff; }
+        
+        .portal-btn {
+            background: linear-gradient(135deg, #facc15, #a855f7);
+            border: none;
+            padding: 14px 32px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 15px;
+            color: #0a0a0f;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .portal-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(250, 204, 21, 0.3); }
+        
+        .portal-btn-outline {
+            background: transparent;
+            border: 2px solid #a855f7;
+            padding: 14px 32px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 15px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .portal-btn-outline:hover { background: rgba(168, 85, 247, 0.2); border-color: #facc15; }
+        
+        .quiz-option { display: flex; align-items: center; padding: 14px 18px; margin-bottom: 10px; border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 10px; cursor: pointer; transition: all 0.2s; background: rgba(20, 20, 30, 0.8); }
+        .quiz-option:hover { border-color: #a855f7; background: rgba(40, 30, 50, 0.8); }
+        .quiz-option.selected { border-color: #facc15; background: rgba(50, 40, 20, 0.8); }
+        .quiz-option.correct { border-color: #22c55e; background: rgba(20, 40, 30, 0.8); }
+        .quiz-option.incorrect { border-color: #ef4444; background: rgba(40, 20, 20, 0.8); }
+        .quiz-option .option-marker { width: 22px; height: 22px; border: 2px solid rgba(168, 85, 247, 0.6); border-radius: 6px; margin-right: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .quiz-option.selected .option-marker { border-color: #facc15; background: #facc15; }
+        .quiz-option.correct .option-marker { border-color: #22c55e; background: #22c55e; }
+        .quiz-option.incorrect .option-marker { border-color: #ef4444; background: #ef4444; }
+        .quiz-option .option-text { color: #f1f5f9; font-size: 15px; }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0f; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #facc15, #a855f7); border-radius: 4px; }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div class="portal-bg"></div>
+    <div id="canvas-container"></div>
+
+    <header class="fixed top-0 left-0 right-0 z-50" style="background: rgba(13, 13, 18, 0.98); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(168, 85, 247, 0.2);">
+        <div class="max-w-4xl mx-auto px-6">
+            <nav class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <a href="index.html" class="flex items-center gap-3">
+                        <i class="fas fa-code text-2xl text-purple-500"></i>
+                        <div>
+                            <h1 class="text-2xl font-bold rick-gradient">PYTHON</h1>
+                            <p class="text-xs text-gray-400">Guia de Programacion</p>
+                        </div>
+                    </a>
+                </div>
+                <a href="index.html" class="nav-portal" style="color: rgba(255,255,255,0.7); font-weight: 500;">
+                    <i class="fas fa-arrow-left mr-2"></i>Volver
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="pt-20 pb-16">
+        <div class="max-w-3xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4" style="font-family: 'Bangers', cursive; letter-spacing: 3px;">
+                    <span class="rick-gradient">TEST DE CONOCIMIENTO</span>
+                </h1>
+                <p class="text-lg text-gray-300">Responde las preguntas y verifica tu aprendizaje</p>
+                <p class="text-sm text-gray-500 mt-2">15 preguntas sobre Python</p>
+            </div>
+            
+            <div id="quiz-container"></div>
+            
+            <div class="text-center mt-10">
+                <button onclick="checkAnswers()" class="portal-btn">
+                    <i class="fas fa-check mr-2"></i>Verificar Respuestas
+                </button>
+                <button onclick="resetQuiz()" class="portal-btn-outline ml-4">
+                    <i class="fas fa-redo mr-2"></i>Reiniciar
+                </button>
+            </div>
+            
+            <div id="result" class="hidden mt-8 text-center">
+                <div class="rick-card inline-block px-8 py-6">
+                    <h3 class="text-2xl font-bold mb-2">Resultado</h3>
+                    <p class="text-4xl font-bold rick-gradient" id="score-text"></p>
+                    <p class="text-gray-400 mt-2" id="score-message"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="py-8" style="background: rgba(15, 15, 26, 0.8); border-top: 1px solid rgba(168, 85, 247, 0.2);">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <div class="flex items-center justify-center gap-3 mb-4">
+                <i class="fas fa-code text-xl text-purple-500"></i>
+                <span class="text-xl font-bold rick-gradient" style="font-family: 'Bangers', cursive;">PYTHON GUIDE</span>
+            </div>
+            <p class="text-gray-400 text-sm">Gabriel Pedreros - Aprende a programar con Python</p>
+        </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script>
+        let answers = {};
+        
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = data.quiz.map((q, i) => `
+                <div class="rick-card mb-6">
+                    <h4 class="text-base font-semibold text-white mb-4 flex items-start gap-3">
+                        <span class="bg-gradient-to-r from-purple-500 to-pink-500 text-white w-7 h-7 rounded-lg flex items-center justify-center text-sm font-bold flex-shrink-0">${i + 1}</span>
+                        ${q.question}
+                    </h4>
+                    <div class="space-y-3">
+                        ${q.options.map((opt, j) => `
+                            <div class="quiz-option cursor-pointer ${answers[i] === j ? 'selected' : ''}" onclick="selectOption(${i}, ${j})">
+                                <span class="option-marker"></span>
+                                <span class="option-text">${opt}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function selectOption(qIndex, optIndex) {
+            answers[qIndex] = optIndex;
+            renderQuiz();
+        }
+
+        function checkAnswers() {
+            let score = 0;
+            const questionElements = document.querySelectorAll('#quiz-container .rick-card');
+            
+            data.quiz.forEach((q, i) => {
+                const options = questionElements[i].querySelectorAll('.quiz-option');
+                options.forEach((opt, j) => {
+                    opt.classList.remove('correct', 'incorrect');
+                    if (j === q.correct) opt.classList.add('correct');
+                });
+                
+                if (answers[i] !== undefined) {
+                    if (answers[i] === q.correct) {
+                        score++;
+                    } else {
+                        options[answers[i]].classList.add('incorrect');
+                    }
+                }
+            });
+
+            const percentage = (score / data.quiz.length) * 100;
+            document.getElementById('score-text').textContent = `${score}/${data.quiz.length}`;
+            
+            let message = '';
+            if (percentage >= 80) message = 'Excelente! Dominas Python perfectamente!';
+            else if (percentage >= 60) message = 'Muy bien! Tienes un buen conocimiento de Python.';
+            else if (percentage >= 40) message = 'Bien! Pero puedes mejorar practicando mas.';
+            else message = 'Sigue estudiando! Repasa los temas basicos.';
+            
+            document.getElementById('score-message').textContent = message;
+            document.getElementById('result').classList.remove('hidden');
+        }
+
+        function resetQuiz() {
+            answers = {};
+            document.getElementById('result').classList.add('hidden');
+            renderQuiz();
+        }
+
+        function initThreeJS() {
+            const container = document.getElementById('canvas-container');
+            if (!container) return;
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, 0.1, 2000);
+            camera.position.z = 50;
+
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            container.appendChild(renderer.domElement);
+
+            const starsGeometry = new THREE.BufferGeometry();
+            const starsCount = 5000;
+            const starsPos = new Float32Array(starsCount * 3);
+            
+            for (let i = 0; i < starsCount * 3; i += 3) {
+                starsPos[i] = (Math.random() - 0.5) * 400;
+                starsPos[i + 1] = (Math.random() - 0.5) * 400;
+                starsPos[i + 2] = (Math.random() - 0.5) * 200;
+            }
+            
+            starsGeometry.setAttribute('position', new THREE.BufferAttribute(starsPos, 3));
+            const starsMaterial = new THREE.PointsMaterial({ size: 0.5, color: 0xffffff, transparent: true, opacity: 0.8 });
+            const stars = new THREE.Points(starsGeometry, starsMaterial);
+            scene.add(stars);
+
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = 4000;
+            const posArray = new Float32Array(particlesCount * 3);
+            const colorArray = new Float32Array(particlesCount * 3);
+            
+            const colors = [new THREE.Color(0xfacc15), new THREE.Color(0xa855f7), new THREE.Color(0xec4899)];
+            
+            for (let i = 0; i < particlesCount * 3; i += 3) {
+                posArray[i] = (Math.random() - 0.5) * 150;
+                posArray[i + 1] = (Math.random() - 0.5) * 150;
+                posArray[i + 2] = (Math.random() - 0.5) * 80;
+                
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                colorArray[i] = color.r;
+                colorArray[i + 1] = color.g;
+                colorArray[i + 2] = color.b;
+            }
+            
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colorArray, 3));
+            
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 0.08, vertexColors: true, transparent: true, opacity: 0.8, blending: THREE.AdditiveBlending
+            });
+            
+            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particlesMesh);
+
+            let mouseX = 0, mouseY = 0, targetX = 0, targetY = 0;
+            
+            document.addEventListener('mousemove', (event) => {
+                mouseX = (event.clientX - window.innerWidth / 2) * 0.0005;
+                mouseY = (event.clientY - window.innerHeight / 2) * 0.0005;
+            });
+            
+            let time = 0;
+            function animate() {
+                requestAnimationFrame(animate);
+                time += 0.0005;
+                
+                targetX += (mouseX - targetX) * 0.05;
+                targetY += (mouseY - targetY) * 0.05;
+                
+                particlesMesh.rotation.y = time * 0.3 + targetX * 20;
+                particlesMesh.rotation.x = time * 0.1 + targetY * 20;
+                stars.rotation.y = time * 0.01;
+                
+                renderer.render(scene, camera);
+            }
+            
+            animate();
+            
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderQuiz();
+            initThreeJS();
+        });
+    </script>
+</body>
+</html>
