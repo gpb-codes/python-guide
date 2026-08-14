@@ -126,7 +126,8 @@ npx wrangler pages deploy out --project-name=python-guide
 **Gabriel Pedreros** — Estudiante de Ingeniería en Informática (DuocUC)
 
 - GitHub: [github.com/gpb-codes](https://github.com/gpb-codes)
-- Portafolio: [gpb-codes.github.io/gabrielPedreros/](https://gpb-codes.github.io/gabrielPedreros/)
+- Instagram: [@gabrielpedreros.tech](https://www.instagram.com/gabrielpedreros.tech/)
+- Portafolio: [gpb-portfolio.pages.dev](https://gpb-portfolio.pages.dev/)
 
 ## Licencia
 

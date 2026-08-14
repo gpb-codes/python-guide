@@ -32,7 +32,7 @@ export default function Footer() {
           </p>
           <div className="flex flex-wrap justify-center gap-3 mt-2">
             <a
-              href="https://instagram.com/gabrielpedreros"
+              href="https://www.instagram.com/gabrielpedreros.tech/"
               target="_blank"
               rel="noopener noreferrer"
               className="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant hover:bg-primary hover:text-on-primary transition-all"
@@ -41,7 +41,7 @@ export default function Footer() {
               <InstagramIcon />
             </a>
             <a
-              href="https://gpb-codes.github.io/gabrielPedreros/"
+              href="https://gpb-portfolio.pages.dev/"
               target="_blank"
               rel="noopener noreferrer"
               className="px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:bg-primary hover:text-on-primary transition-all text-sm flex items-center gap-2"
